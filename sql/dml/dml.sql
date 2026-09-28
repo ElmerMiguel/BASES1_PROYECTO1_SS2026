@@ -3,9 +3,9 @@
 SET search_path TO hospitales_occidente, public;
 SET timezone TO 'America/Guatemala';
 
-/* ============================================================================
+/* ***************
    M1. CATALOGOS CLINICOS Y GEOGRAFIA
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en departamento: Catalogo de los 22 departamentos de Guatemala.
 INSERT INTO departamento (id_departamento, nombre) VALUES
@@ -391,9 +391,9 @@ INSERT INTO item_verificacion (id_item, id_momento, descripcion, tipo_resultado,
     (31, 8, 'Documentacion clinica completa y boleta de traslado', 'Exito o fallo', 3),
     (32, 8, 'Sueros de mantencion y venoclisis pasando correctamente', 'Exito o fallo', 4);
 
-/* ============================================================================
+/* ***************
    M2. ESTRUCTURA HOSPITALARIA
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en hospital: Hospitales propios de Occidente y centros de referencia externa.
 INSERT INTO hospital (id_hospital, codigo, nombre, id_direccion, telefono, correo, es_interno, activo) VALUES
@@ -469,9 +469,9 @@ INSERT INTO clinica (id_clinica, id_hospital, numero_clinica, habilitada) VALUES
     (11, 4, 'CLN-401', True),
     (12, 4, 'CLN-402', True);
 
-/* ============================================================================
+/* ***************
    M3. PERSONAS Y PERSONAL
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en persona: Sujetos con datos demograficos de Guatemala (DPI 13 digitos).
 INSERT INTO persona (id_persona, nombres, apellidos, dpi, fecha_nacimiento, sexo, telefono, id_direccion) VALUES
@@ -640,9 +640,9 @@ INSERT INTO horario_medico (id_horario, id_medico, id_clinica, dia_semana, hora_
     (13, 7, 4, 4, '07:00:00', '12:00:00'),
     (14, 7, 4, 5, '07:00:00', '12:00:00');
 
-/* ============================================================================
+/* ***************
    M4. NUCLEO CLINICO COMUN
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en episodio: Ciclo integral de atencion del paciente.
 INSERT INTO episodio (id_episodio, id_paciente, id_hospital, fecha_apertura, fecha_cierre) VALUES
@@ -714,9 +714,9 @@ INSERT INTO consumo_insumo (id_consumo_insumo, id_ingreso, id_insumo, cantidad, 
     (10, 6, 5, 5, '2026-09-11 08:00:00-06', 18),
     (11, 6, 7, 2, '2026-09-11 08:00:00-06', 18);
 
-/* ============================================================================
+/* ***************
    M5. CONSULTA EXTERNA
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en cita: Agendamiento ambulatorio y control de cancelaciones.
 INSERT INTO cita (id_cita, id_paciente, id_medico, id_clinica, fecha_hora, canal_asignacion, tipo_consulta, id_hospital_referente, estado, fecha_cancelacion, motivo_cancelacion, cancelacion_notificada, id_cita_anterior, id_cita_recargo_origen, creada_en) VALUES
@@ -760,9 +760,9 @@ INSERT INTO orden_laboratorio_detalle (id_orden_laboratorio, id_examen) VALUES
     (2, 2),
     (2, 4);
 
-/* ============================================================================
+/* ***************
    M6. CIRUGIA: PROCESO QUIRURGICO Y CHECKLISTS
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en historia_clinica: Interrogatorio y exploracion sistematizada.
 INSERT INTO historia_clinica (id_historia_clinica, id_episodio, id_medico, fecha_hora, tipo_interrogatorio, informante, antecedentes_heredofamiliares, antecedentes_personales_no_patologicos, antecedentes_patologicos, padecimiento_actual, interrogatorio_aparatos_sistemas, sintomas_generales_terapeutica, estudios_previos, id_signos_vitales, exploracion_general, explo_cabeza, explo_cuello, explo_torax, explo_abdomen, explo_extremidades, explo_columna_vertebral, explo_cavidad_bucal, explo_cavidad_vaginal, explo_cavidad_rectal, explo_conducto_auditivo_externo) VALUES
@@ -939,9 +939,9 @@ INSERT INTO cirugia_documento_fase (id_documento, id_cirugia, fase, id_enfermero
     (8, 3, 'Intraoperatorio', 15, '2026-09-10'),
     (9, 3, 'Postoperatorio', 15, '2026-09-10');
 
-/* ============================================================================
+/* ***************
    M7. FACTURACION Y PAGOS
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en tarifa_servicio: Arancel hospitalario por atencion y por dia.
 INSERT INTO tarifa_servicio (id_hospital, id_servicio, costo_atencion, costo_dia) VALUES
@@ -1009,9 +1009,9 @@ INSERT INTO pago (id_pago, id_factura, numero_cuota, monto, fecha_pago, id_metod
     (6, 5, 1, 820.83, '2026-09-16 09:45:00-06', 4, 4, 26, 'TRANSF-BI-332154'),
     (7, 5, 2, 820.83, '2026-09-27 11:30:00-06', 2, 4, 26, 'POS-VISA-98741');
 
-/* ============================================================================
+/* ***************
    M8. CALIDAD DEL SERVICIO
-   ============================================================================ */
+   *************** */
 
 -- Insercion de datos en calificacion_hospital: Puntuacion (1-5) sobre la atencion del hospital.
 INSERT INTO calificacion_hospital (id_calificacion_hospital, id_episodio, puntuacion, comentario, fecha_hora) VALUES
@@ -1029,8 +1029,8 @@ INSERT INTO calificacion_personal (id_calificacion_personal, id_episodio, id_per
     (5, 5, 6, 5, 'Atencion cordial y excelente control de la presion arterial en cardiologia', '2026-09-15 11:00:00-06'),
     (6, 4, 25, 4, 'Amable y rapida en la asignacion de la cita y cobro en recepcion', '2026-09-12 11:55:00-06');
 
-/* ============================================================================
-   ============================================================================ */
+/* ***************
+   *************** */
 
 SELECT setval(pg_get_serial_sequence('departamento', 'id_departamento'), COALESCE((SELECT MAX(id_departamento) FROM departamento), 1));
 SELECT setval(pg_get_serial_sequence('municipio', 'id_municipio'), COALESCE((SELECT MAX(id_municipio) FROM municipio), 1));

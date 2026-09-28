@@ -27,9 +27,9 @@ SET timezone TO 'America/Guatemala';
 CREATE EXTENSION IF NOT EXISTS btree_gist WITH SCHEMA public;
 
 
-/* ============================================================================
+/* ***************
    M1. CATÁLOGOS CLÍNICOS Y GEOGRAFÍA (19 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Departamentos de la república de Guatemala.
 CREATE TABLE departamento (
@@ -243,9 +243,9 @@ CREATE TABLE item_verificacion (
 );
 
 
-/* ============================================================================
+/* ***************
    M2. ESTRUCTURA HOSPITALARIA (4 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Hospitales pertenecientes a la red y centros externos de referencia/traslado.
 CREATE TABLE hospital (
@@ -309,9 +309,9 @@ CREATE TABLE clinica (
 );
 
 
-/* ============================================================================
+/* ***************
    M3. PERSONAS Y PERSONAL (8 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Entidad supertipo con datos demográficos y de identificación de personas.
 CREATE TABLE persona (
@@ -456,9 +456,9 @@ CREATE TABLE horario_medico (
 );
 
 
-/* ============================================================================
+/* ***************
    M4. NÚCLEO CLÍNICO COMÚN (7 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Episodio clínico: ciclo continuo de atención del paciente hasta su facturación.
 CREATE TABLE episodio (
@@ -643,9 +643,9 @@ CREATE TABLE consumo_insumo (
 );
 
 
-/* ============================================================================
+/* ***************
    M5. CONSULTA EXTERNA (6 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Citas médicas programadas y trazabilidad completa de su ciclo de vida.
 CREATE TABLE cita (
@@ -760,9 +760,9 @@ CREATE TABLE orden_laboratorio_detalle (
 );
 
 
-/* ============================================================================
+/* ***************
    M6. CIRUGÍA: PROCESO QUIRÚRGICO Y CHECKLISTS (14 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Historia clínica preoperatoria que documenta interrogatorio y exploración física.
 CREATE TABLE historia_clinica (
@@ -1033,9 +1033,9 @@ CREATE TABLE cirugia_documento_fase (
 );
 
 
-/* ============================================================================
+/* ***************
    M7. FACTURACIÓN Y PAGOS (6 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Arancel hospitalario de atención médica y costo por día de internamiento.
 CREATE TABLE tarifa_servicio (
@@ -1156,9 +1156,9 @@ CREATE TABLE pago (
 );
 
 
-/* ============================================================================
+/* ***************
    M8. CALIDAD DEL SERVICIO (2 TABLAS)
-   ============================================================================ */
+   *************** */
 
 -- Calificación de la calidad del servicio brindado por el hospital evaluado por episodio.
 CREATE TABLE calificacion_hospital (
@@ -1192,9 +1192,9 @@ CREATE TABLE calificacion_personal (
 );
 
 
-/* ============================================================================
+/* ***************
    ÍNDICES DE RENDIMIENTO (B-TREE Y REGLAS DE NEGOCIO PARCIALES)
-   ============================================================================ */
+   *************** */
 
 -- Reglas de unicidad parcial de negocio
 CREATE UNIQUE INDEX uq_paciente_encargado_principal ON paciente_encargado (id_paciente) WHERE es_principal;
@@ -1261,9 +1261,9 @@ CREATE INDEX ix_pago_fecha                  ON pago (fecha_pago);
 CREATE INDEX ix_calpers_personal            ON calificacion_personal (id_personal);
 
 
-/* ============================================================================
+/* ***************
    VISTAS DE NEGOCIO Y DERIVACIÓN (ESTRICTO CUMPLIMIENTO 3FN)
-   ============================================================================ */
+   *************** */
 
 -- Vista analítica de pacientes con cálculo dinámico de edad en años cumplidos.
 CREATE OR REPLACE VIEW vw_paciente AS
@@ -1364,9 +1364,9 @@ WHERE h.es_interno = TRUE
 GROUP BY h.id_hospital, h.nombre;
 
 
-/* ============================================================================
+/* ***************
    TRIGGERS DE REGLAS DE NEGOCIO E INTEGRIDAD COMPLEJA
-   ============================================================================ */
+   *************** */
 
 -- 1. Regla: La fecha de nacimiento no puede ser posterior a la fecha actual.
 CREATE OR REPLACE FUNCTION fn_check_persona_fecha_nacimiento()
@@ -1584,6 +1584,6 @@ CREATE TRIGGER trg_check_coherencia_paciente_consulta
 BEFORE INSERT OR UPDATE ON consulta
 FOR EACH ROW EXECUTE FUNCTION fn_check_coherencia_paciente_consulta();
 
--- ============================================================================
+-- ***************
 -- FIN
--- ============================================================================
+-- ***************

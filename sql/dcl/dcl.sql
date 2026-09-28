@@ -44,9 +44,9 @@ BEGIN
     END LOOP;
 END $$;
 
-/* ============================================================================
+/* ***************
     CREACION DE ROLES INSTITUCIONALES (GRUPOS DE PRIVILEGIOS)
-   ============================================================================ */
+   *************** */
 
 -- Rol 1: Administrador con control total del esquema hospitales_occidente
 CREATE ROLE rol_admin_hospital WITH NOLOGIN;
@@ -60,9 +60,9 @@ CREATE ROLE rol_medico_asistencial WITH NOLOGIN;
 -- Rol 4: Facturacion y recepcion (agendamiento de citas, cobros y emision de facturas)
 CREATE ROLE rol_caja_facturacion WITH NOLOGIN;
 
-/* ============================================================================
+/* ***************
     ASIGNACION DE PRIVILEGIOS A NIVEL DE BASE DE DATOS Y ESQUEMA
-   ============================================================================ */
+   *************** */
 
 -- Permiso de conexion a la base de datos para todos los roles
 DO $$
@@ -75,9 +75,9 @@ END $$;
 -- Permiso de uso del esquema institucional
 GRANT USAGE ON SCHEMA hospitales_occidente TO rol_admin_hospital, rol_auditor_consulta, rol_medico_asistencial, rol_caja_facturacion;
 
-/* ============================================================================
+/* ***************
    PRIVILEGIOS ESPECIFICOS POR ROL
-   ============================================================================ */
+   *************** */
 
 -- ----------------------------------------------------------------------------
 -- ROL ADMINISTRADOR (rol_admin_hospital)
@@ -158,9 +158,9 @@ GRANT INSERT, UPDATE ON TABLE
     calificacion_personal
 TO rol_caja_facturacion;
 
-/* ============================================================================
+/* ***************
     CREACION DE USUARIOS Y ASIGNACION DE ROLES
-   ============================================================================ */
+   *************** */
 
 -- Usuario 1: Administrador General del Sistema
 CREATE USER usr_admin_occidente WITH ENCRYPTED PASSWORD 'AdminPass2026!';
@@ -178,9 +178,9 @@ GRANT rol_medico_asistencial TO usr_medico_occidente;
 CREATE USER usr_caja_occidente WITH ENCRYPTED PASSWORD 'CajaPass2026!';
 GRANT rol_caja_facturacion TO usr_caja_occidente;
 
-/* ============================================================================
+/* ***************
    CONSULTAS DE AUDITORIA Y VERIFICACION DE PRIVILEGIOS
-   ============================================================================ */
+   *************** */
 
 -- Verificacion de roles y usuarios creados
 SELECT rolname, rolsuper, rolinherit, rolcreaterole, rolcreatedb, rolcanlogin
