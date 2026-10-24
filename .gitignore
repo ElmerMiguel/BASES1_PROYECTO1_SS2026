@@ -7,3 +7,16 @@ MD/
 !AGENTS.md
 !proyecto-2/**/comparacion.md
 
+# Node / TypeORM
+node_modules/
+dist/
+.env
+
+# LaTeX auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+
