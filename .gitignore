@@ -3,3 +3,7 @@ docs/
 MD/
 
 *.md
+!README.md
+!AGENTS.md
+!proyecto-2/**/comparacion.md
+
