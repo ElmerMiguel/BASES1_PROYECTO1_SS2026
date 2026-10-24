@@ -51,7 +51,9 @@ ORDER BY nivel_jerarquico ASC;
 SELECT 
     m.id_personal,
     p.nombres || ' ' || p.apellidos AS nombre_medico,
+    m.no_colegiado,
     h.nombre AS hospital,
+    COUNT(DISTINCT con.id_consulta) AS numero_consultas,
     ROUND(AVG(cp.puntuacion), 2) AS calificacion_promedio,
     RANK() OVER (
         PARTITION BY h.id_hospital 
@@ -65,8 +67,9 @@ JOIN persona p ON p.id_persona = m.id_personal
 JOIN cita ci ON ci.id_medico = m.id_personal
 JOIN clinica cl ON cl.id_clinica = ci.id_clinica
 JOIN hospital h ON h.id_hospital = cl.id_hospital
+JOIN consulta con ON con.id_cita = ci.id_cita
 JOIN calificacion_personal cp ON cp.id_personal = m.id_personal
-GROUP BY m.id_personal, p.nombres, p.apellidos, h.id_hospital, h.nombre
+GROUP BY m.id_personal, p.nombres, p.apellidos, m.no_colegiado, h.id_hospital, h.nombre
 ORDER BY calificacion_promedio ASC;
 
 
@@ -75,21 +78,26 @@ WITH promedios AS (
     SELECT 
         m.id_personal,
         p.nombres || ' ' || p.apellidos AS nombre_medico,
+        m.no_colegiado,
         h.id_hospital,
         h.nombre AS hospital,
+        COUNT(DISTINCT con.id_consulta) AS numero_consultas,
         ROUND(AVG(cp.puntuacion), 2) AS calificacion_promedio
     FROM medico m
     JOIN persona p ON p.id_persona = m.id_personal
     JOIN cita ci ON ci.id_medico = m.id_personal
     JOIN clinica cl ON cl.id_clinica = ci.id_clinica
     JOIN hospital h ON h.id_hospital = cl.id_hospital
+    JOIN consulta con ON con.id_cita = ci.id_cita
     JOIN calificacion_personal cp ON cp.id_personal = m.id_personal
-    GROUP BY m.id_personal, p.nombres, p.apellidos, h.id_hospital, h.nombre
+    GROUP BY m.id_personal, p.nombres, p.apellidos, m.no_colegiado, h.id_hospital, h.nombre
 )
 SELECT 
     p1.id_personal,
     p1.nombre_medico,
+    p1.no_colegiado,
     p1.hospital,
+    p1.numero_consultas,
     p1.calificacion_promedio,
     (
         SELECT COUNT(*) + 1
@@ -116,21 +124,26 @@ WITH promedios AS (
     SELECT 
         m.id_personal,
         p.nombres || ' ' || p.apellidos AS nombre_medico,
+        m.no_colegiado,
         h.id_hospital,
         h.nombre AS hospital,
+        COUNT(DISTINCT con.id_consulta) AS numero_consultas,
         ROUND(AVG(cp.puntuacion), 2) AS calificacion_promedio
     FROM medico m
     JOIN persona p ON p.id_persona = m.id_personal
     JOIN cita ci ON ci.id_medico = m.id_personal
     JOIN clinica cl ON cl.id_clinica = ci.id_clinica
     JOIN hospital h ON h.id_hospital = cl.id_hospital
+    JOIN consulta con ON con.id_cita = ci.id_cita
     JOIN calificacion_personal cp ON cp.id_personal = m.id_personal
-    GROUP BY m.id_personal, p.nombres, p.apellidos, h.id_hospital, h.nombre
+    GROUP BY m.id_personal, p.nombres, p.apellidos, m.no_colegiado, h.id_hospital, h.nombre
 )
 SELECT 
     id_personal,
     nombre_medico,
+    no_colegiado,
     hospital,
+    numero_consultas,
     calificacion_promedio,
     RANK() OVER (PARTITION BY id_hospital ORDER BY calificacion_promedio ASC) AS ranking_hospital,
     RANK() OVER (ORDER BY calificacion_promedio ASC) AS ranking_general
@@ -143,21 +156,26 @@ WITH promedios AS (
     SELECT 
         m.id_personal,
         p.nombres || ' ' || p.apellidos AS nombre_medico,
+        m.no_colegiado,
         h.id_hospital,
         h.nombre AS hospital,
+        COUNT(DISTINCT con.id_consulta) AS numero_consultas,
         ROUND(AVG(cp.puntuacion), 2) AS calificacion_promedio
     FROM medico m
     JOIN persona p ON p.id_persona = m.id_personal
     JOIN cita ci ON ci.id_medico = m.id_personal
     JOIN clinica cl ON cl.id_clinica = ci.id_clinica
     JOIN hospital h ON h.id_hospital = cl.id_hospital
+    JOIN consulta con ON con.id_cita = ci.id_cita
     JOIN calificacion_personal cp ON cp.id_personal = m.id_personal
-    GROUP BY m.id_personal, p.nombres, p.apellidos, h.id_hospital, h.nombre
+    GROUP BY m.id_personal, p.nombres, p.apellidos, m.no_colegiado, h.id_hospital, h.nombre
 )
 SELECT 
     p1.id_personal,
     p1.nombre_medico,
+    p1.no_colegiado,
     p1.hospital,
+    p1.numero_consultas,
     p1.calificacion_promedio,
     (
         SELECT COUNT(*) + 1
