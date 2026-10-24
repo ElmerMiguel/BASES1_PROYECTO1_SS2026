@@ -70,7 +70,7 @@ CREATE SCHEMA IF NOT EXISTS normalizacion_cirugia;
 SET search_path TO normalizacion_cirugia, public;
 
 -- 1. Diagnostico
-CREATE TABLE diagnostico (
+CREATE TABLE IF NOT EXISTS diagnostico (
     id_diagnostico INTEGER GENERATED ALWAYS AS IDENTITY,
     codigo_diagnostico VARCHAR(20) NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE diagnostico (
 );
 
 -- 2. Paciente
-CREATE TABLE paciente (
+CREATE TABLE IF NOT EXISTS paciente (
     id_paciente INTEGER GENERATED ALWAYS AS IDENTITY,
     nombre VARCHAR(150) NOT NULL,
     CONSTRAINT pk_norm_paciente PRIMARY KEY (id_paciente),
@@ -89,7 +89,7 @@ CREATE TABLE paciente (
 );
 
 -- 3. Cirujano
-CREATE TABLE cirujano (
+CREATE TABLE IF NOT EXISTS cirujano (
     id_cirujano INTEGER GENERATED ALWAYS AS IDENTITY,
     nombre VARCHAR(150) NOT NULL,
     especialidad VARCHAR(100) NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE cirujano (
 );
 
 -- 4. Insumo
-CREATE TABLE insumo (
+CREATE TABLE IF NOT EXISTS insumo (
     id_insumo INTEGER GENERATED ALWAYS AS IDENTITY,
     nombre VARCHAR(100) NOT NULL,
     unidad_medida VARCHAR(30) NOT NULL DEFAULT 'Unidad',
@@ -109,7 +109,7 @@ CREATE TABLE insumo (
 );
 
 -- 5. Cirugia
-CREATE TABLE cirugia (
+CREATE TABLE IF NOT EXISTS cirugia (
     id_cirugia BIGINT GENERATED ALWAYS AS IDENTITY,
     id_paciente INTEGER NOT NULL,
     id_cirujano INTEGER NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE cirugia (
 );
 
 -- 6. Cirugia_Insumo (N:M)
-CREATE TABLE cirugia_insumo (
+CREATE TABLE IF NOT EXISTS cirugia_insumo (
     id_cirugia BIGINT NOT NULL,
     id_insumo INTEGER NOT NULL,
     cantidad NUMERIC(8,2) NOT NULL,
@@ -143,11 +143,11 @@ CREATE TABLE cirugia_insumo (
 );
 
 -- Indices para optimizacion de busquedas y uniones
-CREATE INDEX ix_norm_cirugia_paciente ON cirugia (id_paciente);
-CREATE INDEX ix_norm_cirugia_cirujano ON cirugia (id_cirujano);
-CREATE INDEX ix_norm_cirugia_diagnostico ON cirugia (id_diagnostico);
-CREATE INDEX ix_norm_cirugia_fecha ON cirugia (fecha);
-CREATE INDEX ix_norm_det_insumo ON cirugia_insumo (id_insumo);
+CREATE INDEX IF NOT EXISTS ix_norm_cirugia_paciente ON cirugia (id_paciente);
+CREATE INDEX IF NOT EXISTS ix_norm_cirugia_cirujano ON cirugia (id_cirujano);
+CREATE INDEX IF NOT EXISTS ix_norm_cirugia_diagnostico ON cirugia (id_diagnostico);
+CREATE INDEX IF NOT EXISTS ix_norm_cirugia_fecha ON cirugia (fecha);
+CREATE INDEX IF NOT EXISTS ix_norm_det_insumo ON cirugia_insumo (id_insumo);
 
 
 -- ============================================================================
@@ -176,3 +176,37 @@ GROUP BY
     d.codigo_diagnostico, 
     d.descripcion, 
     c.fecha;
+
+
+-- ============================================================================
+-- VERIFICACION DE INTEGRIDAD Y RECONSTRUCCION DEL REPORTE
+-- ============================================================================
+INSERT INTO diagnostico (codigo_diagnostico, descripcion) 
+VALUES ('K35.8', 'Apendicitis aguda no especificada') 
+ON CONFLICT (codigo_diagnostico) DO NOTHING;
+
+INSERT INTO paciente (nombre) 
+VALUES ('Carlos Daniel Mendez Perez')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO cirujano (nombre, especialidad) 
+VALUES ('Dr. Roberto Gomez', 'Cirugia General')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO insumo (nombre, unidad_medida) 
+VALUES ('Bisturi Quirurgico No. 15', 'Unidad')
+ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO insumo (nombre, unidad_medida) 
+VALUES ('Sutura Vicryl 3-0', 'Unidad')
+ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO cirugia (id_paciente, id_cirujano, id_diagnostico, fecha)
+VALUES (1, 1, 1, '2026-06-15 10:30:00-06')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO cirugia_insumo (id_cirugia, id_insumo, cantidad)
+VALUES (1, 1, 2.00), (1, 2, 4.00)
+ON CONFLICT (id_cirugia, id_insumo) DO NOTHING;
+
+SELECT * FROM vista_reporte_cirugia;
