@@ -1,0 +1,404 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\lstdefinestyle{sqlstyle}{
+	language=SQL,
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{teal},
+	commentstyle=\color{gray},
+	frame=single,
+	breaklines=true,
+	showstringspaces=false,
+	extendedchars=true,
+	literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {Ñ}{{\~N}}1
+}
+
+\geometry{margin=2cm}
+\setlength{\tabcolsep}{4pt}
+
+\title{
+	\textbf{Universidad de San Carlos de Guatemala}\\
+	\large Centro Universitario de Occidente -- CUNOC\\
+	\large División de Ciencias de la Ingeniería\\
+	\large Carrera de Ingeniería en Ciencias y Sistemas\\
+	\vspace{0.5cm}
+	\textbf{Proyecto No. 2: Extensión No Destructiva, Auditoría, Consultas Analíticas Avanzadas e Integración ORM}\\
+	\large Curso: Sistemas de Bases de Datos 1 -- Ing. Bryan René Gómez Gómez
+}
+\author{\textbf{Estudiante:} Elmer Miguel \quad | \quad \textbf{Registro Académico:} 201931295}
+\date{Octubre de 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% =========================================================================
+\section{Introducción y Resumen Ejecutivo}
+% =========================================================================
+El presente informe técnico documenta el diseño, implementación y verificación de la Fase 2 del Sistema de Gestión de Bases de Datos para la red de \textbf{Hospitales de Occidente}.
+
+Partiendo del esquema base de 66 tablas en Tercera Forma Normal (3FN), se ejecutó una migración 100\% no destructiva (Zero-Downtime Migration) para incorporar requerimientos corporativos sin degradar la operatividad previa:
+\begin{enumerate}
+	\item \textbf{Extensión Jerárquica y de Personal:} Incorporación de los atributos salariales y de contratación en \texttt{personal}, modelado de la relación recursiva de supervisión médica en \texttt{medico} y creación de la tabla física \texttt{enfermero} bajo el patrón Table-per-Type (TPT).
+	\item \textbf{Trazabilidad y Auditoría (Objetivo 20):} Implementación de una bitácora granular con disparadores PL/pgSQL que registran modificaciones a campos sensibles (salario, id\_superior, nivel\_acceso y especialidad principal).
+	\item \textbf{Ampliación de Dataset:} Registro consistente de facultativos, enfermeros, episodios e ingresos en todas las unidades asistenciales.
+	\item \textbf{Inteligencia de Negocio y Teoría Relacional:} Resolución de 20 consultas complejas incluyendo recursión dinámica (\texttt{WITH RECURSIVE}), rankings con Window Functions frente a subconsultas correlacionadas evaluadas con \texttt{EXPLAIN ANALYZE}, y división relacional formal en dos formulaciones algebraicas equivalentes.
+	\item \textbf{Estudio de Normalización (Objetivo 19):} Auditoría formal del monolito \texttt{Reporte\_Cirugia}, identificación de anomalías operativas y propuesta de descomposición en 3FN con sentencias DDL completas.
+	\item \textbf{Integración ORM Segura:} Implementación de capa de acceso con Node.js, TypeScript y TypeORM, utilizando sentencias preparadas y parámetros enlazados para prevenir inyecciones SQL.
+\end{enumerate}
+
+\newpage
+
+% =========================================================================
+\section{Extensión del Modelo E-R en Notación Barker}
+% =========================================================================
+
+\subsection{Estrategia de Mapeo Supertipo / Subtipo (TPT)}
+Para extender la entidad \texttt{personal} e incorporar a los enfermeros respetando la arquitectura previa de \texttt{medico}, se seleccionó el patrón \textbf{Table-per-Type (TPT)}:
+\begin{itemize}
+	\item \textbf{Identidad Compartida:} La tabla \texttt{enfermero} utiliza como llave primaria su propio \texttt{id\_personal}, que actúa simultáneamente como llave foránea estricta referenciando a \texttt{personal(id\_personal)}.
+	\item \textbf{Ciclo de Vida Ontológico:} Se definió \texttt{ON DELETE CASCADE ON UPDATE CASCADE}. La existencia del registro de enfermero depende del registro general de personal; si el empleado es dado de baja, se eliminan sus detalles especializados manteniendo la coherencia física.
+\end{itemize}
+
+\subsection{Jerarquía Recursiva Médica}
+Para soportar líneas de mando dinámicas sin límite arbitrario de niveles:
+\begin{itemize}
+	\item Se agregó en \texttt{medico} la columna \texttt{id\_superior INTEGER NULL}.
+	\item Se estableció la restricción \texttt{CHECK (id\_superior IS NULL OR id\_superior <> id\_personal)} para prohibir la auto-supervisión directa.
+	\item \textbf{Acción Referencial:} Se definió \texttt{ON DELETE SET NULL ON UPDATE CASCADE}. Si un director médico o jefe de servicio es removido del sistema, sus subordinados quedan temporalmente sin superior directo (\texttt{NULL}) en lugar de eliminarse del hospital.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\linewidth,keepaspectratio]{imagenes/modulo3_personal_jerarquia_fase2.png}
+	\caption{Detalle de Extensión de Módulo 3: Jerarquía Médica, Subtipo Enfermero y Bitácora de Auditoría.}
+\end{figure}
+
+\begin{landscape}
+\subsection{Modelo E-R Completo en Notación Barker (Fase 2)}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.98\linewidth,height=0.82\textheight,keepaspectratio]{imagenes/modelo_completo_fase2.png}
+	\caption{Diagrama General Extendido de Hospitales de Occidente en Notación Barker.}
+\end{figure}
+\end{landscape}
+
+\newpage
+
+% =========================================================================
+\section{Diccionario de Datos Actualizado (Fase 2)}
+% =========================================================================
+A continuación se presentan las tablas modificadas y agregadas en la Fase 2, documentando el 100\% de las acciones referenciales y reglas de negocio.
+
+\subsection{Tabla: personal (Modificada)}
+Propósito: Registro institucional de empleados del hospital.
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{|l|l|c|c|X|c|c|X|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Llave} & \textbf{Nulos} & \textbf{Descripción} & \textbf{DELETE} & \textbf{UPDATE} & \textbf{Justificación Regla Negocio} \\
+\hline
+id\_personal & INTEGER & PK/FK & No & Identificador del personal & CASCADE & CASCADE & Depende de persona; si persona se elimina, se borra el personal. \\
+id\_persona & INTEGER & FK & No & Referencia a persona & RESTRICT & CASCADE & No eliminar persona si mantiene contrato de personal activo. \\
+tipo\_personal & VARCHAR(20) & -- & No & Medico, Enfermero, etc. & -- & -- & Clasificación operativa laboral. \\
+fecha\_contratacion & DATE & -- & No & Fecha de ingreso & -- & -- & Requerido para cómputo de antigüedad. \\
+salario & NUMERIC(10,2) & -- & No & Remuneración mensual & -- & -- & Salario debe ser mayor a cero (CHECK). \\
+activo & BOOLEAN & -- & No & Estado operativo & -- & -- & Control de vigencia institucional. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Tabla: medico (Modificada)}
+Propósito: Subtipo especializado de médicos con supervisión jerárquica.
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{|l|l|c|c|X|c|c|X|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Llave} & \textbf{Nulos} & \textbf{Descripción} & \textbf{DELETE} & \textbf{UPDATE} & \textbf{Justificación Regla Negocio} \\
+\hline
+id\_personal & INTEGER & PK/FK & No & Identificador de médico & CASCADE & CASCADE & Subtipo TPT; si se borra personal, se borra médico. \\
+no\_colegiado & VARCHAR(15) & UQ & No & Colegiado profesional & -- & -- & Matrícula médica obligatoria y única. \\
+condicion & VARCHAR(15) & -- & No & Condición de contrato & -- & -- & Planta, Residente, Interno, Externo. \\
+institucion\_origen & VARCHAR(100) & -- & Sí & Centro de procedencia & -- & -- & Aplica si es médico foráneo. \\
+tarifa\_consulta & NUMERIC(8,2) & -- & Sí & Costo base de consulta & -- & -- & Honorarios asignados al médico. \\
+id\_superior & INTEGER & FK & Sí & Superior inmediato & SET NULL & CASCADE & Si el jefe es dado de baja, los subordinados no se eliminan. \\
+nivel\_acceso & VARCHAR(25) & -- & No & Cargo jerárquico & -- & -- & Director Médico, Jefe Servicio, Jefe Guardia, Asistencial. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Tabla: enfermero (Nueva)}
+Propósito: Subtipo especializado para el cuerpo de enfermería (TPT).
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{|l|l|c|c|X|c|c|X|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Llave} & \textbf{Nulos} & \textbf{Descripción} & \textbf{DELETE} & \textbf{UPDATE} & \textbf{Justificación Regla Negocio} \\
+\hline
+id\_personal & INTEGER & PK/FK & No & Identificador de enfermero & CASCADE & CASCADE & Subtipo TPT dependiente de la tabla personal. \\
+no\_licencia & VARCHAR(20) & UQ & No & Licencia de enfermería & -- & -- & Acreditación técnica única en el sistema. \\
+grado\_academico & VARCHAR(20) & -- & No & Nivel de graduación & -- & -- & Auxiliar, Tecnico, Licenciado, Magister. \\
+area\_asignada & VARCHAR(50) & -- & No & Servicio o unidad médica & -- & -- & Área física principal de servicio asistencial. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Tabla: bitacora\_auditoria\_personal (Nueva)}
+Propósito: Pista de auditoría forense para modificaciones sensibles de personal y médicos.
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{|l|l|c|c|X|c|c|X|}
+\hline
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Llave} & \textbf{Nulos} & \textbf{Descripción} & \textbf{DELETE} & \textbf{UPDATE} & \textbf{Justificación Regla Negocio} \\
+\hline
+id\_auditoria & BIGINT & PK & No & Secuencia de auditoría & -- & -- & Clave única autoincremental de bitácora. \\
+id\_personal & INTEGER & FK & No & Empleado auditado & RESTRICT & CASCADE & No borrar personal si existen registros de auditoría forense. \\
+tabla\_afectada & VARCHAR(50) & -- & No & personal, medico, etc. & -- & -- & Tabla donde ocurrió la modificación. \\
+campo\_modificado & VARCHAR(50) & -- & No & Atributo alterado & -- & -- & Nombre de la columna monitoreada. \\
+valor\_anterior & TEXT & -- & Sí & Estado previo al UPDATE & -- & -- & Valor antiguo para rollback o trazabilidad. \\
+valor\_nuevo & TEXT & -- & Sí & Estado nuevo post UPDATE & -- & -- & Nuevo valor validado en la transacción. \\
+usuario\_db & VARCHAR(60) & -- & No & Usuario de PostgreSQL & -- & -- & Cuenta del motor responsable de la mutación. \\
+fecha\_hora & TIMESTAMPTZ & -- & No & Timestamp exacto & -- & -- & Precisión milimétrica (\texttt{clock\_timestamp()}). \\
+operacion & VARCHAR(10) & -- & No & Tipo de DML (UPDATE) & -- & -- & Operación ejecutada sobre el registro. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+% =========================================================================
+\section{Sistema de Auditoría PL/pgSQL (Objetivo 20)}
+% =========================================================================
+Se implementó la función disparadora \texttt{fn\_auditoria\_personal\_medico()} que captura de forma atómica e individual cualquier modificación sobre:
+\begin{itemize}
+	\item \texttt{personal}: campo \texttt{salario}.
+	\item \texttt{medico}: campos \texttt{id\_superior} y \texttt{nivel\_acceso}.
+	\item \texttt{medico\_especialidad}: campo \texttt{es\_principal}.
+\end{itemize}
+
+\subsection{Demostración y Pruebas de Auditoría}
+Se ejecutaron dos operaciones DML deliberadas utilizando la cuenta \texttt{user1}:
+\begin{lstlisting}[style=sqlstyle]
+-- Prueba 1: Actualizacion salarial de personal id 7
+UPDATE hospitales_occidente.personal 
+SET salario = 14500.00 
+WHERE id_personal = 7;
+
+-- Prueba 2: Reasignacion de superior y nivel de acceso
+UPDATE hospitales_occidente.medico 
+SET id_superior = 2, nivel_acceso = 'Jefe de Servicio' 
+WHERE id_personal = 7;
+\end{lstlisting}
+
+\subsection{Consulta de Verificación en Bitácora}
+\begin{lstlisting}[style=sqlstyle]
+SELECT id_auditoria, id_personal, tabla_afectada, campo_modificado, 
+       valor_anterior, valor_nuevo, usuario_db, fecha_hora 
+FROM hospitales_occidente.bitacora_auditoria_personal 
+ORDER BY id_auditoria DESC LIMIT 3;
+\end{lstlisting}
+
+\textbf{Salida Verificada en el Motor:}
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{|c|c|l|l|c|c|c|l|}
+\hline
+\textbf{ID} & \textbf{Personal} & \textbf{Tabla} & \textbf{Campo} & \textbf{Valor Anterior} & \textbf{Valor Nuevo} & \textbf{Usuario} & \textbf{Fecha / Hora} \\
+\hline
+1 & 7 & personal & salario & 12000.00 & 14500.00 & user1 & 2026-10-24 04:30:15 \\
+2 & 7 & medico & id\_superior & 4 & 2 & user1 & 2026-10-24 04:30:18 \\
+3 & 7 & medico & nivel\_acceso & Medico Asistencial & Jefe de Servicio & user1 & 2026-10-24 04:30:18 \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% =========================================================================
+\section{Análisis de Rendimiento: Window Functions vs Subconsultas (Objetivo 17)}
+% =========================================================================
+El Objetivo 17 evalúa el ranking simultáneo de calificaciones de médicos por hospital y a nivel global de toda la cadena hospitalaria.
+
+\subsection{Evaluación con EXPLAIN (ANALYZE, BUFFERS)}
+Se contrastó la Variante A (funciones analíticas \texttt{RANK() OVER}) contra la Variante B (subconsultas correlacionadas escalares tradicionales sin cláusula \texttt{OVER}).
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Métrica de Ejecución} & \textbf{Variante A (Window Functions)} & \textbf{Variante B (Subconsultas Correlacionadas)} \\
+\hline
+\textbf{Nodo Raíz Principal} & \texttt{WindowAgg} & \texttt{CTE Scan} con 2 \texttt{SubPlan} \\
+\textbf{Costo de Arranque (Startup)} & 85.82 & 0.00 \\
+\textbf{Costo Total Estimado} & \textbf{87.90} & \textbf{701.70} (\textasciitilde{}8 veces mayor) \\
+\textbf{Tiempo Real de Ejecución} & \textbf{0.092 ms} & \textbf{0.142 ms} \\
+\textbf{Accesos a Buffers (Shared Hit)} & 8 bloques & 8 bloques + 16 llamadas a subplanes \\
+\textbf{Complejidad Computacional} & $O(N \log N)$ (Sort + Single Scan) & $O(N^2)$ (Subconsultas correlacionadas $N \times M$) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Justificación Técnica del Optimizador de PostgreSQL}
+\begin{enumerate}
+	\item \textbf{Reutilización de Partición:} La Variante A realiza una única fase de ordenamiento en memoria (\texttt{Quicksort} en 25 kB de RAM) y luego computa los rankings locales y globales linealmente mediante dos pasadas de agregación por ventana (\texttt{WindowAgg}).
+	\item \textbf{Degradación Cuadrática en Subconsultas:} La Variante B ejecuta dos subplanes escalares independientes (\texttt{SubPlan 2} y \texttt{SubPlan 3}) por cada fila externa (\texttt{loops=8}), re-escaneando el materializado de la CTE en cada iteración. En un dataset hospitalario con miles de médicos, este enfoque satura la CPU y memoria caché.
+\end{enumerate}
+
+\newpage
+
+% =========================================================================
+\section{División Relacional Formal (Objetivo 18: Pacientes Fieles)}
+% =========================================================================
+El requerimiento exige identificar a los pacientes atendidos en \textbf{todas las unidades médicas} oficiales del hospital (\textit{Consulta externa, Emergencias, Cirugía y Hospitalización}) en un lapso determinado.
+
+\subsection{Demostración de Equivalencia Algebraica}
+\begin{enumerate}
+	\item \textbf{Enfoque 1 (Agregación Relacional Exacta):} Agrupa por paciente sobre la consolidación asistencial y valida \texttt{HAVING COUNT(DISTINCT unidad) = 4}.
+	\item \textbf{Enfoque 2 (Doble Negación con Álgebra Relacional):} Formaliza la tupla universal: ``Pacientes tales que \textbf{NO EXISTA} una unidad médica requerida que \textbf{NO HAYA} atendido al paciente'' empleando \texttt{NOT EXISTS (SELECT ... EXCEPT SELECT ...)}.
+\end{enumerate}
+
+Ambas consultas arrojaron de forma matemáticamente idéntica a los siguientes 3 pacientes en el motor PostgreSQL:
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{ID Paciente} & \textbf{Nombre Completo} & \textbf{DPI} & \textbf{Unidades Atendidas} \\
+\hline
+1 & Jose Miguel Yax Ixcoy & 2658941230901 & 4 (Consulta, Emergencias, Cirugía, Hosp.) \\
+2 & Maria Concepcion Sac Rodriguez & 2799112230901 & 4 (Consulta, Emergencias, Cirugía, Hosp.) \\
+9 & Josue Daniel Cifuentes Sac & 4012589630901 & 4 (Consulta, Emergencias, Cirugía, Hosp.) \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% =========================================================================
+\section{Auditoría y Normalización de Reporte\_Cirugia (Objetivo 19)}
+% =========================================================================
+
+\subsection{Diagnóstico de Violaciones a Formas Normales}
+\begin{itemize}
+	\item \textbf{1FN (No Atomicidad y Grupos Repetitivos):} Presencia de atributos numerados (\texttt{Nombre\_insumo\_1, Cantidad\_insumo\_1, Nombre\_insumo\_2, Cantidad\_insumo\_2}). Impone un límite artificial de 2 insumos y genera redundancia de nulos.
+	\item \textbf{2FN (Dependencias Parciales):} Atributos de catálogo como \texttt{Especialidad\_cirujano} y \texttt{Descripcion\_diagnostico} dependen únicamente de identificadores secundarios y no de la clave del acto quirúrgico.
+	\item \textbf{3FN (Dependencias Transitivas):} Existen dependencias funcionales entre atributos no primos:
+	\begin{itemize}
+		\item $Id\_cirugia \to Id\_cirujano \to (Nombre\_cirujano, Especialidad\_cirujano)$
+		\item $Id\_cirugia \to Codigo\_diagnostico \to Descripcion\_diagnostico$
+		\item $Id\_cirugia \to Id\_paciente \to Nombre\_paciente$
+	\end{itemize}
+\end{itemize}
+
+\subsection{Anomalías Operativas}
+\begin{itemize}
+	\item \textbf{Inserción:} Imposible ingresar un nuevo cirujano o insumo al sistema sin registrar una cirugía ficticia.
+	\item \textbf{Modificación:} Actualizar el nombre de una patología exige mutar miles de filas históricas con alto riesgo de inconsistencia.
+	\item \textbf{Eliminación:} Cancelar el registro de una intervención puede eliminar la única referencia existente a un insumo o diagnóstico.
+\end{itemize}
+
+\subsection{Propuesta de Descomposición en 3FN (Lossless-Join)}
+Se descompuso el reporte monolítico en 6 entidades atómicas normalizadas:
+\begin{enumerate}
+	\item \texttt{diagnostico(id\_diagnostico PK, codigo\_diagnostico UQ, descripcion)}
+	\item \texttt{paciente(id\_paciente PK, nombre)}
+	\item \texttt{cirujano(id\_cirujano PK, nombre, especialidad)}
+	\item \texttt{insumo(id\_insumo PK, nombre UQ, unidad\_medida)}
+	\item \texttt{cirugia(id\_cirugia PK, id\_paciente FK, id\_cirujano FK, id\_diagnostico FK, fecha)}
+	\item \texttt{cirugia\_insumo(id\_cirugia FK, id\_insumo FK, cantidad, PK(id\_cirugia, id\_insumo))}
+\end{enumerate}
+
+\newpage
+
+% =========================================================================
+\section{Implementación con ORM (Node.js + TypeORM)}
+% =========================================================================
+Se implementó una aplicación en TypeScript ubicada en \texttt{proyecto-2/orm/} utilizando el rol con privilegios mínimos de solo lectura \texttt{usr\_auditor\_occidente}.
+
+\subsection{Tabla Comparativa Lado a Lado}
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{|l|X|X|}
+\hline
+\textbf{Aspecto} & \textbf{TypeORM (QueryBuilder / Logs Oficiales)} & \textbf{SQL Nativo de PostgreSQL} \\
+\hline
+\textbf{Objetivo 1} & Emite \texttt{SELECT ... FROM hospital WHERE es\_interno = \$3} con parámetros enlazados: \texttt{["2026-01-01", "2026-12-31", true]}. & \texttt{WITH demanda AS (...) SELECT hospital, demanda\_total FROM demanda ORDER BY demanda\_total DESC LIMIT 3;} \\
+\hline
+\textbf{Objetivo 16} & Ejecuta CTE recursiva con marcador posicional \texttt{\$1} y parámetro enlazado: \texttt{[7]}. & \texttt{WITH RECURSIVE cadena\_supervision AS (...) WHERE m.id\_personal = 7;} \\
+\hline
+\textbf{Objetivo 18} & División relacional con filtro seguro \texttt{BETWEEN \$1 AND \$2} y parámetros: \texttt{["2026-01-01", "2026-12-31"]}. & \texttt{WITH atenciones AS (...) HAVING COUNT(DISTINCT a.nombre\_unidad) = 4;} \\
+\hline
+\textbf{Seguridad} & \textbf{Protegido (Zero SQLi)}: Parámetros tipados transmitidos en el protocolo binario de PostgreSQL. & Vulnerable si se concatena dinámicamente en aplicaciones sin sentencias preparadas. \\
+\hline
+\textbf{Hidratación} & Convierte los resultados en estructuras de objetos tipadas en TypeScript. & Retorna tuplas tabulares en consola o driver sin tipado estricto. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+% =========================================================================
+\section{Catálogo Resumido de las 20 Consultas Analíticas}
+% =========================================================================
+Todas las consultas se encuentran implementadas y verificadas en \texttt{proyecto-2/sql/consultas/}:
+\begin{enumerate}
+	\item \textbf{Obj 01:} Top 3 hospitales con mayor demanda en consulta externa (Hospital Central Los Altos: 28).
+	\item \textbf{Obj 02:} 5 médicos de consulta externa con menor nota (Notas entre 1.00 y 2.00).
+	\item \textbf{Obj 03:} 5 mejores médicos de emergencias por horas efectivas y egresos vivos con consentimiento.
+	\item \textbf{Obj 04:} Eficiencia en emergencias (camas disponibles, rotación y promedio de triage).
+	\item \textbf{Obj 05:} Cirujanos más eficientes con menor gasto de insumos, instrumental y equipos biomédicos.
+	\item \textbf{Obj 06:} Cirugías más rentables sin complicaciones y con verificación de seguridad quirúrgica.
+	\item \textbf{Obj 07:} Ingresos generados en hospitalización frente a camillas asignadas.
+	\item \textbf{Obj 08:} Métodos de pago cruzados por hospital y unidad médica (Efectivo, Tarjeta Crédito/Débito).
+	\item \textbf{Obj 09:} Recaudación promedio por visita hospitalaria.
+	\item \textbf{Obj 10:} Fecha pico de decesos y unidad médica de concentración.
+	\item \textbf{Obj 11:} Total de ingresos monetarios recaudados por hospital.
+	\item \textbf{Obj 12:} Demografía de emergencias: promedio de edad y distribución por sexo y turno.
+	\item \textbf{Obj 13:} Reporte cronológico de citas por sexo y especialidad médica.
+	\item \textbf{Obj 14:} Promedio de cuotas de financiamiento por unidad y hospital.
+	\item \textbf{Obj 15:} Consistencia de transacciones financieras y estados de liquidación.
+	\item \textbf{Obj 16:} Cadena de supervisión médica recursiva ascendente hasta Director Médico.
+	\item \textbf{Obj 17:} Ranking dual de notas médicas (hospital y general) optimizado con Window Functions.
+	\item \textbf{Obj 18:} División relacional de pacientes fieles con atenciones en las 4 unidades.
+	\item \textbf{Obj 19:} Normalización en 3FN del monolito \texttt{Reporte\_Cirugia}.
+	\item \textbf{Obj 20:} Pista de auditoría forense PL/pgSQL para cambios salariales y jerárquicos.
+\end{enumerate}
+
+\newpage
+
+% =========================================================================
+\section{Conclusiones y Recomendaciones de Ingeniería}
+% =========================================================================
+\begin{enumerate}
+	\item \textbf{Extensibilidad No Destructiva:} La aplicación estricta de DDL incremental permitió extender el modelo del Proyecto 1 sin requerir \texttt{DROP TABLE} ni interrupción del servicio.
+	\item \textbf{Optimización Analítica con Window Functions:} El uso de \texttt{RANK() OVER} demostró una reducción de costos de \textasciitilde{}8x frente al enfoque tradicional de subconsultas correlacionadas al evitar escaneos redundantes en disco.
+	\item \textbf{Seguridad Operacional:} La delimitación de roles DCL (\texttt{usr\_auditor\_occidente}) junto con el enlace estricto de parámetros en TypeORM garantiza tolerancia cero a inyecciones SQL.
+\end{enumerate}
+
+\end{document}
