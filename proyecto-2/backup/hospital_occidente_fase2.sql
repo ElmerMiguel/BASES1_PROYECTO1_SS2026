@@ -2,10 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict CbFmpxt1BLjiUOqcwwLhc5a8i1lazSpgQEscqoMIltAWtCV5DPb0F4QJzMus8Ub
+\restrict LtjAf8yJZcDdrlqqs15kFIdJzIAAbpjLP76d7g6Kl43LxRmaj46UMAQ8A8idcMI
 
 -- Dumped from database version 18.6 (Debian 18.6-1.pgdg13+2)
 -- Dumped by pg_dump version 18.6 (Debian 18.6-1.pgdg13+2)
+
+-- Started on 2026-10-24 06:38:19 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +21,11 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+-- Requerido para restricciones EXCLUDE con tipos enteros en GiST
+CREATE EXTENSION IF NOT EXISTS btree_gist WITH SCHEMA public;
+
 --
+-- TOC entry 7 (class 2615 OID 43119)
 -- Name: hospitales_occidente; Type: SCHEMA; Schema: -; Owner: user1
 --
 
@@ -29,6 +35,7 @@ CREATE SCHEMA hospitales_occidente;
 ALTER SCHEMA hospitales_occidente OWNER TO user1;
 
 --
+-- TOC entry 523 (class 1255 OID 44970)
 -- Name: fn_auditoria_personal_medico(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -126,6 +133,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_auditoria_personal_medico() OWNER TO user1;
 
 --
+-- TOC entry 408 (class 1255 OID 44814)
 -- Name: fn_check_coherencia_paciente_consulta(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -156,6 +164,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_coherencia_paciente_consulta() OWNER TO user1;
 
 --
+-- TOC entry 485 (class 1255 OID 44808)
 -- Name: fn_check_cuota_pago(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -181,6 +190,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_cuota_pago() OWNER TO user1;
 
 --
+-- TOC entry 498 (class 1255 OID 44812)
 -- Name: fn_check_cuotas_factura(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -213,6 +223,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_cuotas_factura() OWNER TO user1;
 
 --
+-- TOC entry 588 (class 1255 OID 44802)
 -- Name: fn_check_fecha_egreso(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -238,6 +249,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_fecha_egreso() OWNER TO user1;
 
 --
+-- TOC entry 557 (class 1255 OID 44804)
 -- Name: fn_check_limite_quirofanos(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -277,6 +289,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_limite_quirofanos() OWNER TO user1;
 
 --
+-- TOC entry 474 (class 1255 OID 44800)
 -- Name: fn_check_persona_fecha_nacimiento(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -296,6 +309,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_persona_fecha_nacimiento() OWNER TO user1;
 
 --
+-- TOC entry 399 (class 1255 OID 44810)
 -- Name: fn_check_rol_equipo_quirurgico(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -335,6 +349,7 @@ $$;
 ALTER FUNCTION hospitales_occidente.fn_check_rol_equipo_quirurgico() OWNER TO user1;
 
 --
+-- TOC entry 437 (class 1255 OID 44806)
 -- Name: fn_check_unidad_hospital_interno(); Type: FUNCTION; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -363,6 +378,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- TOC entry 279 (class 1259 OID 43613)
 -- Name: asignacion_personal; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -380,6 +396,7 @@ CREATE TABLE hospitales_occidente.asignacion_personal (
 ALTER TABLE hospitales_occidente.asignacion_personal OWNER TO user1;
 
 --
+-- TOC entry 278 (class 1259 OID 43612)
 -- Name: asignacion_personal_id_asignacion_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -394,6 +411,7 @@ ALTER TABLE hospitales_occidente.asignacion_personal ALTER COLUMN id_asignacion 
 
 
 --
+-- TOC entry 348 (class 1259 OID 44946)
 -- Name: bitacora_auditoria_personal; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -413,6 +431,7 @@ CREATE TABLE hospitales_occidente.bitacora_auditoria_personal (
 ALTER TABLE hospitales_occidente.bitacora_auditoria_personal OWNER TO user1;
 
 --
+-- TOC entry 347 (class 1259 OID 44945)
 -- Name: bitacora_auditoria_personal_id_auditoria_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -427,6 +446,7 @@ ALTER TABLE hospitales_occidente.bitacora_auditoria_personal ALTER COLUMN id_aud
 
 
 --
+-- TOC entry 338 (class 1259 OID 44668)
 -- Name: calificacion_hospital; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -443,6 +463,7 @@ CREATE TABLE hospitales_occidente.calificacion_hospital (
 ALTER TABLE hospitales_occidente.calificacion_hospital OWNER TO user1;
 
 --
+-- TOC entry 337 (class 1259 OID 44667)
 -- Name: calificacion_hospital_id_calificacion_hospital_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -457,6 +478,7 @@ ALTER TABLE hospitales_occidente.calificacion_hospital ALTER COLUMN id_calificac
 
 
 --
+-- TOC entry 340 (class 1259 OID 44689)
 -- Name: calificacion_personal; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -474,6 +496,7 @@ CREATE TABLE hospitales_occidente.calificacion_personal (
 ALTER TABLE hospitales_occidente.calificacion_personal OWNER TO user1;
 
 --
+-- TOC entry 339 (class 1259 OID 44688)
 -- Name: calificacion_personal_id_calificacion_personal_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -488,6 +511,7 @@ ALTER TABLE hospitales_occidente.calificacion_personal ALTER COLUMN id_calificac
 
 
 --
+-- TOC entry 318 (class 1259 OID 44300)
 -- Name: cirugia; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -513,6 +537,7 @@ CREATE TABLE hospitales_occidente.cirugia (
 ALTER TABLE hospitales_occidente.cirugia OWNER TO user1;
 
 --
+-- TOC entry 327 (class 1259 OID 44467)
 -- Name: cirugia_documento_fase; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -529,6 +554,7 @@ CREATE TABLE hospitales_occidente.cirugia_documento_fase (
 ALTER TABLE hospitales_occidente.cirugia_documento_fase OWNER TO user1;
 
 --
+-- TOC entry 326 (class 1259 OID 44466)
 -- Name: cirugia_documento_fase_id_documento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -543,6 +569,7 @@ ALTER TABLE hospitales_occidente.cirugia_documento_fase ALTER COLUMN id_document
 
 
 --
+-- TOC entry 319 (class 1259 OID 44336)
 -- Name: cirugia_equipo_medico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -557,6 +584,7 @@ CREATE TABLE hospitales_occidente.cirugia_equipo_medico (
 ALTER TABLE hospitales_occidente.cirugia_equipo_medico OWNER TO user1;
 
 --
+-- TOC entry 317 (class 1259 OID 44299)
 -- Name: cirugia_id_cirugia_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -571,6 +599,7 @@ ALTER TABLE hospitales_occidente.cirugia ALTER COLUMN id_cirugia ADD GENERATED B
 
 
 --
+-- TOC entry 325 (class 1259 OID 44434)
 -- Name: cirugia_verificacion; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -589,6 +618,7 @@ CREATE TABLE hospitales_occidente.cirugia_verificacion (
 ALTER TABLE hospitales_occidente.cirugia_verificacion OWNER TO user1;
 
 --
+-- TOC entry 324 (class 1259 OID 44433)
 -- Name: cirugia_verificacion_id_verificacion_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -603,6 +633,7 @@ ALTER TABLE hospitales_occidente.cirugia_verificacion ALTER COLUMN id_verificaci
 
 
 --
+-- TOC entry 296 (class 1259 OID 43943)
 -- Name: cita; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -634,6 +665,7 @@ CREATE TABLE hospitales_occidente.cita (
 ALTER TABLE hospitales_occidente.cita OWNER TO user1;
 
 --
+-- TOC entry 295 (class 1259 OID 43942)
 -- Name: cita_id_cita_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -648,6 +680,7 @@ ALTER TABLE hospitales_occidente.cita ALTER COLUMN id_cita ADD GENERATED BY DEFA
 
 
 --
+-- TOC entry 267 (class 1259 OID 43450)
 -- Name: clinica; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -663,6 +696,7 @@ CREATE TABLE hospitales_occidente.clinica (
 ALTER TABLE hospitales_occidente.clinica OWNER TO user1;
 
 --
+-- TOC entry 266 (class 1259 OID 43449)
 -- Name: clinica_id_clinica_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -677,6 +711,7 @@ ALTER TABLE hospitales_occidente.clinica ALTER COLUMN id_clinica ADD GENERATED B
 
 
 --
+-- TOC entry 321 (class 1259 OID 44356)
 -- Name: consentimiento_informado; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -701,6 +736,7 @@ CREATE TABLE hospitales_occidente.consentimiento_informado (
 ALTER TABLE hospitales_occidente.consentimiento_informado OWNER TO user1;
 
 --
+-- TOC entry 320 (class 1259 OID 44355)
 -- Name: consentimiento_informado_id_consentimiento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -715,6 +751,7 @@ ALTER TABLE hospitales_occidente.consentimiento_informado ALTER COLUMN id_consen
 
 
 --
+-- TOC entry 298 (class 1259 OID 43996)
 -- Name: consulta; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -732,6 +769,7 @@ CREATE TABLE hospitales_occidente.consulta (
 ALTER TABLE hospitales_occidente.consulta OWNER TO user1;
 
 --
+-- TOC entry 297 (class 1259 OID 43995)
 -- Name: consulta_id_consulta_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -746,6 +784,7 @@ ALTER TABLE hospitales_occidente.consulta ALTER COLUMN id_consulta ADD GENERATED
 
 
 --
+-- TOC entry 294 (class 1259 OID 43915)
 -- Name: consumo_insumo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -763,6 +802,7 @@ CREATE TABLE hospitales_occidente.consumo_insumo (
 ALTER TABLE hospitales_occidente.consumo_insumo OWNER TO user1;
 
 --
+-- TOC entry 293 (class 1259 OID 43914)
 -- Name: consumo_insumo_id_consumo_insumo_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -777,6 +817,7 @@ ALTER TABLE hospitales_occidente.consumo_insumo ALTER COLUMN id_consumo_insumo A
 
 
 --
+-- TOC entry 223 (class 1259 OID 43121)
 -- Name: departamento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -790,6 +831,7 @@ CREATE TABLE hospitales_occidente.departamento (
 ALTER TABLE hospitales_occidente.departamento OWNER TO user1;
 
 --
+-- TOC entry 222 (class 1259 OID 43120)
 -- Name: departamento_id_departamento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -804,6 +846,7 @@ ALTER TABLE hospitales_occidente.departamento ALTER COLUMN id_departamento ADD G
 
 
 --
+-- TOC entry 233 (class 1259 OID 43189)
 -- Name: diagnostico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -818,6 +861,7 @@ CREATE TABLE hospitales_occidente.diagnostico (
 ALTER TABLE hospitales_occidente.diagnostico OWNER TO user1;
 
 --
+-- TOC entry 232 (class 1259 OID 43188)
 -- Name: diagnostico_id_diagnostico_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -832,6 +876,7 @@ ALTER TABLE hospitales_occidente.diagnostico ALTER COLUMN id_diagnostico ADD GEN
 
 
 --
+-- TOC entry 227 (class 1259 OID 43149)
 -- Name: direccion; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -848,6 +893,7 @@ CREATE TABLE hospitales_occidente.direccion (
 ALTER TABLE hospitales_occidente.direccion OWNER TO user1;
 
 --
+-- TOC entry 226 (class 1259 OID 43148)
 -- Name: direccion_id_direccion_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -862,6 +908,7 @@ ALTER TABLE hospitales_occidente.direccion ALTER COLUMN id_direccion ADD GENERAT
 
 
 --
+-- TOC entry 291 (class 1259 OID 43848)
 -- Name: egreso; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -886,6 +933,7 @@ CREATE TABLE hospitales_occidente.egreso (
 ALTER TABLE hospitales_occidente.egreso OWNER TO user1;
 
 --
+-- TOC entry 292 (class 1259 OID 43897)
 -- Name: egreso_diagnostico_secundario; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -898,6 +946,7 @@ CREATE TABLE hospitales_occidente.egreso_diagnostico_secundario (
 ALTER TABLE hospitales_occidente.egreso_diagnostico_secundario OWNER TO user1;
 
 --
+-- TOC entry 290 (class 1259 OID 43847)
 -- Name: egreso_id_egreso_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -912,6 +961,7 @@ ALTER TABLE hospitales_occidente.egreso ALTER COLUMN id_egreso ADD GENERATED BY 
 
 
 --
+-- TOC entry 346 (class 1259 OID 44926)
 -- Name: enfermero; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -929,6 +979,8 @@ CREATE TABLE hospitales_occidente.enfermero (
 ALTER TABLE hospitales_occidente.enfermero OWNER TO user1;
 
 --
+-- TOC entry 4898 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: TABLE enfermero; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -936,6 +988,8 @@ COMMENT ON TABLE hospitales_occidente.enfermero IS 'Subtipo de personal para col
 
 
 --
+-- TOC entry 4899 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: COLUMN enfermero.id_personal; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -943,6 +997,8 @@ COMMENT ON COLUMN hospitales_occidente.enfermero.id_personal IS 'Identificador c
 
 
 --
+-- TOC entry 4900 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: COLUMN enfermero.no_licencia; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -950,6 +1006,8 @@ COMMENT ON COLUMN hospitales_occidente.enfermero.no_licencia IS 'Numero oficial 
 
 
 --
+-- TOC entry 4901 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: COLUMN enfermero.grado_academico; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -957,6 +1015,8 @@ COMMENT ON COLUMN hospitales_occidente.enfermero.grado_academico IS 'Grado acade
 
 
 --
+-- TOC entry 4902 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: COLUMN enfermero.area_asignada; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -964,6 +1024,7 @@ COMMENT ON COLUMN hospitales_occidente.enfermero.area_asignada IS 'Area operativ
 
 
 --
+-- TOC entry 283 (class 1259 OID 43669)
 -- Name: episodio; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -980,6 +1041,7 @@ CREATE TABLE hospitales_occidente.episodio (
 ALTER TABLE hospitales_occidente.episodio OWNER TO user1;
 
 --
+-- TOC entry 282 (class 1259 OID 43668)
 -- Name: episodio_id_episodio_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -994,6 +1056,7 @@ ALTER TABLE hospitales_occidente.episodio ALTER COLUMN id_episodio ADD GENERATED
 
 
 --
+-- TOC entry 255 (class 1259 OID 43333)
 -- Name: equipo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1011,6 +1074,7 @@ CREATE TABLE hospitales_occidente.equipo (
 ALTER TABLE hospitales_occidente.equipo OWNER TO user1;
 
 --
+-- TOC entry 254 (class 1259 OID 43332)
 -- Name: equipo_id_equipo_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1025,6 +1089,7 @@ ALTER TABLE hospitales_occidente.equipo ALTER COLUMN id_equipo ADD GENERATED BY 
 
 
 --
+-- TOC entry 265 (class 1259 OID 43429)
 -- Name: espacio_atencion; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1042,6 +1107,7 @@ CREATE TABLE hospitales_occidente.espacio_atencion (
 ALTER TABLE hospitales_occidente.espacio_atencion OWNER TO user1;
 
 --
+-- TOC entry 264 (class 1259 OID 43428)
 -- Name: espacio_atencion_id_espacio_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1056,6 +1122,7 @@ ALTER TABLE hospitales_occidente.espacio_atencion ALTER COLUMN id_espacio ADD GE
 
 
 --
+-- TOC entry 231 (class 1259 OID 43177)
 -- Name: especialidad; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1070,6 +1137,7 @@ CREATE TABLE hospitales_occidente.especialidad (
 ALTER TABLE hospitales_occidente.especialidad OWNER TO user1;
 
 --
+-- TOC entry 230 (class 1259 OID 43176)
 -- Name: especialidad_id_especialidad_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1084,6 +1152,7 @@ ALTER TABLE hospitales_occidente.especialidad ALTER COLUMN id_especialidad ADD G
 
 
 --
+-- TOC entry 323 (class 1259 OID 44397)
 -- Name: evaluacion_preanestesica; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1104,6 +1173,7 @@ CREATE TABLE hospitales_occidente.evaluacion_preanestesica (
 ALTER TABLE hospitales_occidente.evaluacion_preanestesica OWNER TO user1;
 
 --
+-- TOC entry 322 (class 1259 OID 44396)
 -- Name: evaluacion_preanestesica_id_evaluacion_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1118,6 +1188,7 @@ ALTER TABLE hospitales_occidente.evaluacion_preanestesica ALTER COLUMN id_evalua
 
 
 --
+-- TOC entry 245 (class 1259 OID 43266)
 -- Name: examen_laboratorio; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1131,6 +1202,7 @@ CREATE TABLE hospitales_occidente.examen_laboratorio (
 ALTER TABLE hospitales_occidente.examen_laboratorio OWNER TO user1;
 
 --
+-- TOC entry 244 (class 1259 OID 43265)
 -- Name: examen_laboratorio_id_examen_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1145,6 +1217,7 @@ ALTER TABLE hospitales_occidente.examen_laboratorio ALTER COLUMN id_examen ADD G
 
 
 --
+-- TOC entry 332 (class 1259 OID 44550)
 -- Name: factura; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1169,6 +1242,7 @@ CREATE TABLE hospitales_occidente.factura (
 ALTER TABLE hospitales_occidente.factura OWNER TO user1;
 
 --
+-- TOC entry 334 (class 1259 OID 44589)
 -- Name: factura_detalle; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1194,6 +1268,7 @@ CREATE TABLE hospitales_occidente.factura_detalle (
 ALTER TABLE hospitales_occidente.factura_detalle OWNER TO user1;
 
 --
+-- TOC entry 333 (class 1259 OID 44588)
 -- Name: factura_detalle_id_factura_detalle_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1208,6 +1283,7 @@ ALTER TABLE hospitales_occidente.factura_detalle ALTER COLUMN id_factura_detalle
 
 
 --
+-- TOC entry 331 (class 1259 OID 44549)
 -- Name: factura_id_factura_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1222,6 +1298,7 @@ ALTER TABLE hospitales_occidente.factura ALTER COLUMN id_factura ADD GENERATED B
 
 
 --
+-- TOC entry 307 (class 1259 OID 44112)
 -- Name: historia_clinica; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1260,6 +1337,7 @@ CREATE TABLE hospitales_occidente.historia_clinica (
 ALTER TABLE hospitales_occidente.historia_clinica OWNER TO user1;
 
 --
+-- TOC entry 306 (class 1259 OID 44111)
 -- Name: historia_clinica_id_historia_clinica_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1274,6 +1352,7 @@ ALTER TABLE hospitales_occidente.historia_clinica ALTER COLUMN id_historia_clini
 
 
 --
+-- TOC entry 281 (class 1259 OID 43642)
 -- Name: horario_medico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1293,6 +1372,7 @@ CREATE TABLE hospitales_occidente.horario_medico (
 ALTER TABLE hospitales_occidente.horario_medico OWNER TO user1;
 
 --
+-- TOC entry 280 (class 1259 OID 43641)
 -- Name: horario_medico_id_horario_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1307,6 +1387,7 @@ ALTER TABLE hospitales_occidente.horario_medico ALTER COLUMN id_horario ADD GENE
 
 
 --
+-- TOC entry 261 (class 1259 OID 43382)
 -- Name: hospital; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1328,6 +1409,7 @@ CREATE TABLE hospitales_occidente.hospital (
 ALTER TABLE hospitales_occidente.hospital OWNER TO user1;
 
 --
+-- TOC entry 260 (class 1259 OID 43381)
 -- Name: hospital_id_hospital_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1342,6 +1424,7 @@ ALTER TABLE hospitales_occidente.hospital ALTER COLUMN id_hospital ADD GENERATED
 
 
 --
+-- TOC entry 287 (class 1259 OID 43720)
 -- Name: ingreso; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1368,6 +1451,7 @@ CREATE TABLE hospitales_occidente.ingreso (
 ALTER TABLE hospitales_occidente.ingreso OWNER TO user1;
 
 --
+-- TOC entry 286 (class 1259 OID 43719)
 -- Name: ingreso_id_ingreso_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1382,6 +1466,7 @@ ALTER TABLE hospitales_occidente.ingreso ALTER COLUMN id_ingreso ADD GENERATED B
 
 
 --
+-- TOC entry 253 (class 1259 OID 43319)
 -- Name: instrumento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1399,6 +1484,7 @@ CREATE TABLE hospitales_occidente.instrumento (
 ALTER TABLE hospitales_occidente.instrumento OWNER TO user1;
 
 --
+-- TOC entry 252 (class 1259 OID 43318)
 -- Name: instrumento_id_instrumento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1413,6 +1499,7 @@ ALTER TABLE hospitales_occidente.instrumento ALTER COLUMN id_instrumento ADD GEN
 
 
 --
+-- TOC entry 251 (class 1259 OID 43305)
 -- Name: insumo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1429,6 +1516,7 @@ CREATE TABLE hospitales_occidente.insumo (
 ALTER TABLE hospitales_occidente.insumo OWNER TO user1;
 
 --
+-- TOC entry 250 (class 1259 OID 43304)
 -- Name: insumo_id_insumo_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1443,6 +1531,7 @@ ALTER TABLE hospitales_occidente.insumo ALTER COLUMN id_insumo ADD GENERATED BY 
 
 
 --
+-- TOC entry 259 (class 1259 OID 43361)
 -- Name: item_verificacion; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1460,6 +1549,7 @@ CREATE TABLE hospitales_occidente.item_verificacion (
 ALTER TABLE hospitales_occidente.item_verificacion OWNER TO user1;
 
 --
+-- TOC entry 258 (class 1259 OID 43360)
 -- Name: item_verificacion_id_item_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1474,6 +1564,7 @@ ALTER TABLE hospitales_occidente.item_verificacion ALTER COLUMN id_item ADD GENE
 
 
 --
+-- TOC entry 243 (class 1259 OID 43255)
 -- Name: medicamento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1488,6 +1579,7 @@ CREATE TABLE hospitales_occidente.medicamento (
 ALTER TABLE hospitales_occidente.medicamento OWNER TO user1;
 
 --
+-- TOC entry 242 (class 1259 OID 43254)
 -- Name: medicamento_id_medicamento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1502,6 +1594,7 @@ ALTER TABLE hospitales_occidente.medicamento ALTER COLUMN id_medicamento ADD GEN
 
 
 --
+-- TOC entry 276 (class 1259 OID 43572)
 -- Name: medico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1525,6 +1618,8 @@ CREATE TABLE hospitales_occidente.medico (
 ALTER TABLE hospitales_occidente.medico OWNER TO user1;
 
 --
+-- TOC entry 4936 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: COLUMN medico.id_superior; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1532,6 +1627,8 @@ COMMENT ON COLUMN hospitales_occidente.medico.id_superior IS 'Referencia foranea
 
 
 --
+-- TOC entry 4937 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: COLUMN medico.nivel_acceso; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1539,6 +1636,7 @@ COMMENT ON COLUMN hospitales_occidente.medico.nivel_acceso IS 'Nivel funcional d
 
 
 --
+-- TOC entry 277 (class 1259 OID 43593)
 -- Name: medico_especialidad; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1552,6 +1650,7 @@ CREATE TABLE hospitales_occidente.medico_especialidad (
 ALTER TABLE hospitales_occidente.medico_especialidad OWNER TO user1;
 
 --
+-- TOC entry 241 (class 1259 OID 43244)
 -- Name: metodo_pago; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1565,6 +1664,7 @@ CREATE TABLE hospitales_occidente.metodo_pago (
 ALTER TABLE hospitales_occidente.metodo_pago OWNER TO user1;
 
 --
+-- TOC entry 240 (class 1259 OID 43243)
 -- Name: metodo_pago_id_metodo_pago_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1579,6 +1679,7 @@ ALTER TABLE hospitales_occidente.metodo_pago ALTER COLUMN id_metodo_pago ADD GEN
 
 
 --
+-- TOC entry 257 (class 1259 OID 43347)
 -- Name: momento_quirurgico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1595,6 +1696,7 @@ CREATE TABLE hospitales_occidente.momento_quirurgico (
 ALTER TABLE hospitales_occidente.momento_quirurgico OWNER TO user1;
 
 --
+-- TOC entry 256 (class 1259 OID 43346)
 -- Name: momento_quirurgico_id_momento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1609,6 +1711,7 @@ ALTER TABLE hospitales_occidente.momento_quirurgico ALTER COLUMN id_momento ADD 
 
 
 --
+-- TOC entry 225 (class 1259 OID 43132)
 -- Name: municipio; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1623,6 +1726,7 @@ CREATE TABLE hospitales_occidente.municipio (
 ALTER TABLE hospitales_occidente.municipio OWNER TO user1;
 
 --
+-- TOC entry 224 (class 1259 OID 43131)
 -- Name: municipio_id_municipio_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1637,6 +1741,7 @@ ALTER TABLE hospitales_occidente.municipio ALTER COLUMN id_municipio ADD GENERAT
 
 
 --
+-- TOC entry 304 (class 1259 OID 44078)
 -- Name: orden_laboratorio; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1651,6 +1756,7 @@ CREATE TABLE hospitales_occidente.orden_laboratorio (
 ALTER TABLE hospitales_occidente.orden_laboratorio OWNER TO user1;
 
 --
+-- TOC entry 305 (class 1259 OID 44094)
 -- Name: orden_laboratorio_detalle; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1663,6 +1769,7 @@ CREATE TABLE hospitales_occidente.orden_laboratorio_detalle (
 ALTER TABLE hospitales_occidente.orden_laboratorio_detalle OWNER TO user1;
 
 --
+-- TOC entry 303 (class 1259 OID 44077)
 -- Name: orden_laboratorio_id_orden_laboratorio_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1677,6 +1784,7 @@ ALTER TABLE hospitales_occidente.orden_laboratorio ALTER COLUMN id_orden_laborat
 
 
 --
+-- TOC entry 271 (class 1259 OID 43496)
 -- Name: paciente; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1697,6 +1805,7 @@ CREATE TABLE hospitales_occidente.paciente (
 ALTER TABLE hospitales_occidente.paciente OWNER TO user1;
 
 --
+-- TOC entry 273 (class 1259 OID 43525)
 -- Name: paciente_encargado; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1712,6 +1821,7 @@ CREATE TABLE hospitales_occidente.paciente_encargado (
 ALTER TABLE hospitales_occidente.paciente_encargado OWNER TO user1;
 
 --
+-- TOC entry 272 (class 1259 OID 43524)
 -- Name: paciente_encargado_id_paciente_encargado_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1726,6 +1836,7 @@ ALTER TABLE hospitales_occidente.paciente_encargado ALTER COLUMN id_paciente_enc
 
 
 --
+-- TOC entry 270 (class 1259 OID 43495)
 -- Name: paciente_id_paciente_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1740,6 +1851,7 @@ ALTER TABLE hospitales_occidente.paciente ALTER COLUMN id_paciente ADD GENERATED
 
 
 --
+-- TOC entry 336 (class 1259 OID 44629)
 -- Name: pago; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1761,6 +1873,7 @@ CREATE TABLE hospitales_occidente.pago (
 ALTER TABLE hospitales_occidente.pago OWNER TO user1;
 
 --
+-- TOC entry 335 (class 1259 OID 44628)
 -- Name: pago_id_pago_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1775,6 +1888,7 @@ ALTER TABLE hospitales_occidente.pago ALTER COLUMN id_pago ADD GENERATED BY DEFA
 
 
 --
+-- TOC entry 229 (class 1259 OID 43166)
 -- Name: parentesco; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1788,6 +1902,7 @@ CREATE TABLE hospitales_occidente.parentesco (
 ALTER TABLE hospitales_occidente.parentesco OWNER TO user1;
 
 --
+-- TOC entry 228 (class 1259 OID 43165)
 -- Name: parentesco_id_parentesco_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1802,6 +1917,7 @@ ALTER TABLE hospitales_occidente.parentesco ALTER COLUMN id_parentesco ADD GENER
 
 
 --
+-- TOC entry 269 (class 1259 OID 43469)
 -- Name: persona; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1827,6 +1943,7 @@ CREATE TABLE hospitales_occidente.persona (
 ALTER TABLE hospitales_occidente.persona OWNER TO user1;
 
 --
+-- TOC entry 268 (class 1259 OID 43468)
 -- Name: persona_id_persona_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1841,6 +1958,7 @@ ALTER TABLE hospitales_occidente.persona ALTER COLUMN id_persona ADD GENERATED B
 
 
 --
+-- TOC entry 275 (class 1259 OID 43554)
 -- Name: personal; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1859,6 +1977,8 @@ CREATE TABLE hospitales_occidente.personal (
 ALTER TABLE hospitales_occidente.personal OWNER TO user1;
 
 --
+-- TOC entry 4959 (class 0 OID 0)
+-- Dependencies: 275
 -- Name: COLUMN personal.fecha_contratacion; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1866,6 +1986,8 @@ COMMENT ON COLUMN hospitales_occidente.personal.fecha_contratacion IS 'Fecha ofi
 
 
 --
+-- TOC entry 4960 (class 0 OID 0)
+-- Dependencies: 275
 -- Name: COLUMN personal.salario; Type: COMMENT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1873,6 +1995,7 @@ COMMENT ON COLUMN hospitales_occidente.personal.salario IS 'Salario base mensual
 
 
 --
+-- TOC entry 274 (class 1259 OID 43553)
 -- Name: personal_id_personal_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1887,6 +2010,7 @@ ALTER TABLE hospitales_occidente.personal ALTER COLUMN id_personal ADD GENERATED
 
 
 --
+-- TOC entry 249 (class 1259 OID 43288)
 -- Name: procedimiento_quirurgico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1902,6 +2026,7 @@ CREATE TABLE hospitales_occidente.procedimiento_quirurgico (
 ALTER TABLE hospitales_occidente.procedimiento_quirurgico OWNER TO user1;
 
 --
+-- TOC entry 248 (class 1259 OID 43287)
 -- Name: procedimiento_quirurgico_id_procedimiento_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1916,6 +2041,7 @@ ALTER TABLE hospitales_occidente.procedimiento_quirurgico ALTER COLUMN id_proced
 
 
 --
+-- TOC entry 300 (class 1259 OID 44027)
 -- Name: receta; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1931,6 +2057,7 @@ CREATE TABLE hospitales_occidente.receta (
 ALTER TABLE hospitales_occidente.receta OWNER TO user1;
 
 --
+-- TOC entry 302 (class 1259 OID 44053)
 -- Name: receta_detalle; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1948,6 +2075,7 @@ CREATE TABLE hospitales_occidente.receta_detalle (
 ALTER TABLE hospitales_occidente.receta_detalle OWNER TO user1;
 
 --
+-- TOC entry 301 (class 1259 OID 44052)
 -- Name: receta_detalle_id_receta_detalle_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1962,6 +2090,7 @@ ALTER TABLE hospitales_occidente.receta_detalle ALTER COLUMN id_receta_detalle A
 
 
 --
+-- TOC entry 299 (class 1259 OID 44026)
 -- Name: receta_id_receta_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -1976,6 +2105,7 @@ ALTER TABLE hospitales_occidente.receta ALTER COLUMN id_receta ADD GENERATED BY 
 
 
 --
+-- TOC entry 285 (class 1259 OID 43691)
 -- Name: registro_signos_vitales; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2007,6 +2137,7 @@ CREATE TABLE hospitales_occidente.registro_signos_vitales (
 ALTER TABLE hospitales_occidente.registro_signos_vitales OWNER TO user1;
 
 --
+-- TOC entry 284 (class 1259 OID 43690)
 -- Name: registro_signos_vitales_id_signos_vitales_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2021,6 +2152,7 @@ ALTER TABLE hospitales_occidente.registro_signos_vitales ALTER COLUMN id_signos_
 
 
 --
+-- TOC entry 316 (class 1259 OID 44282)
 -- Name: revision_miembro_comite; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2033,6 +2165,7 @@ CREATE TABLE hospitales_occidente.revision_miembro_comite (
 ALTER TABLE hospitales_occidente.revision_miembro_comite OWNER TO user1;
 
 --
+-- TOC entry 315 (class 1259 OID 44261)
 -- Name: revision_solicitud; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2050,6 +2183,7 @@ CREATE TABLE hospitales_occidente.revision_solicitud (
 ALTER TABLE hospitales_occidente.revision_solicitud OWNER TO user1;
 
 --
+-- TOC entry 314 (class 1259 OID 44260)
 -- Name: revision_solicitud_id_revision_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2064,6 +2198,7 @@ ALTER TABLE hospitales_occidente.revision_solicitud ALTER COLUMN id_revision ADD
 
 
 --
+-- TOC entry 237 (class 1259 OID 43212)
 -- Name: servicio_medico; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2079,6 +2214,7 @@ CREATE TABLE hospitales_occidente.servicio_medico (
 ALTER TABLE hospitales_occidente.servicio_medico OWNER TO user1;
 
 --
+-- TOC entry 236 (class 1259 OID 43211)
 -- Name: servicio_medico_id_servicio_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2093,6 +2229,7 @@ ALTER TABLE hospitales_occidente.servicio_medico ALTER COLUMN id_servicio ADD GE
 
 
 --
+-- TOC entry 309 (class 1259 OID 44147)
 -- Name: solicitud_cirugia; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2113,6 +2250,7 @@ CREATE TABLE hospitales_occidente.solicitud_cirugia (
 ALTER TABLE hospitales_occidente.solicitud_cirugia OWNER TO user1;
 
 --
+-- TOC entry 308 (class 1259 OID 44146)
 -- Name: solicitud_cirugia_id_solicitud_cirugia_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2127,6 +2265,7 @@ ALTER TABLE hospitales_occidente.solicitud_cirugia ALTER COLUMN id_solicitud_cir
 
 
 --
+-- TOC entry 313 (class 1259 OID 44240)
 -- Name: solicitud_equipo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2141,6 +2280,7 @@ CREATE TABLE hospitales_occidente.solicitud_equipo (
 ALTER TABLE hospitales_occidente.solicitud_equipo OWNER TO user1;
 
 --
+-- TOC entry 312 (class 1259 OID 44220)
 -- Name: solicitud_instrumento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2155,6 +2295,7 @@ CREATE TABLE hospitales_occidente.solicitud_instrumento (
 ALTER TABLE hospitales_occidente.solicitud_instrumento OWNER TO user1;
 
 --
+-- TOC entry 311 (class 1259 OID 44200)
 -- Name: solicitud_insumo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2169,6 +2310,7 @@ CREATE TABLE hospitales_occidente.solicitud_insumo (
 ALTER TABLE hospitales_occidente.solicitud_insumo OWNER TO user1;
 
 --
+-- TOC entry 310 (class 1259 OID 44183)
 -- Name: solicitud_procedimiento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2181,6 +2323,7 @@ CREATE TABLE hospitales_occidente.solicitud_procedimiento (
 ALTER TABLE hospitales_occidente.solicitud_procedimiento OWNER TO user1;
 
 --
+-- TOC entry 330 (class 1259 OID 44530)
 -- Name: tarifa_insumo; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2195,6 +2338,7 @@ CREATE TABLE hospitales_occidente.tarifa_insumo (
 ALTER TABLE hospitales_occidente.tarifa_insumo OWNER TO user1;
 
 --
+-- TOC entry 329 (class 1259 OID 44511)
 -- Name: tarifa_procedimiento; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2209,6 +2353,7 @@ CREATE TABLE hospitales_occidente.tarifa_procedimiento (
 ALTER TABLE hospitales_occidente.tarifa_procedimiento OWNER TO user1;
 
 --
+-- TOC entry 328 (class 1259 OID 44491)
 -- Name: tarifa_servicio; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2225,6 +2370,7 @@ CREATE TABLE hospitales_occidente.tarifa_servicio (
 ALTER TABLE hospitales_occidente.tarifa_servicio OWNER TO user1;
 
 --
+-- TOC entry 247 (class 1259 OID 43277)
 -- Name: tipo_anestesia; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2238,6 +2384,7 @@ CREATE TABLE hospitales_occidente.tipo_anestesia (
 ALTER TABLE hospitales_occidente.tipo_anestesia OWNER TO user1;
 
 --
+-- TOC entry 246 (class 1259 OID 43276)
 -- Name: tipo_anestesia_id_tipo_anestesia_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2252,6 +2399,7 @@ ALTER TABLE hospitales_occidente.tipo_anestesia ALTER COLUMN id_tipo_anestesia A
 
 
 --
+-- TOC entry 235 (class 1259 OID 43201)
 -- Name: tipo_unidad; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2265,6 +2413,7 @@ CREATE TABLE hospitales_occidente.tipo_unidad (
 ALTER TABLE hospitales_occidente.tipo_unidad OWNER TO user1;
 
 --
+-- TOC entry 234 (class 1259 OID 43200)
 -- Name: tipo_unidad_id_tipo_unidad_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2279,6 +2428,7 @@ ALTER TABLE hospitales_occidente.tipo_unidad ALTER COLUMN id_tipo_unidad ADD GEN
 
 
 --
+-- TOC entry 289 (class 1259 OID 43776)
 -- Name: traslado; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2305,6 +2455,7 @@ CREATE TABLE hospitales_occidente.traslado (
 ALTER TABLE hospitales_occidente.traslado OWNER TO user1;
 
 --
+-- TOC entry 288 (class 1259 OID 43775)
 -- Name: traslado_id_traslado_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2319,6 +2470,7 @@ ALTER TABLE hospitales_occidente.traslado ALTER COLUMN id_traslado ADD GENERATED
 
 
 --
+-- TOC entry 239 (class 1259 OID 43231)
 -- Name: turno; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2334,6 +2486,7 @@ CREATE TABLE hospitales_occidente.turno (
 ALTER TABLE hospitales_occidente.turno OWNER TO user1;
 
 --
+-- TOC entry 238 (class 1259 OID 43230)
 -- Name: turno_id_turno_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2348,6 +2501,7 @@ ALTER TABLE hospitales_occidente.turno ALTER COLUMN id_turno ADD GENERATED BY DE
 
 
 --
+-- TOC entry 263 (class 1259 OID 43408)
 -- Name: unidad_hospital; Type: TABLE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2361,6 +2515,7 @@ CREATE TABLE hospitales_occidente.unidad_hospital (
 ALTER TABLE hospitales_occidente.unidad_hospital OWNER TO user1;
 
 --
+-- TOC entry 262 (class 1259 OID 43407)
 -- Name: unidad_hospital_id_unidad_hospital_seq; Type: SEQUENCE; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2375,6 +2530,7 @@ ALTER TABLE hospitales_occidente.unidad_hospital ALTER COLUMN id_unidad_hospital
 
 
 --
+-- TOC entry 345 (class 1259 OID 44795)
 -- Name: vw_calificacion_resumen_hospital; Type: VIEW; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2393,6 +2549,7 @@ CREATE VIEW hospitales_occidente.vw_calificacion_resumen_hospital AS
 ALTER VIEW hospitales_occidente.vw_calificacion_resumen_hospital OWNER TO user1;
 
 --
+-- TOC entry 344 (class 1259 OID 44790)
 -- Name: vw_cirugias_rechazadas; Type: VIEW; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2417,6 +2574,7 @@ CREATE VIEW hospitales_occidente.vw_cirugias_rechazadas AS
 ALTER VIEW hospitales_occidente.vw_cirugias_rechazadas OWNER TO user1;
 
 --
+-- TOC entry 342 (class 1259 OID 44780)
 -- Name: vw_egreso_dias; Type: VIEW; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2437,6 +2595,7 @@ CREATE VIEW hospitales_occidente.vw_egreso_dias AS
 ALTER VIEW hospitales_occidente.vw_egreso_dias OWNER TO user1;
 
 --
+-- TOC entry 343 (class 1259 OID 44785)
 -- Name: vw_factura_resumen; Type: VIEW; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2464,6 +2623,7 @@ CREATE VIEW hospitales_occidente.vw_factura_resumen AS
 ALTER VIEW hospitales_occidente.vw_factura_resumen OWNER TO user1;
 
 --
+-- TOC entry 341 (class 1259 OID 44775)
 -- Name: vw_paciente; Type: VIEW; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2492,6 +2652,8 @@ CREATE VIEW hospitales_occidente.vw_paciente AS
 ALTER VIEW hospitales_occidente.vw_paciente OWNER TO user1;
 
 --
+-- TOC entry 4784 (class 0 OID 43613)
+-- Dependencies: 279
 -- Data for Name: asignacion_personal; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2544,6 +2706,8 @@ COPY hospitales_occidente.asignacion_personal (id_asignacion, id_personal, id_un
 
 
 --
+-- TOC entry 4848 (class 0 OID 44946)
+-- Dependencies: 348
 -- Data for Name: bitacora_auditoria_personal; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2592,6 +2756,8 @@ COPY hospitales_occidente.bitacora_auditoria_personal (id_auditoria, id_personal
 
 
 --
+-- TOC entry 4843 (class 0 OID 44668)
+-- Dependencies: 338
 -- Data for Name: calificacion_hospital; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2604,6 +2770,8 @@ COPY hospitales_occidente.calificacion_hospital (id_calificacion_hospital, id_ep
 
 
 --
+-- TOC entry 4845 (class 0 OID 44689)
+-- Dependencies: 340
 -- Data for Name: calificacion_personal; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2631,6 +2799,8 @@ COPY hospitales_occidente.calificacion_personal (id_calificacion_personal, id_ep
 
 
 --
+-- TOC entry 4823 (class 0 OID 44300)
+-- Dependencies: 318
 -- Data for Name: cirugia; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2645,6 +2815,8 @@ COPY hospitales_occidente.cirugia (id_cirugia, id_solicitud_cirugia, id_quirofan
 
 
 --
+-- TOC entry 4832 (class 0 OID 44467)
+-- Dependencies: 327
 -- Data for Name: cirugia_documento_fase; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2662,6 +2834,8 @@ COPY hospitales_occidente.cirugia_documento_fase (id_documento, id_cirugia, fase
 
 
 --
+-- TOC entry 4824 (class 0 OID 44336)
+-- Dependencies: 319
 -- Data for Name: cirugia_equipo_medico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2687,6 +2861,8 @@ COPY hospitales_occidente.cirugia_equipo_medico (id_cirugia, id_personal, rol) F
 
 
 --
+-- TOC entry 4830 (class 0 OID 44434)
+-- Dependencies: 325
 -- Data for Name: cirugia_verificacion; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2733,6 +2909,8 @@ COPY hospitales_occidente.cirugia_verificacion (id_verificacion, id_cirugia, id_
 
 
 --
+-- TOC entry 4801 (class 0 OID 43943)
+-- Dependencies: 296
 -- Data for Name: cita; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2759,6 +2937,8 @@ COPY hospitales_occidente.cita (id_cita, id_paciente, id_medico, id_clinica, fec
 
 
 --
+-- TOC entry 4772 (class 0 OID 43450)
+-- Dependencies: 267
 -- Data for Name: clinica; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2779,6 +2959,8 @@ COPY hospitales_occidente.clinica (id_clinica, id_hospital, numero_clinica, habi
 
 
 --
+-- TOC entry 4826 (class 0 OID 44356)
+-- Dependencies: 321
 -- Data for Name: consentimiento_informado; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2790,6 +2972,8 @@ COPY hospitales_occidente.consentimiento_informado (id_consentimiento, id_cirugi
 
 
 --
+-- TOC entry 4803 (class 0 OID 43996)
+-- Dependencies: 298
 -- Data for Name: consulta; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2809,6 +2993,8 @@ COPY hospitales_occidente.consulta (id_consulta, id_cita, id_episodio, fecha_hor
 
 
 --
+-- TOC entry 4799 (class 0 OID 43915)
+-- Dependencies: 294
 -- Data for Name: consumo_insumo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2828,6 +3014,8 @@ COPY hospitales_occidente.consumo_insumo (id_consumo_insumo, id_ingreso, id_insu
 
 
 --
+-- TOC entry 4728 (class 0 OID 43121)
+-- Dependencies: 223
 -- Data for Name: departamento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2858,6 +3046,8 @@ COPY hospitales_occidente.departamento (id_departamento, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4738 (class 0 OID 43189)
+-- Dependencies: 233
 -- Data for Name: diagnostico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2881,6 +3071,8 @@ COPY hospitales_occidente.diagnostico (id_diagnostico, codigo_cie10, descripcion
 
 
 --
+-- TOC entry 4732 (class 0 OID 43149)
+-- Dependencies: 227
 -- Data for Name: direccion; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2924,6 +3116,8 @@ COPY hospitales_occidente.direccion (id_direccion, id_municipio, area, detalle) 
 
 
 --
+-- TOC entry 4796 (class 0 OID 43848)
+-- Dependencies: 291
 -- Data for Name: egreso; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2950,6 +3144,8 @@ COPY hospitales_occidente.egreso (id_egreso, id_ingreso, fecha_hora_egreso, id_d
 
 
 --
+-- TOC entry 4797 (class 0 OID 43897)
+-- Dependencies: 292
 -- Data for Name: egreso_diagnostico_secundario; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2961,6 +3157,8 @@ COPY hospitales_occidente.egreso_diagnostico_secundario (id_egreso, id_diagnosti
 
 
 --
+-- TOC entry 4846 (class 0 OID 44926)
+-- Dependencies: 346
 -- Data for Name: enfermero; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -2984,6 +3182,8 @@ COPY hospitales_occidente.enfermero (id_personal, no_licencia, grado_academico, 
 
 
 --
+-- TOC entry 4788 (class 0 OID 43669)
+-- Dependencies: 283
 -- Data for Name: episodio; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3022,6 +3222,8 @@ COPY hospitales_occidente.episodio (id_episodio, id_paciente, id_hospital, fecha
 
 
 --
+-- TOC entry 4760 (class 0 OID 43333)
+-- Dependencies: 255
 -- Data for Name: equipo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3041,6 +3243,8 @@ COPY hospitales_occidente.equipo (id_equipo, nombre, descripcion, tipo, funcion)
 
 
 --
+-- TOC entry 4770 (class 0 OID 43429)
+-- Dependencies: 265
 -- Data for Name: espacio_atencion; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3076,6 +3280,8 @@ COPY hospitales_occidente.espacio_atencion (id_espacio, id_unidad_hospital, tipo
 
 
 --
+-- TOC entry 4736 (class 0 OID 43177)
+-- Dependencies: 231
 -- Data for Name: especialidad; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3118,6 +3324,8 @@ COPY hospitales_occidente.especialidad (id_especialidad, nombre, tipo) FROM stdi
 
 
 --
+-- TOC entry 4828 (class 0 OID 44397)
+-- Dependencies: 323
 -- Data for Name: evaluacion_preanestesica; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3129,6 +3337,8 @@ COPY hospitales_occidente.evaluacion_preanestesica (id_evaluacion, id_cirugia, c
 
 
 --
+-- TOC entry 4750 (class 0 OID 43266)
+-- Dependencies: 245
 -- Data for Name: examen_laboratorio; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3149,6 +3359,8 @@ COPY hospitales_occidente.examen_laboratorio (id_examen, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4837 (class 0 OID 44550)
+-- Dependencies: 332
 -- Data for Name: factura; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3178,6 +3390,8 @@ COPY hospitales_occidente.factura (id_factura, serie, numero_factura, id_episodi
 
 
 --
+-- TOC entry 4839 (class 0 OID 44589)
+-- Dependencies: 334
 -- Data for Name: factura_detalle; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3211,6 +3425,8 @@ COPY hospitales_occidente.factura_detalle (id_factura_detalle, id_factura, conce
 
 
 --
+-- TOC entry 4812 (class 0 OID 44112)
+-- Dependencies: 307
 -- Data for Name: historia_clinica; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3226,6 +3442,8 @@ COPY hospitales_occidente.historia_clinica (id_historia_clinica, id_episodio, id
 
 
 --
+-- TOC entry 4786 (class 0 OID 43642)
+-- Dependencies: 281
 -- Data for Name: horario_medico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3248,6 +3466,8 @@ COPY hospitales_occidente.horario_medico (id_horario, id_medico, id_clinica, dia
 
 
 --
+-- TOC entry 4766 (class 0 OID 43382)
+-- Dependencies: 261
 -- Data for Name: hospital; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3263,6 +3483,8 @@ COPY hospitales_occidente.hospital (id_hospital, codigo, nombre, id_direccion, t
 
 
 --
+-- TOC entry 4792 (class 0 OID 43720)
+-- Dependencies: 287
 -- Data for Name: ingreso; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3289,6 +3511,8 @@ COPY hospitales_occidente.ingreso (id_ingreso, id_episodio, id_unidad_hospital, 
 
 
 --
+-- TOC entry 4758 (class 0 OID 43319)
+-- Dependencies: 253
 -- Data for Name: instrumento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3309,6 +3533,8 @@ COPY hospitales_occidente.instrumento (id_instrumento, nombre, descripcion, tipo
 
 
 --
+-- TOC entry 4756 (class 0 OID 43305)
+-- Dependencies: 251
 -- Data for Name: insumo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3332,6 +3558,8 @@ COPY hospitales_occidente.insumo (id_insumo, nombre, descripcion, material, tipo
 
 
 --
+-- TOC entry 4764 (class 0 OID 43361)
+-- Dependencies: 259
 -- Data for Name: item_verificacion; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3372,6 +3600,8 @@ COPY hospitales_occidente.item_verificacion (id_item, id_momento, descripcion, t
 
 
 --
+-- TOC entry 4748 (class 0 OID 43255)
+-- Dependencies: 243
 -- Data for Name: medicamento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3395,6 +3625,8 @@ COPY hospitales_occidente.medicamento (id_medicamento, nombre, presentacion) FRO
 
 
 --
+-- TOC entry 4781 (class 0 OID 43572)
+-- Dependencies: 276
 -- Data for Name: medico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3427,6 +3659,8 @@ COPY hospitales_occidente.medico (id_personal, no_colegiado, condicion, instituc
 
 
 --
+-- TOC entry 4782 (class 0 OID 43593)
+-- Dependencies: 277
 -- Data for Name: medico_especialidad; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3462,6 +3696,8 @@ COPY hospitales_occidente.medico_especialidad (id_medico, id_especialidad, es_pr
 
 
 --
+-- TOC entry 4746 (class 0 OID 43244)
+-- Dependencies: 241
 -- Data for Name: metodo_pago; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3475,6 +3711,8 @@ COPY hospitales_occidente.metodo_pago (id_metodo_pago, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4762 (class 0 OID 43347)
+-- Dependencies: 257
 -- Data for Name: momento_quirurgico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3491,6 +3729,8 @@ COPY hospitales_occidente.momento_quirurgico (id_momento, nombre, fase, orden) F
 
 
 --
+-- TOC entry 4730 (class 0 OID 43132)
+-- Dependencies: 225
 -- Data for Name: municipio; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3534,6 +3774,8 @@ COPY hospitales_occidente.municipio (id_municipio, id_departamento, nombre) FROM
 
 
 --
+-- TOC entry 4809 (class 0 OID 44078)
+-- Dependencies: 304
 -- Data for Name: orden_laboratorio; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3544,6 +3786,8 @@ COPY hospitales_occidente.orden_laboratorio (id_orden_laboratorio, id_consulta, 
 
 
 --
+-- TOC entry 4810 (class 0 OID 44094)
+-- Dependencies: 305
 -- Data for Name: orden_laboratorio_detalle; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3556,6 +3800,8 @@ COPY hospitales_occidente.orden_laboratorio_detalle (id_orden_laboratorio, id_ex
 
 
 --
+-- TOC entry 4776 (class 0 OID 43496)
+-- Dependencies: 271
 -- Data for Name: paciente; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3587,6 +3833,8 @@ COPY hospitales_occidente.paciente (id_paciente, id_persona, no_expediente, esta
 
 
 --
+-- TOC entry 4778 (class 0 OID 43525)
+-- Dependencies: 273
 -- Data for Name: paciente_encargado; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3600,6 +3848,8 @@ COPY hospitales_occidente.paciente_encargado (id_paciente_encargado, id_paciente
 
 
 --
+-- TOC entry 4841 (class 0 OID 44629)
+-- Dependencies: 336
 -- Data for Name: pago; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3632,6 +3882,8 @@ COPY hospitales_occidente.pago (id_pago, id_factura, numero_cuota, monto, fecha_
 
 
 --
+-- TOC entry 4734 (class 0 OID 43166)
+-- Dependencies: 229
 -- Data for Name: parentesco; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3654,6 +3906,8 @@ COPY hospitales_occidente.parentesco (id_parentesco, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4774 (class 0 OID 43469)
+-- Dependencies: 269
 -- Data for Name: persona; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3737,6 +3991,8 @@ COPY hospitales_occidente.persona (id_persona, nombres, apellidos, dpi, fecha_na
 
 
 --
+-- TOC entry 4780 (class 0 OID 43554)
+-- Dependencies: 275
 -- Data for Name: personal; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3792,6 +4048,8 @@ COPY hospitales_occidente.personal (id_personal, id_persona, tipo_personal, acti
 
 
 --
+-- TOC entry 4754 (class 0 OID 43288)
+-- Dependencies: 249
 -- Data for Name: procedimiento_quirurgico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3812,6 +4070,8 @@ COPY hospitales_occidente.procedimiento_quirurgico (id_procedimiento, id_especia
 
 
 --
+-- TOC entry 4805 (class 0 OID 44027)
+-- Dependencies: 300
 -- Data for Name: receta; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3827,6 +4087,8 @@ COPY hospitales_occidente.receta (id_receta, id_consulta, fecha_emision, id_cita
 
 
 --
+-- TOC entry 4807 (class 0 OID 44053)
+-- Dependencies: 302
 -- Data for Name: receta_detalle; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3840,6 +4102,8 @@ COPY hospitales_occidente.receta_detalle (id_receta_detalle, id_receta, id_medic
 
 
 --
+-- TOC entry 4790 (class 0 OID 43691)
+-- Dependencies: 285
 -- Data for Name: registro_signos_vitales; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3858,6 +4122,8 @@ COPY hospitales_occidente.registro_signos_vitales (id_signos_vitales, id_episodi
 
 
 --
+-- TOC entry 4821 (class 0 OID 44282)
+-- Dependencies: 316
 -- Data for Name: revision_miembro_comite; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3874,6 +4140,8 @@ COPY hospitales_occidente.revision_miembro_comite (id_revision, id_medico) FROM 
 
 
 --
+-- TOC entry 4820 (class 0 OID 44261)
+-- Dependencies: 315
 -- Data for Name: revision_solicitud; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3889,6 +4157,8 @@ COPY hospitales_occidente.revision_solicitud (id_revision, id_solicitud_cirugia,
 
 
 --
+-- TOC entry 4742 (class 0 OID 43212)
+-- Dependencies: 237
 -- Data for Name: servicio_medico; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3933,6 +4203,8 @@ COPY hospitales_occidente.servicio_medico (id_servicio, id_tipo_unidad, nombre, 
 
 
 --
+-- TOC entry 4814 (class 0 OID 44147)
+-- Dependencies: 309
 -- Data for Name: solicitud_cirugia; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3948,6 +4220,8 @@ COPY hospitales_occidente.solicitud_cirugia (id_solicitud_cirugia, id_episodio, 
 
 
 --
+-- TOC entry 4818 (class 0 OID 44240)
+-- Dependencies: 313
 -- Data for Name: solicitud_equipo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3971,6 +4245,8 @@ COPY hospitales_occidente.solicitud_equipo (id_solicitud_cirugia, id_equipo, can
 
 
 --
+-- TOC entry 4817 (class 0 OID 44220)
+-- Dependencies: 312
 -- Data for Name: solicitud_instrumento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -3997,6 +4273,8 @@ COPY hospitales_occidente.solicitud_instrumento (id_solicitud_cirugia, id_instru
 
 
 --
+-- TOC entry 4816 (class 0 OID 44200)
+-- Dependencies: 311
 -- Data for Name: solicitud_insumo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4026,6 +4304,8 @@ COPY hospitales_occidente.solicitud_insumo (id_solicitud_cirugia, id_insumo, can
 
 
 --
+-- TOC entry 4815 (class 0 OID 44183)
+-- Dependencies: 310
 -- Data for Name: solicitud_procedimiento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4041,6 +4321,8 @@ COPY hospitales_occidente.solicitud_procedimiento (id_solicitud_cirugia, id_proc
 
 
 --
+-- TOC entry 4835 (class 0 OID 44530)
+-- Dependencies: 330
 -- Data for Name: tarifa_insumo; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4056,6 +4338,8 @@ COPY hospitales_occidente.tarifa_insumo (id_hospital, id_insumo, precio_unitario
 
 
 --
+-- TOC entry 4834 (class 0 OID 44511)
+-- Dependencies: 329
 -- Data for Name: tarifa_procedimiento; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4070,6 +4354,8 @@ COPY hospitales_occidente.tarifa_procedimiento (id_hospital, id_procedimiento, c
 
 
 --
+-- TOC entry 4833 (class 0 OID 44491)
+-- Dependencies: 328
 -- Data for Name: tarifa_servicio; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4090,6 +4376,8 @@ COPY hospitales_occidente.tarifa_servicio (id_hospital, id_servicio, costo_atenc
 
 
 --
+-- TOC entry 4752 (class 0 OID 43277)
+-- Dependencies: 247
 -- Data for Name: tipo_anestesia; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4103,6 +4391,8 @@ COPY hospitales_occidente.tipo_anestesia (id_tipo_anestesia, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4740 (class 0 OID 43201)
+-- Dependencies: 235
 -- Data for Name: tipo_unidad; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4116,6 +4406,8 @@ COPY hospitales_occidente.tipo_unidad (id_tipo_unidad, nombre) FROM stdin;
 
 
 --
+-- TOC entry 4794 (class 0 OID 43776)
+-- Dependencies: 289
 -- Data for Name: traslado; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4127,6 +4419,8 @@ COPY hospitales_occidente.traslado (id_traslado, id_episodio, fecha_hora, id_med
 
 
 --
+-- TOC entry 4744 (class 0 OID 43231)
+-- Dependencies: 239
 -- Data for Name: turno; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4139,6 +4433,8 @@ COPY hospitales_occidente.turno (id_turno, nombre, hora_inicio, hora_fin) FROM s
 
 
 --
+-- TOC entry 4768 (class 0 OID 43408)
+-- Dependencies: 263
 -- Data for Name: unidad_hospital; Type: TABLE DATA; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4163,6 +4459,8 @@ COPY hospitales_occidente.unidad_hospital (id_unidad_hospital, id_hospital, id_t
 
 
 --
+-- TOC entry 5000 (class 0 OID 0)
+-- Dependencies: 278
 -- Name: asignacion_personal_id_asignacion_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4170,6 +4468,8 @@ SELECT pg_catalog.setval('hospitales_occidente.asignacion_personal_id_asignacion
 
 
 --
+-- TOC entry 5001 (class 0 OID 0)
+-- Dependencies: 347
 -- Name: bitacora_auditoria_personal_id_auditoria_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4177,6 +4477,8 @@ SELECT pg_catalog.setval('hospitales_occidente.bitacora_auditoria_personal_id_au
 
 
 --
+-- TOC entry 5002 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: calificacion_hospital_id_calificacion_hospital_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4184,6 +4486,8 @@ SELECT pg_catalog.setval('hospitales_occidente.calificacion_hospital_id_califica
 
 
 --
+-- TOC entry 5003 (class 0 OID 0)
+-- Dependencies: 339
 -- Name: calificacion_personal_id_calificacion_personal_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4191,6 +4495,8 @@ SELECT pg_catalog.setval('hospitales_occidente.calificacion_personal_id_califica
 
 
 --
+-- TOC entry 5004 (class 0 OID 0)
+-- Dependencies: 326
 -- Name: cirugia_documento_fase_id_documento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4198,6 +4504,8 @@ SELECT pg_catalog.setval('hospitales_occidente.cirugia_documento_fase_id_documen
 
 
 --
+-- TOC entry 5005 (class 0 OID 0)
+-- Dependencies: 317
 -- Name: cirugia_id_cirugia_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4205,6 +4513,8 @@ SELECT pg_catalog.setval('hospitales_occidente.cirugia_id_cirugia_seq', 12, true
 
 
 --
+-- TOC entry 5006 (class 0 OID 0)
+-- Dependencies: 324
 -- Name: cirugia_verificacion_id_verificacion_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4212,6 +4522,8 @@ SELECT pg_catalog.setval('hospitales_occidente.cirugia_verificacion_id_verificac
 
 
 --
+-- TOC entry 5007 (class 0 OID 0)
+-- Dependencies: 295
 -- Name: cita_id_cita_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4219,6 +4531,8 @@ SELECT pg_catalog.setval('hospitales_occidente.cita_id_cita_seq', 21, true);
 
 
 --
+-- TOC entry 5008 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: clinica_id_clinica_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4226,6 +4540,8 @@ SELECT pg_catalog.setval('hospitales_occidente.clinica_id_clinica_seq', 12, true
 
 
 --
+-- TOC entry 5009 (class 0 OID 0)
+-- Dependencies: 320
 -- Name: consentimiento_informado_id_consentimiento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4233,6 +4549,8 @@ SELECT pg_catalog.setval('hospitales_occidente.consentimiento_informado_id_conse
 
 
 --
+-- TOC entry 5010 (class 0 OID 0)
+-- Dependencies: 297
 -- Name: consulta_id_consulta_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4240,6 +4558,8 @@ SELECT pg_catalog.setval('hospitales_occidente.consulta_id_consulta_seq', 16, tr
 
 
 --
+-- TOC entry 5011 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: consumo_insumo_id_consumo_insumo_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4247,6 +4567,8 @@ SELECT pg_catalog.setval('hospitales_occidente.consumo_insumo_id_consumo_insumo_
 
 
 --
+-- TOC entry 5012 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: departamento_id_departamento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4254,6 +4576,8 @@ SELECT pg_catalog.setval('hospitales_occidente.departamento_id_departamento_seq'
 
 
 --
+-- TOC entry 5013 (class 0 OID 0)
+-- Dependencies: 232
 -- Name: diagnostico_id_diagnostico_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4261,6 +4585,8 @@ SELECT pg_catalog.setval('hospitales_occidente.diagnostico_id_diagnostico_seq', 
 
 
 --
+-- TOC entry 5014 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: direccion_id_direccion_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4268,6 +4594,8 @@ SELECT pg_catalog.setval('hospitales_occidente.direccion_id_direccion_seq', 35, 
 
 
 --
+-- TOC entry 5015 (class 0 OID 0)
+-- Dependencies: 290
 -- Name: egreso_id_egreso_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4275,6 +4603,8 @@ SELECT pg_catalog.setval('hospitales_occidente.egreso_id_egreso_seq', 20, true);
 
 
 --
+-- TOC entry 5016 (class 0 OID 0)
+-- Dependencies: 282
 -- Name: episodio_id_episodio_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4282,6 +4612,8 @@ SELECT pg_catalog.setval('hospitales_occidente.episodio_id_episodio_seq', 30, tr
 
 
 --
+-- TOC entry 5017 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: equipo_id_equipo_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4289,6 +4621,8 @@ SELECT pg_catalog.setval('hospitales_occidente.equipo_id_equipo_seq', 11, true);
 
 
 --
+-- TOC entry 5018 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: espacio_atencion_id_espacio_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4296,6 +4630,8 @@ SELECT pg_catalog.setval('hospitales_occidente.espacio_atencion_id_espacio_seq',
 
 
 --
+-- TOC entry 5019 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: especialidad_id_especialidad_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4303,6 +4639,8 @@ SELECT pg_catalog.setval('hospitales_occidente.especialidad_id_especialidad_seq'
 
 
 --
+-- TOC entry 5020 (class 0 OID 0)
+-- Dependencies: 322
 -- Name: evaluacion_preanestesica_id_evaluacion_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4310,6 +4648,8 @@ SELECT pg_catalog.setval('hospitales_occidente.evaluacion_preanestesica_id_evalu
 
 
 --
+-- TOC entry 5021 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: examen_laboratorio_id_examen_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4317,6 +4657,8 @@ SELECT pg_catalog.setval('hospitales_occidente.examen_laboratorio_id_examen_seq'
 
 
 --
+-- TOC entry 5022 (class 0 OID 0)
+-- Dependencies: 333
 -- Name: factura_detalle_id_factura_detalle_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4324,6 +4666,8 @@ SELECT pg_catalog.setval('hospitales_occidente.factura_detalle_id_factura_detall
 
 
 --
+-- TOC entry 5023 (class 0 OID 0)
+-- Dependencies: 331
 -- Name: factura_id_factura_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4331,6 +4675,8 @@ SELECT pg_catalog.setval('hospitales_occidente.factura_id_factura_seq', 25, true
 
 
 --
+-- TOC entry 5024 (class 0 OID 0)
+-- Dependencies: 306
 -- Name: historia_clinica_id_historia_clinica_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4338,6 +4684,8 @@ SELECT pg_catalog.setval('hospitales_occidente.historia_clinica_id_historia_clin
 
 
 --
+-- TOC entry 5025 (class 0 OID 0)
+-- Dependencies: 280
 -- Name: horario_medico_id_horario_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4345,6 +4693,8 @@ SELECT pg_catalog.setval('hospitales_occidente.horario_medico_id_horario_seq', 1
 
 
 --
+-- TOC entry 5026 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: hospital_id_hospital_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4352,6 +4702,8 @@ SELECT pg_catalog.setval('hospitales_occidente.hospital_id_hospital_seq', 7, tru
 
 
 --
+-- TOC entry 5027 (class 0 OID 0)
+-- Dependencies: 286
 -- Name: ingreso_id_ingreso_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4359,6 +4711,8 @@ SELECT pg_catalog.setval('hospitales_occidente.ingreso_id_ingreso_seq', 20, true
 
 
 --
+-- TOC entry 5028 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: instrumento_id_instrumento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4366,6 +4720,8 @@ SELECT pg_catalog.setval('hospitales_occidente.instrumento_id_instrumento_seq', 
 
 
 --
+-- TOC entry 5029 (class 0 OID 0)
+-- Dependencies: 250
 -- Name: insumo_id_insumo_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4373,6 +4729,8 @@ SELECT pg_catalog.setval('hospitales_occidente.insumo_id_insumo_seq', 15, true);
 
 
 --
+-- TOC entry 5030 (class 0 OID 0)
+-- Dependencies: 258
 -- Name: item_verificacion_id_item_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4380,6 +4738,8 @@ SELECT pg_catalog.setval('hospitales_occidente.item_verificacion_id_item_seq', 3
 
 
 --
+-- TOC entry 5031 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: medicamento_id_medicamento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4387,6 +4747,8 @@ SELECT pg_catalog.setval('hospitales_occidente.medicamento_id_medicamento_seq', 
 
 
 --
+-- TOC entry 5032 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: metodo_pago_id_metodo_pago_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4394,6 +4756,8 @@ SELECT pg_catalog.setval('hospitales_occidente.metodo_pago_id_metodo_pago_seq', 
 
 
 --
+-- TOC entry 5033 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: momento_quirurgico_id_momento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4401,6 +4765,8 @@ SELECT pg_catalog.setval('hospitales_occidente.momento_quirurgico_id_momento_seq
 
 
 --
+-- TOC entry 5034 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: municipio_id_municipio_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4408,6 +4774,8 @@ SELECT pg_catalog.setval('hospitales_occidente.municipio_id_municipio_seq', 35, 
 
 
 --
+-- TOC entry 5035 (class 0 OID 0)
+-- Dependencies: 303
 -- Name: orden_laboratorio_id_orden_laboratorio_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4415,6 +4783,8 @@ SELECT pg_catalog.setval('hospitales_occidente.orden_laboratorio_id_orden_labora
 
 
 --
+-- TOC entry 5036 (class 0 OID 0)
+-- Dependencies: 272
 -- Name: paciente_encargado_id_paciente_encargado_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4422,6 +4792,8 @@ SELECT pg_catalog.setval('hospitales_occidente.paciente_encargado_id_paciente_en
 
 
 --
+-- TOC entry 5037 (class 0 OID 0)
+-- Dependencies: 270
 -- Name: paciente_id_paciente_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4429,6 +4801,8 @@ SELECT pg_catalog.setval('hospitales_occidente.paciente_id_paciente_seq', 23, tr
 
 
 --
+-- TOC entry 5038 (class 0 OID 0)
+-- Dependencies: 335
 -- Name: pago_id_pago_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4436,6 +4810,8 @@ SELECT pg_catalog.setval('hospitales_occidente.pago_id_pago_seq', 26, true);
 
 
 --
+-- TOC entry 5039 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: parentesco_id_parentesco_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4443,6 +4819,8 @@ SELECT pg_catalog.setval('hospitales_occidente.parentesco_id_parentesco_seq', 14
 
 
 --
+-- TOC entry 5040 (class 0 OID 0)
+-- Dependencies: 268
 -- Name: persona_id_persona_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4450,6 +4828,8 @@ SELECT pg_catalog.setval('hospitales_occidente.persona_id_persona_seq', 75, true
 
 
 --
+-- TOC entry 5041 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: personal_id_personal_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4457,6 +4837,8 @@ SELECT pg_catalog.setval('hospitales_occidente.personal_id_personal_seq', 60, tr
 
 
 --
+-- TOC entry 5042 (class 0 OID 0)
+-- Dependencies: 248
 -- Name: procedimiento_quirurgico_id_procedimiento_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4464,6 +4846,8 @@ SELECT pg_catalog.setval('hospitales_occidente.procedimiento_quirurgico_id_proce
 
 
 --
+-- TOC entry 5043 (class 0 OID 0)
+-- Dependencies: 301
 -- Name: receta_detalle_id_receta_detalle_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4471,6 +4855,8 @@ SELECT pg_catalog.setval('hospitales_occidente.receta_detalle_id_receta_detalle_
 
 
 --
+-- TOC entry 5044 (class 0 OID 0)
+-- Dependencies: 299
 -- Name: receta_id_receta_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4478,6 +4864,8 @@ SELECT pg_catalog.setval('hospitales_occidente.receta_id_receta_seq', 13, true);
 
 
 --
+-- TOC entry 5045 (class 0 OID 0)
+-- Dependencies: 284
 -- Name: registro_signos_vitales_id_signos_vitales_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4485,6 +4873,8 @@ SELECT pg_catalog.setval('hospitales_occidente.registro_signos_vitales_id_signos
 
 
 --
+-- TOC entry 5046 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: revision_solicitud_id_revision_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4492,6 +4882,8 @@ SELECT pg_catalog.setval('hospitales_occidente.revision_solicitud_id_revision_se
 
 
 --
+-- TOC entry 5047 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: servicio_medico_id_servicio_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4499,6 +4891,8 @@ SELECT pg_catalog.setval('hospitales_occidente.servicio_medico_id_servicio_seq',
 
 
 --
+-- TOC entry 5048 (class 0 OID 0)
+-- Dependencies: 308
 -- Name: solicitud_cirugia_id_solicitud_cirugia_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4506,6 +4900,8 @@ SELECT pg_catalog.setval('hospitales_occidente.solicitud_cirugia_id_solicitud_ci
 
 
 --
+-- TOC entry 5049 (class 0 OID 0)
+-- Dependencies: 246
 -- Name: tipo_anestesia_id_tipo_anestesia_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4513,6 +4909,8 @@ SELECT pg_catalog.setval('hospitales_occidente.tipo_anestesia_id_tipo_anestesia_
 
 
 --
+-- TOC entry 5050 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: tipo_unidad_id_tipo_unidad_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4520,6 +4918,8 @@ SELECT pg_catalog.setval('hospitales_occidente.tipo_unidad_id_tipo_unidad_seq', 
 
 
 --
+-- TOC entry 5051 (class 0 OID 0)
+-- Dependencies: 288
 -- Name: traslado_id_traslado_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4527,6 +4927,8 @@ SELECT pg_catalog.setval('hospitales_occidente.traslado_id_traslado_seq', 3, tru
 
 
 --
+-- TOC entry 5052 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: turno_id_turno_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4534,6 +4936,8 @@ SELECT pg_catalog.setval('hospitales_occidente.turno_id_turno_seq', 4, true);
 
 
 --
+-- TOC entry 5053 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: unidad_hospital_id_unidad_hospital_seq; Type: SEQUENCE SET; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4541,6 +4945,7 @@ SELECT pg_catalog.setval('hospitales_occidente.unidad_hospital_id_unidad_hospita
 
 
 --
+-- TOC entry 4370 (class 2606 OID 44320)
 -- Name: cirugia ex_cirugia_traslape; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4549,6 +4954,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4274 (class 2606 OID 43623)
 -- Name: asignacion_personal pk_asignacion_personal; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4557,6 +4963,7 @@ ALTER TABLE ONLY hospitales_occidente.asignacion_personal
 
 
 --
+-- TOC entry 4434 (class 2606 OID 44962)
 -- Name: bitacora_auditoria_personal pk_bitacora_auditoria; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4565,6 +4972,7 @@ ALTER TABLE ONLY hospitales_occidente.bitacora_auditoria_personal
 
 
 --
+-- TOC entry 4419 (class 2606 OID 44680)
 -- Name: calificacion_hospital pk_calificacion_hospital; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4573,6 +4981,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_hospital
 
 
 --
+-- TOC entry 4424 (class 2606 OID 44702)
 -- Name: calificacion_personal pk_calificacion_personal; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4581,6 +4990,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_personal
 
 
 --
+-- TOC entry 4374 (class 2606 OID 44316)
 -- Name: cirugia pk_cirugia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4589,6 +4999,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4395 (class 2606 OID 44478)
 -- Name: cirugia_documento_fase pk_cirugia_documento_fase; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4597,6 +5008,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_documento_fase
 
 
 --
+-- TOC entry 4379 (class 2606 OID 44344)
 -- Name: cirugia_equipo_medico pk_cirugia_equipo_medico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4605,6 +5017,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_equipo_medico
 
 
 --
+-- TOC entry 4391 (class 2606 OID 44448)
 -- Name: cirugia_verificacion pk_cirugia_verificacion; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4613,6 +5026,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_verificacion
 
 
 --
+-- TOC entry 4321 (class 2606 OID 43964)
 -- Name: cita pk_cita; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4621,6 +5035,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4231 (class 2606 OID 43460)
 -- Name: clinica pk_clinica; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4629,6 +5044,7 @@ ALTER TABLE ONLY hospitales_occidente.clinica
 
 
 --
+-- TOC entry 4382 (class 2606 OID 44378)
 -- Name: consentimiento_informado pk_consentimiento_informado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4637,6 +5053,7 @@ ALTER TABLE ONLY hospitales_occidente.consentimiento_informado
 
 
 --
+-- TOC entry 4325 (class 2606 OID 44008)
 -- Name: consulta pk_consulta; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4645,6 +5062,7 @@ ALTER TABLE ONLY hospitales_occidente.consulta
 
 
 --
+-- TOC entry 4317 (class 2606 OID 43926)
 -- Name: consumo_insumo pk_consumo_insumo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4653,6 +5071,7 @@ ALTER TABLE ONLY hospitales_occidente.consumo_insumo
 
 
 --
+-- TOC entry 4133 (class 2606 OID 43128)
 -- Name: departamento pk_departamento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4661,6 +5080,7 @@ ALTER TABLE ONLY hospitales_occidente.departamento
 
 
 --
+-- TOC entry 4153 (class 2606 OID 43197)
 -- Name: diagnostico pk_diagnostico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4669,6 +5089,7 @@ ALTER TABLE ONLY hospitales_occidente.diagnostico
 
 
 --
+-- TOC entry 4143 (class 2606 OID 43159)
 -- Name: direccion pk_direccion; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4677,6 +5098,7 @@ ALTER TABLE ONLY hospitales_occidente.direccion
 
 
 --
+-- TOC entry 4306 (class 2606 OID 43867)
 -- Name: egreso pk_egreso; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4685,6 +5107,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4313 (class 2606 OID 43903)
 -- Name: egreso_diagnostico_secundario pk_egreso_diag_secundario; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4693,6 +5116,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso_diagnostico_secundario
 
 
 --
+-- TOC entry 4428 (class 2606 OID 44937)
 -- Name: enfermero pk_enfermero; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4701,6 +5125,7 @@ ALTER TABLE ONLY hospitales_occidente.enfermero
 
 
 --
+-- TOC entry 4285 (class 2606 OID 43679)
 -- Name: episodio pk_episodio; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4709,6 +5134,7 @@ ALTER TABLE ONLY hospitales_occidente.episodio
 
 
 --
+-- TOC entry 4199 (class 2606 OID 43343)
 -- Name: equipo pk_equipo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4717,6 +5143,7 @@ ALTER TABLE ONLY hospitales_occidente.equipo
 
 
 --
+-- TOC entry 4226 (class 2606 OID 43441)
 -- Name: espacio_atencion pk_espacio_atencion; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4725,6 +5152,7 @@ ALTER TABLE ONLY hospitales_occidente.espacio_atencion
 
 
 --
+-- TOC entry 4149 (class 2606 OID 43185)
 -- Name: especialidad pk_especialidad; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4733,6 +5161,7 @@ ALTER TABLE ONLY hospitales_occidente.especialidad
 
 
 --
+-- TOC entry 4386 (class 2606 OID 44415)
 -- Name: evaluacion_preanestesica pk_evaluacion_preanestesica; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4741,6 +5170,7 @@ ALTER TABLE ONLY hospitales_occidente.evaluacion_preanestesica
 
 
 --
+-- TOC entry 4178 (class 2606 OID 43273)
 -- Name: examen_laboratorio pk_examen_laboratorio; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4749,6 +5179,7 @@ ALTER TABLE ONLY hospitales_occidente.examen_laboratorio
 
 
 --
+-- TOC entry 4405 (class 2606 OID 44575)
 -- Name: factura pk_factura; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4757,6 +5188,7 @@ ALTER TABLE ONLY hospitales_occidente.factura
 
 
 --
+-- TOC entry 4411 (class 2606 OID 44607)
 -- Name: factura_detalle pk_factura_detalle; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4765,6 +5197,7 @@ ALTER TABLE ONLY hospitales_occidente.factura_detalle
 
 
 --
+-- TOC entry 4347 (class 2606 OID 44128)
 -- Name: historia_clinica pk_historia_clinica; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4773,6 +5206,7 @@ ALTER TABLE ONLY hospitales_occidente.historia_clinica
 
 
 --
+-- TOC entry 4279 (class 2606 OID 43655)
 -- Name: horario_medico pk_horario_medico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4781,6 +5215,7 @@ ALTER TABLE ONLY hospitales_occidente.horario_medico
 
 
 --
+-- TOC entry 4213 (class 2606 OID 43397)
 -- Name: hospital pk_hospital; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4789,6 +5224,7 @@ ALTER TABLE ONLY hospitales_occidente.hospital
 
 
 --
+-- TOC entry 4295 (class 2606 OID 43739)
 -- Name: ingreso pk_ingreso; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4797,6 +5233,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4195 (class 2606 OID 43329)
 -- Name: instrumento pk_instrumento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4805,6 +5242,7 @@ ALTER TABLE ONLY hospitales_occidente.instrumento
 
 
 --
+-- TOC entry 4191 (class 2606 OID 43315)
 -- Name: insumo pk_insumo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4813,6 +5251,7 @@ ALTER TABLE ONLY hospitales_occidente.insumo
 
 
 --
+-- TOC entry 4208 (class 2606 OID 43373)
 -- Name: item_verificacion pk_item_verificacion; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4821,6 +5260,7 @@ ALTER TABLE ONLY hospitales_occidente.item_verificacion
 
 
 --
+-- TOC entry 4174 (class 2606 OID 43262)
 -- Name: medicamento pk_medicamento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4829,6 +5269,7 @@ ALTER TABLE ONLY hospitales_occidente.medicamento
 
 
 --
+-- TOC entry 4264 (class 2606 OID 43585)
 -- Name: medico pk_medico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4837,6 +5278,7 @@ ALTER TABLE ONLY hospitales_occidente.medico
 
 
 --
+-- TOC entry 4269 (class 2606 OID 43601)
 -- Name: medico_especialidad pk_medico_especialidad; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4845,6 +5287,7 @@ ALTER TABLE ONLY hospitales_occidente.medico_especialidad
 
 
 --
+-- TOC entry 4170 (class 2606 OID 43251)
 -- Name: metodo_pago pk_metodo_pago; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4853,6 +5296,7 @@ ALTER TABLE ONLY hospitales_occidente.metodo_pago
 
 
 --
+-- TOC entry 4203 (class 2606 OID 43357)
 -- Name: momento_quirurgico pk_momento_quirurgico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4861,6 +5305,7 @@ ALTER TABLE ONLY hospitales_occidente.momento_quirurgico
 
 
 --
+-- TOC entry 4138 (class 2606 OID 43140)
 -- Name: municipio pk_municipio; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4869,6 +5314,7 @@ ALTER TABLE ONLY hospitales_occidente.municipio
 
 
 --
+-- TOC entry 4341 (class 2606 OID 44088)
 -- Name: orden_laboratorio pk_orden_laboratorio; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4877,6 +5323,7 @@ ALTER TABLE ONLY hospitales_occidente.orden_laboratorio
 
 
 --
+-- TOC entry 4344 (class 2606 OID 44100)
 -- Name: orden_laboratorio_detalle pk_orden_laboratorio_detalle; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4885,6 +5332,7 @@ ALTER TABLE ONLY hospitales_occidente.orden_laboratorio_detalle
 
 
 --
+-- TOC entry 4243 (class 2606 OID 43507)
 -- Name: paciente pk_paciente; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4893,6 +5341,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4252 (class 2606 OID 43535)
 -- Name: paciente_encargado pk_paciente_encargado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4901,6 +5350,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente_encargado
 
 
 --
+-- TOC entry 4415 (class 2606 OID 44644)
 -- Name: pago pk_pago; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4909,6 +5359,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4145 (class 2606 OID 43173)
 -- Name: parentesco pk_parentesco; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4917,6 +5368,7 @@ ALTER TABLE ONLY hospitales_occidente.parentesco
 
 
 --
+-- TOC entry 4238 (class 2606 OID 43487)
 -- Name: persona pk_persona; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4925,6 +5377,7 @@ ALTER TABLE ONLY hospitales_occidente.persona
 
 
 --
+-- TOC entry 4259 (class 2606 OID 43564)
 -- Name: personal pk_personal; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4933,6 +5386,7 @@ ALTER TABLE ONLY hospitales_occidente.personal
 
 
 --
+-- TOC entry 4187 (class 2606 OID 43296)
 -- Name: procedimiento_quirurgico pk_procedimiento_quirurgico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4941,6 +5395,7 @@ ALTER TABLE ONLY hospitales_occidente.procedimiento_quirurgico
 
 
 --
+-- TOC entry 4329 (class 2606 OID 44037)
 -- Name: receta pk_receta; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4949,6 +5404,7 @@ ALTER TABLE ONLY hospitales_occidente.receta
 
 
 --
+-- TOC entry 4336 (class 2606 OID 44064)
 -- Name: receta_detalle pk_receta_detalle; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4957,6 +5413,7 @@ ALTER TABLE ONLY hospitales_occidente.receta_detalle
 
 
 --
+-- TOC entry 4288 (class 2606 OID 43708)
 -- Name: registro_signos_vitales pk_registro_signos_vitales; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4965,6 +5422,7 @@ ALTER TABLE ONLY hospitales_occidente.registro_signos_vitales
 
 
 --
+-- TOC entry 4368 (class 2606 OID 44288)
 -- Name: revision_miembro_comite pk_revision_miembro_comite; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4973,6 +5431,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_miembro_comite
 
 
 --
+-- TOC entry 4364 (class 2606 OID 44274)
 -- Name: revision_solicitud pk_revision_solicitud; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4981,6 +5440,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_solicitud
 
 
 --
+-- TOC entry 4162 (class 2606 OID 43222)
 -- Name: servicio_medico pk_servicio_medico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4989,6 +5449,7 @@ ALTER TABLE ONLY hospitales_occidente.servicio_medico
 
 
 --
+-- TOC entry 4353 (class 2606 OID 44162)
 -- Name: solicitud_cirugia pk_solicitud_cirugia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -4997,6 +5458,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_cirugia
 
 
 --
+-- TOC entry 4362 (class 2606 OID 44249)
 -- Name: solicitud_equipo pk_solicitud_equipo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5005,6 +5467,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_equipo
 
 
 --
+-- TOC entry 4360 (class 2606 OID 44229)
 -- Name: solicitud_instrumento pk_solicitud_instrumento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5013,6 +5476,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_instrumento
 
 
 --
+-- TOC entry 4358 (class 2606 OID 44209)
 -- Name: solicitud_insumo pk_solicitud_insumo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5021,6 +5485,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_insumo
 
 
 --
+-- TOC entry 4356 (class 2606 OID 44189)
 -- Name: solicitud_procedimiento pk_solicitud_procedimiento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5029,6 +5494,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_procedimiento
 
 
 --
+-- TOC entry 4403 (class 2606 OID 44538)
 -- Name: tarifa_insumo pk_tarifa_insumo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5037,6 +5503,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_insumo
 
 
 --
+-- TOC entry 4401 (class 2606 OID 44519)
 -- Name: tarifa_procedimiento pk_tarifa_procedimiento; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5045,6 +5512,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_procedimiento
 
 
 --
+-- TOC entry 4399 (class 2606 OID 44500)
 -- Name: tarifa_servicio pk_tarifa_servicio; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5053,6 +5521,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_servicio
 
 
 --
+-- TOC entry 4182 (class 2606 OID 43284)
 -- Name: tipo_anestesia pk_tipo_anestesia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5061,6 +5530,7 @@ ALTER TABLE ONLY hospitales_occidente.tipo_anestesia
 
 
 --
+-- TOC entry 4157 (class 2606 OID 43208)
 -- Name: tipo_unidad pk_tipo_unidad; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5069,6 +5539,7 @@ ALTER TABLE ONLY hospitales_occidente.tipo_unidad
 
 
 --
+-- TOC entry 4300 (class 2606 OID 43794)
 -- Name: traslado pk_traslado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5077,6 +5548,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4166 (class 2606 OID 43240)
 -- Name: turno pk_turno; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5085,6 +5557,7 @@ ALTER TABLE ONLY hospitales_occidente.turno
 
 
 --
+-- TOC entry 4221 (class 2606 OID 43415)
 -- Name: unidad_hospital pk_unidad_hospital; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5093,6 +5566,7 @@ ALTER TABLE ONLY hospitales_occidente.unidad_hospital
 
 
 --
+-- TOC entry 4276 (class 2606 OID 43625)
 -- Name: asignacion_personal uq_asignacion_personal; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5101,6 +5575,7 @@ ALTER TABLE ONLY hospitales_occidente.asignacion_personal
 
 
 --
+-- TOC entry 4421 (class 2606 OID 44682)
 -- Name: calificacion_hospital uq_calificacion_hospital; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5109,6 +5584,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_hospital
 
 
 --
+-- TOC entry 4426 (class 2606 OID 44704)
 -- Name: calificacion_personal uq_calificacion_personal; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5117,6 +5593,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_personal
 
 
 --
+-- TOC entry 4397 (class 2606 OID 44480)
 -- Name: cirugia_documento_fase uq_cirugia_documento_fase; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5125,6 +5602,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_documento_fase
 
 
 --
+-- TOC entry 4376 (class 2606 OID 44318)
 -- Name: cirugia uq_cirugia_solicitud; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5133,6 +5611,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4393 (class 2606 OID 44450)
 -- Name: cirugia_verificacion uq_cirugia_verificacion; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5141,6 +5620,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_verificacion
 
 
 --
+-- TOC entry 4233 (class 2606 OID 43462)
 -- Name: clinica uq_clinica_numero; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5149,6 +5629,7 @@ ALTER TABLE ONLY hospitales_occidente.clinica
 
 
 --
+-- TOC entry 4384 (class 2606 OID 44380)
 -- Name: consentimiento_informado uq_consentimiento_cirugia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5157,6 +5638,7 @@ ALTER TABLE ONLY hospitales_occidente.consentimiento_informado
 
 
 --
+-- TOC entry 4327 (class 2606 OID 44010)
 -- Name: consulta uq_consulta_cita; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5165,6 +5647,7 @@ ALTER TABLE ONLY hospitales_occidente.consulta
 
 
 --
+-- TOC entry 4135 (class 2606 OID 43130)
 -- Name: departamento uq_departamento_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5173,6 +5656,7 @@ ALTER TABLE ONLY hospitales_occidente.departamento
 
 
 --
+-- TOC entry 4155 (class 2606 OID 43199)
 -- Name: diagnostico uq_diagnostico_codigo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5181,6 +5665,7 @@ ALTER TABLE ONLY hospitales_occidente.diagnostico
 
 
 --
+-- TOC entry 4308 (class 2606 OID 43869)
 -- Name: egreso uq_egreso_ingreso; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5189,6 +5674,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4310 (class 2606 OID 43871)
 -- Name: egreso uq_egreso_traslado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5197,6 +5683,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4430 (class 2606 OID 44939)
 -- Name: enfermero uq_enfermero_licencia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5205,6 +5692,7 @@ ALTER TABLE ONLY hospitales_occidente.enfermero
 
 
 --
+-- TOC entry 4201 (class 2606 OID 43345)
 -- Name: equipo uq_equipo_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5213,6 +5701,7 @@ ALTER TABLE ONLY hospitales_occidente.equipo
 
 
 --
+-- TOC entry 4228 (class 2606 OID 43443)
 -- Name: espacio_atencion uq_espacio_codigo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5221,6 +5710,7 @@ ALTER TABLE ONLY hospitales_occidente.espacio_atencion
 
 
 --
+-- TOC entry 4151 (class 2606 OID 43187)
 -- Name: especialidad uq_especialidad_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5229,6 +5719,7 @@ ALTER TABLE ONLY hospitales_occidente.especialidad
 
 
 --
+-- TOC entry 4388 (class 2606 OID 44417)
 -- Name: evaluacion_preanestesica uq_evaluacion_cirugia; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5237,6 +5728,7 @@ ALTER TABLE ONLY hospitales_occidente.evaluacion_preanestesica
 
 
 --
+-- TOC entry 4180 (class 2606 OID 43275)
 -- Name: examen_laboratorio uq_examen_laboratorio_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5245,6 +5737,7 @@ ALTER TABLE ONLY hospitales_occidente.examen_laboratorio
 
 
 --
+-- TOC entry 4408 (class 2606 OID 44577)
 -- Name: factura uq_factura_numero; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5253,6 +5746,7 @@ ALTER TABLE ONLY hospitales_occidente.factura
 
 
 --
+-- TOC entry 4349 (class 2606 OID 44130)
 -- Name: historia_clinica uq_historia_signos; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5261,6 +5755,7 @@ ALTER TABLE ONLY hospitales_occidente.historia_clinica
 
 
 --
+-- TOC entry 4281 (class 2606 OID 43657)
 -- Name: horario_medico uq_horario_medico; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5269,6 +5764,7 @@ ALTER TABLE ONLY hospitales_occidente.horario_medico
 
 
 --
+-- TOC entry 4215 (class 2606 OID 43399)
 -- Name: hospital uq_hospital_codigo; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5277,6 +5773,7 @@ ALTER TABLE ONLY hospitales_occidente.hospital
 
 
 --
+-- TOC entry 4217 (class 2606 OID 43401)
 -- Name: hospital uq_hospital_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5285,6 +5782,7 @@ ALTER TABLE ONLY hospitales_occidente.hospital
 
 
 --
+-- TOC entry 4197 (class 2606 OID 43331)
 -- Name: instrumento uq_instrumento_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5293,6 +5791,7 @@ ALTER TABLE ONLY hospitales_occidente.instrumento
 
 
 --
+-- TOC entry 4193 (class 2606 OID 43317)
 -- Name: insumo uq_insumo_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5301,6 +5800,7 @@ ALTER TABLE ONLY hospitales_occidente.insumo
 
 
 --
+-- TOC entry 4210 (class 2606 OID 43375)
 -- Name: item_verificacion uq_item_verificacion_desc; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5309,6 +5809,7 @@ ALTER TABLE ONLY hospitales_occidente.item_verificacion
 
 
 --
+-- TOC entry 4176 (class 2606 OID 43264)
 -- Name: medicamento uq_medicamento_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5317,6 +5818,7 @@ ALTER TABLE ONLY hospitales_occidente.medicamento
 
 
 --
+-- TOC entry 4266 (class 2606 OID 43587)
 -- Name: medico uq_medico_colegiado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5325,6 +5827,7 @@ ALTER TABLE ONLY hospitales_occidente.medico
 
 
 --
+-- TOC entry 4172 (class 2606 OID 43253)
 -- Name: metodo_pago uq_metodo_pago_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5333,6 +5836,7 @@ ALTER TABLE ONLY hospitales_occidente.metodo_pago
 
 
 --
+-- TOC entry 4205 (class 2606 OID 43359)
 -- Name: momento_quirurgico uq_momento_quirurgico_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5341,6 +5845,7 @@ ALTER TABLE ONLY hospitales_occidente.momento_quirurgico
 
 
 --
+-- TOC entry 4140 (class 2606 OID 43142)
 -- Name: municipio uq_municipio_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5349,6 +5854,7 @@ ALTER TABLE ONLY hospitales_occidente.municipio
 
 
 --
+-- TOC entry 4254 (class 2606 OID 43537)
 -- Name: paciente_encargado uq_paciente_encargado; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5357,6 +5863,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente_encargado
 
 
 --
+-- TOC entry 4245 (class 2606 OID 43511)
 -- Name: paciente uq_paciente_expediente; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5365,6 +5872,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4247 (class 2606 OID 43509)
 -- Name: paciente uq_paciente_persona; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5373,6 +5881,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4249 (class 2606 OID 43513)
 -- Name: paciente uq_paciente_seguro_social; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5381,6 +5890,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4417 (class 2606 OID 44646)
 -- Name: pago uq_pago_cuota; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5389,6 +5899,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4147 (class 2606 OID 43175)
 -- Name: parentesco uq_parentesco_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5397,6 +5908,7 @@ ALTER TABLE ONLY hospitales_occidente.parentesco
 
 
 --
+-- TOC entry 4240 (class 2606 OID 43489)
 -- Name: persona uq_persona_dpi; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5405,6 +5917,7 @@ ALTER TABLE ONLY hospitales_occidente.persona
 
 
 --
+-- TOC entry 4261 (class 2606 OID 43566)
 -- Name: personal uq_personal_persona; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5413,6 +5926,7 @@ ALTER TABLE ONLY hospitales_occidente.personal
 
 
 --
+-- TOC entry 4189 (class 2606 OID 43298)
 -- Name: procedimiento_quirurgico uq_procedimiento_quirurgico_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5421,6 +5935,7 @@ ALTER TABLE ONLY hospitales_occidente.procedimiento_quirurgico
 
 
 --
+-- TOC entry 4331 (class 2606 OID 44041)
 -- Name: receta uq_receta_cita_proxima; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5429,6 +5944,7 @@ ALTER TABLE ONLY hospitales_occidente.receta
 
 
 --
+-- TOC entry 4333 (class 2606 OID 44039)
 -- Name: receta uq_receta_consulta; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5437,6 +5953,7 @@ ALTER TABLE ONLY hospitales_occidente.receta
 
 
 --
+-- TOC entry 4338 (class 2606 OID 44066)
 -- Name: receta_detalle uq_receta_detalle; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5445,6 +5962,7 @@ ALTER TABLE ONLY hospitales_occidente.receta_detalle
 
 
 --
+-- TOC entry 4366 (class 2606 OID 44276)
 -- Name: revision_solicitud uq_revision_solicitud; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5453,6 +5971,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_solicitud
 
 
 --
+-- TOC entry 4164 (class 2606 OID 43224)
 -- Name: servicio_medico uq_servicio_medico_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5461,6 +5980,7 @@ ALTER TABLE ONLY hospitales_occidente.servicio_medico
 
 
 --
+-- TOC entry 4184 (class 2606 OID 43286)
 -- Name: tipo_anestesia uq_tipo_anestesia_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5469,6 +5989,7 @@ ALTER TABLE ONLY hospitales_occidente.tipo_anestesia
 
 
 --
+-- TOC entry 4159 (class 2606 OID 43210)
 -- Name: tipo_unidad uq_tipo_unidad_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5477,6 +5998,7 @@ ALTER TABLE ONLY hospitales_occidente.tipo_unidad
 
 
 --
+-- TOC entry 4302 (class 2606 OID 43796)
 -- Name: traslado uq_traslado_ingreso_destino; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5485,6 +6007,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4168 (class 2606 OID 43242)
 -- Name: turno uq_turno_nombre; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5493,6 +6016,7 @@ ALTER TABLE ONLY hospitales_occidente.turno
 
 
 --
+-- TOC entry 4223 (class 2606 OID 43417)
 -- Name: unidad_hospital uq_unidad_hospital; Type: CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5501,6 +6025,7 @@ ALTER TABLE ONLY hospitales_occidente.unidad_hospital
 
 
 --
+-- TOC entry 4271 (class 1259 OID 44738)
 -- Name: ix_asignacion_personal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5508,6 +6033,7 @@ CREATE INDEX ix_asignacion_personal ON hospitales_occidente.asignacion_personal 
 
 
 --
+-- TOC entry 4272 (class 1259 OID 44739)
 -- Name: ix_asignacion_unidad; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5515,6 +6041,7 @@ CREATE INDEX ix_asignacion_unidad ON hospitales_occidente.asignacion_personal US
 
 
 --
+-- TOC entry 4431 (class 1259 OID 44969)
 -- Name: ix_bitacora_fecha; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5522,6 +6049,7 @@ CREATE INDEX ix_bitacora_fecha ON hospitales_occidente.bitacora_auditoria_person
 
 
 --
+-- TOC entry 4432 (class 1259 OID 44968)
 -- Name: ix_bitacora_personal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5529,6 +6057,7 @@ CREATE INDEX ix_bitacora_personal ON hospitales_occidente.bitacora_auditoria_per
 
 
 --
+-- TOC entry 4422 (class 1259 OID 44774)
 -- Name: ix_calpers_personal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5536,6 +6065,7 @@ CREATE INDEX ix_calpers_personal ON hospitales_occidente.calificacion_personal U
 
 
 --
+-- TOC entry 4377 (class 1259 OID 44769)
 -- Name: ix_cireq_personal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5543,6 +6073,7 @@ CREATE INDEX ix_cireq_personal ON hospitales_occidente.cirugia_equipo_medico USI
 
 
 --
+-- TOC entry 4371 (class 1259 OID 44768)
 -- Name: ix_cirugia_estado_inicio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5550,6 +6081,7 @@ CREATE INDEX ix_cirugia_estado_inicio ON hospitales_occidente.cirugia USING btre
 
 
 --
+-- TOC entry 4372 (class 1259 OID 44767)
 -- Name: ix_cirugia_quirofano; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5557,6 +6089,7 @@ CREATE INDEX ix_cirugia_quirofano ON hospitales_occidente.cirugia USING btree (i
 
 
 --
+-- TOC entry 4389 (class 1259 OID 44770)
 -- Name: ix_cirver_enfermero; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5564,6 +6097,7 @@ CREATE INDEX ix_cirver_enfermero ON hospitales_occidente.cirugia_verificacion US
 
 
 --
+-- TOC entry 4318 (class 1259 OID 44758)
 -- Name: ix_cita_clinica_fecha; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5571,6 +6105,7 @@ CREATE INDEX ix_cita_clinica_fecha ON hospitales_occidente.cita USING btree (id_
 
 
 --
+-- TOC entry 4319 (class 1259 OID 44757)
 -- Name: ix_cita_paciente; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5578,6 +6113,7 @@ CREATE INDEX ix_cita_paciente ON hospitales_occidente.cita USING btree (id_pacie
 
 
 --
+-- TOC entry 4229 (class 1259 OID 44729)
 -- Name: ix_clinica_hospital; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5585,6 +6121,7 @@ CREATE INDEX ix_clinica_hospital ON hospitales_occidente.clinica USING btree (id
 
 
 --
+-- TOC entry 4323 (class 1259 OID 44759)
 -- Name: ix_consulta_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5592,6 +6129,7 @@ CREATE INDEX ix_consulta_episodio ON hospitales_occidente.consulta USING btree (
 
 
 --
+-- TOC entry 4314 (class 1259 OID 44755)
 -- Name: ix_consumo_ingreso; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5599,6 +6137,7 @@ CREATE INDEX ix_consumo_ingreso ON hospitales_occidente.consumo_insumo USING btr
 
 
 --
+-- TOC entry 4315 (class 1259 OID 44756)
 -- Name: ix_consumo_insumo; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5606,6 +6145,7 @@ CREATE INDEX ix_consumo_insumo ON hospitales_occidente.consumo_insumo USING btre
 
 
 --
+-- TOC entry 4141 (class 1259 OID 44721)
 -- Name: ix_direccion_municipio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5613,6 +6153,7 @@ CREATE INDEX ix_direccion_municipio ON hospitales_occidente.direccion USING btre
 
 
 --
+-- TOC entry 4311 (class 1259 OID 44754)
 -- Name: ix_egdiag_diagnostico; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5620,6 +6161,7 @@ CREATE INDEX ix_egdiag_diagnostico ON hospitales_occidente.egreso_diagnostico_se
 
 
 --
+-- TOC entry 4303 (class 1259 OID 44753)
 -- Name: ix_egreso_fecha; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5627,6 +6169,7 @@ CREATE INDEX ix_egreso_fecha ON hospitales_occidente.egreso USING btree (fecha_h
 
 
 --
+-- TOC entry 4304 (class 1259 OID 44752)
 -- Name: ix_egreso_medico; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5634,6 +6177,7 @@ CREATE INDEX ix_egreso_medico ON hospitales_occidente.egreso USING btree (id_med
 
 
 --
+-- TOC entry 4282 (class 1259 OID 44742)
 -- Name: ix_episodio_hospital; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5641,6 +6185,7 @@ CREATE INDEX ix_episodio_hospital ON hospitales_occidente.episodio USING btree (
 
 
 --
+-- TOC entry 4283 (class 1259 OID 44741)
 -- Name: ix_episodio_paciente; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5648,6 +6193,7 @@ CREATE INDEX ix_episodio_paciente ON hospitales_occidente.episodio USING btree (
 
 
 --
+-- TOC entry 4224 (class 1259 OID 44728)
 -- Name: ix_espacio_unidad; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5655,6 +6201,7 @@ CREATE INDEX ix_espacio_unidad ON hospitales_occidente.espacio_atencion USING bt
 
 
 --
+-- TOC entry 4409 (class 1259 OID 44771)
 -- Name: ix_factura_detalle_factura; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5662,6 +6209,7 @@ CREATE INDEX ix_factura_detalle_factura ON hospitales_occidente.factura_detalle 
 
 
 --
+-- TOC entry 4345 (class 1259 OID 44763)
 -- Name: ix_historia_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5669,6 +6217,7 @@ CREATE INDEX ix_historia_episodio ON hospitales_occidente.historia_clinica USING
 
 
 --
+-- TOC entry 4277 (class 1259 OID 44740)
 -- Name: ix_horario_clinica; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5676,6 +6225,7 @@ CREATE INDEX ix_horario_clinica ON hospitales_occidente.horario_medico USING btr
 
 
 --
+-- TOC entry 4211 (class 1259 OID 44725)
 -- Name: ix_hospital_direccion; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5683,6 +6233,7 @@ CREATE INDEX ix_hospital_direccion ON hospitales_occidente.hospital USING btree 
 
 
 --
+-- TOC entry 4289 (class 1259 OID 44748)
 -- Name: ix_ingreso_diagnostico; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5690,6 +6241,7 @@ CREATE INDEX ix_ingreso_diagnostico ON hospitales_occidente.ingreso USING btree 
 
 
 --
+-- TOC entry 4290 (class 1259 OID 44744)
 -- Name: ix_ingreso_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5697,6 +6249,7 @@ CREATE INDEX ix_ingreso_episodio ON hospitales_occidente.ingreso USING btree (id
 
 
 --
+-- TOC entry 4291 (class 1259 OID 44746)
 -- Name: ix_ingreso_espacio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5704,6 +6257,7 @@ CREATE INDEX ix_ingreso_espacio ON hospitales_occidente.ingreso USING btree (id_
 
 
 --
+-- TOC entry 4292 (class 1259 OID 44747)
 -- Name: ix_ingreso_medico; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5711,6 +6265,7 @@ CREATE INDEX ix_ingreso_medico ON hospitales_occidente.ingreso USING btree (id_m
 
 
 --
+-- TOC entry 4293 (class 1259 OID 44745)
 -- Name: ix_ingreso_unidad_fecha; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5718,6 +6273,7 @@ CREATE INDEX ix_ingreso_unidad_fecha ON hospitales_occidente.ingreso USING btree
 
 
 --
+-- TOC entry 4206 (class 1259 OID 44724)
 -- Name: ix_item_verif_momento; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5725,6 +6281,7 @@ CREATE INDEX ix_item_verif_momento ON hospitales_occidente.item_verificacion USI
 
 
 --
+-- TOC entry 4267 (class 1259 OID 44737)
 -- Name: ix_medesp_especialidad; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5732,6 +6289,7 @@ CREATE INDEX ix_medesp_especialidad ON hospitales_occidente.medico_especialidad 
 
 
 --
+-- TOC entry 4262 (class 1259 OID 44925)
 -- Name: ix_medico_superior; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5739,6 +6297,7 @@ CREATE INDEX ix_medico_superior ON hospitales_occidente.medico USING btree (id_s
 
 
 --
+-- TOC entry 4136 (class 1259 OID 44720)
 -- Name: ix_municipio_departamento; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5746,6 +6305,7 @@ CREATE INDEX ix_municipio_departamento ON hospitales_occidente.municipio USING b
 
 
 --
+-- TOC entry 4339 (class 1259 OID 44761)
 -- Name: ix_orden_lab_consulta; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5753,6 +6313,7 @@ CREATE INDEX ix_orden_lab_consulta ON hospitales_occidente.orden_laboratorio USI
 
 
 --
+-- TOC entry 4342 (class 1259 OID 44762)
 -- Name: ix_orden_lab_det_examen; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5760,6 +6321,7 @@ CREATE INDEX ix_orden_lab_det_examen ON hospitales_occidente.orden_laboratorio_d
 
 
 --
+-- TOC entry 4250 (class 1259 OID 44734)
 -- Name: ix_paciente_encargado_pers; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5767,6 +6329,7 @@ CREATE INDEX ix_paciente_encargado_pers ON hospitales_occidente.paciente_encarga
 
 
 --
+-- TOC entry 4241 (class 1259 OID 44733)
 -- Name: ix_paciente_persona; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5774,6 +6337,7 @@ CREATE INDEX ix_paciente_persona ON hospitales_occidente.paciente USING btree (i
 
 
 --
+-- TOC entry 4412 (class 1259 OID 44772)
 -- Name: ix_pago_factura; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5781,6 +6345,7 @@ CREATE INDEX ix_pago_factura ON hospitales_occidente.pago USING btree (id_factur
 
 
 --
+-- TOC entry 4413 (class 1259 OID 44773)
 -- Name: ix_pago_fecha; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5788,6 +6353,7 @@ CREATE INDEX ix_pago_fecha ON hospitales_occidente.pago USING btree (fecha_pago)
 
 
 --
+-- TOC entry 4234 (class 1259 OID 44731)
 -- Name: ix_persona_apellidos; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5795,6 +6361,7 @@ CREATE INDEX ix_persona_apellidos ON hospitales_occidente.persona USING btree (a
 
 
 --
+-- TOC entry 4235 (class 1259 OID 44730)
 -- Name: ix_persona_direccion; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5802,6 +6369,7 @@ CREATE INDEX ix_persona_direccion ON hospitales_occidente.persona USING btree (i
 
 
 --
+-- TOC entry 4236 (class 1259 OID 44732)
 -- Name: ix_persona_dpi; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5809,6 +6377,7 @@ CREATE INDEX ix_persona_dpi ON hospitales_occidente.persona USING btree (dpi);
 
 
 --
+-- TOC entry 4256 (class 1259 OID 44735)
 -- Name: ix_personal_persona; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5816,6 +6385,7 @@ CREATE INDEX ix_personal_persona ON hospitales_occidente.personal USING btree (i
 
 
 --
+-- TOC entry 4257 (class 1259 OID 44736)
 -- Name: ix_personal_tipo; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5823,6 +6393,7 @@ CREATE INDEX ix_personal_tipo ON hospitales_occidente.personal USING btree (tipo
 
 
 --
+-- TOC entry 4185 (class 1259 OID 44723)
 -- Name: ix_proc_especialidad; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5830,6 +6401,7 @@ CREATE INDEX ix_proc_especialidad ON hospitales_occidente.procedimiento_quirurgi
 
 
 --
+-- TOC entry 4334 (class 1259 OID 44760)
 -- Name: ix_receta_detalle_med; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5837,6 +6409,7 @@ CREATE INDEX ix_receta_detalle_med ON hospitales_occidente.receta_detalle USING 
 
 
 --
+-- TOC entry 4160 (class 1259 OID 44722)
 -- Name: ix_servicio_tipo_unidad; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5844,6 +6417,7 @@ CREATE INDEX ix_servicio_tipo_unidad ON hospitales_occidente.servicio_medico USI
 
 
 --
+-- TOC entry 4286 (class 1259 OID 44743)
 -- Name: ix_signos_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5851,6 +6425,7 @@ CREATE INDEX ix_signos_episodio ON hospitales_occidente.registro_signos_vitales 
 
 
 --
+-- TOC entry 4350 (class 1259 OID 44765)
 -- Name: ix_solicitud_cirujano; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5858,6 +6433,7 @@ CREATE INDEX ix_solicitud_cirujano ON hospitales_occidente.solicitud_cirugia USI
 
 
 --
+-- TOC entry 4351 (class 1259 OID 44764)
 -- Name: ix_solicitud_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5865,6 +6441,7 @@ CREATE INDEX ix_solicitud_episodio ON hospitales_occidente.solicitud_cirugia USI
 
 
 --
+-- TOC entry 4354 (class 1259 OID 44766)
 -- Name: ix_solproc_procedimiento; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5872,6 +6449,7 @@ CREATE INDEX ix_solproc_procedimiento ON hospitales_occidente.solicitud_procedim
 
 
 --
+-- TOC entry 4296 (class 1259 OID 44751)
 -- Name: ix_traslado_destino; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5879,6 +6457,7 @@ CREATE INDEX ix_traslado_destino ON hospitales_occidente.traslado USING btree (i
 
 
 --
+-- TOC entry 4297 (class 1259 OID 44749)
 -- Name: ix_traslado_episodio; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5886,6 +6465,7 @@ CREATE INDEX ix_traslado_episodio ON hospitales_occidente.traslado USING btree (
 
 
 --
+-- TOC entry 4298 (class 1259 OID 44750)
 -- Name: ix_traslado_origen; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5893,6 +6473,7 @@ CREATE INDEX ix_traslado_origen ON hospitales_occidente.traslado USING btree (id
 
 
 --
+-- TOC entry 4218 (class 1259 OID 44726)
 -- Name: ix_unidad_hosp_hospital; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5900,6 +6481,7 @@ CREATE INDEX ix_unidad_hosp_hospital ON hospitales_occidente.unidad_hospital USI
 
 
 --
+-- TOC entry 4219 (class 1259 OID 44727)
 -- Name: ix_unidad_hosp_tipo; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5907,6 +6489,7 @@ CREATE INDEX ix_unidad_hosp_tipo ON hospitales_occidente.unidad_hospital USING b
 
 
 --
+-- TOC entry 4380 (class 1259 OID 44719)
 -- Name: uq_cirugia_cirujano_principal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5914,6 +6497,7 @@ CREATE UNIQUE INDEX uq_cirugia_cirujano_principal ON hospitales_occidente.cirugi
 
 
 --
+-- TOC entry 4322 (class 1259 OID 44717)
 -- Name: uq_cita_medico_horario; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5921,6 +6505,7 @@ CREATE UNIQUE INDEX uq_cita_medico_horario ON hospitales_occidente.cita USING bt
 
 
 --
+-- TOC entry 4406 (class 1259 OID 44718)
 -- Name: uq_factura_episodio_emitida; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5928,6 +6513,7 @@ CREATE UNIQUE INDEX uq_factura_episodio_emitida ON hospitales_occidente.factura 
 
 
 --
+-- TOC entry 4270 (class 1259 OID 44716)
 -- Name: uq_medico_especialidad_principal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5935,6 +6521,7 @@ CREATE UNIQUE INDEX uq_medico_especialidad_principal ON hospitales_occidente.med
 
 
 --
+-- TOC entry 4255 (class 1259 OID 44715)
 -- Name: uq_paciente_encargado_principal; Type: INDEX; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5942,6 +6529,7 @@ CREATE UNIQUE INDEX uq_paciente_encargado_principal ON hospitales_occidente.paci
 
 
 --
+-- TOC entry 4567 (class 2620 OID 44975)
 -- Name: medico trg_auditoria_medico; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5949,6 +6537,7 @@ CREATE TRIGGER trg_auditoria_medico AFTER UPDATE ON hospitales_occidente.medico 
 
 
 --
+-- TOC entry 4568 (class 2620 OID 44976)
 -- Name: medico_especialidad trg_auditoria_medico_especialidad; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5956,6 +6545,7 @@ CREATE TRIGGER trg_auditoria_medico_especialidad AFTER INSERT OR DELETE OR UPDAT
 
 
 --
+-- TOC entry 4566 (class 2620 OID 44974)
 -- Name: personal trg_auditoria_personal; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5963,6 +6553,7 @@ CREATE TRIGGER trg_auditoria_personal AFTER UPDATE ON hospitales_occidente.perso
 
 
 --
+-- TOC entry 4570 (class 2620 OID 44815)
 -- Name: consulta trg_check_coherencia_paciente_consulta; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5970,6 +6561,7 @@ CREATE TRIGGER trg_check_coherencia_paciente_consulta BEFORE INSERT OR UPDATE ON
 
 
 --
+-- TOC entry 4573 (class 2620 OID 44809)
 -- Name: pago trg_check_cuota_pago; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5977,6 +6569,7 @@ CREATE TRIGGER trg_check_cuota_pago BEFORE INSERT OR UPDATE ON hospitales_occide
 
 
 --
+-- TOC entry 4572 (class 2620 OID 44813)
 -- Name: factura trg_check_cuotas_factura; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5984,6 +6577,7 @@ CREATE TRIGGER trg_check_cuotas_factura BEFORE UPDATE ON hospitales_occidente.fa
 
 
 --
+-- TOC entry 4569 (class 2620 OID 44803)
 -- Name: egreso trg_check_fecha_egreso; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5991,6 +6585,7 @@ CREATE TRIGGER trg_check_fecha_egreso BEFORE INSERT OR UPDATE ON hospitales_occi
 
 
 --
+-- TOC entry 4564 (class 2620 OID 44805)
 -- Name: espacio_atencion trg_check_limite_quirofanos; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -5998,6 +6593,7 @@ CREATE TRIGGER trg_check_limite_quirofanos BEFORE INSERT OR UPDATE ON hospitales
 
 
 --
+-- TOC entry 4565 (class 2620 OID 44801)
 -- Name: persona trg_check_persona_fecha_nacimiento; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6005,6 +6601,7 @@ CREATE TRIGGER trg_check_persona_fecha_nacimiento BEFORE INSERT OR UPDATE ON hos
 
 
 --
+-- TOC entry 4571 (class 2620 OID 44811)
 -- Name: cirugia_equipo_medico trg_check_rol_equipo_quirurgico; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6012,6 +6609,7 @@ CREATE TRIGGER trg_check_rol_equipo_quirurgico BEFORE INSERT OR UPDATE ON hospit
 
 
 --
+-- TOC entry 4563 (class 2620 OID 44807)
 -- Name: unidad_hospital trg_check_unidad_hospital_interno; Type: TRIGGER; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6019,6 +6617,7 @@ CREATE TRIGGER trg_check_unidad_hospital_interno BEFORE INSERT OR UPDATE ON hosp
 
 
 --
+-- TOC entry 4456 (class 2606 OID 43626)
 -- Name: asignacion_personal fk_asignacion_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6027,6 +6626,7 @@ ALTER TABLE ONLY hospitales_occidente.asignacion_personal
 
 
 --
+-- TOC entry 4457 (class 2606 OID 43636)
 -- Name: asignacion_personal fk_asignacion_turno; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6035,6 +6635,7 @@ ALTER TABLE ONLY hospitales_occidente.asignacion_personal
 
 
 --
+-- TOC entry 4458 (class 2606 OID 43631)
 -- Name: asignacion_personal fk_asignacion_unidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6043,6 +6644,7 @@ ALTER TABLE ONLY hospitales_occidente.asignacion_personal
 
 
 --
+-- TOC entry 4562 (class 2606 OID 44963)
 -- Name: bitacora_auditoria_personal fk_bitacora_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6051,6 +6653,7 @@ ALTER TABLE ONLY hospitales_occidente.bitacora_auditoria_personal
 
 
 --
+-- TOC entry 4558 (class 2606 OID 44683)
 -- Name: calificacion_hospital fk_calhosp_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6059,6 +6662,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_hospital
 
 
 --
+-- TOC entry 4559 (class 2606 OID 44705)
 -- Name: calificacion_personal fk_calpers_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6067,6 +6671,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_personal
 
 
 --
+-- TOC entry 4560 (class 2606 OID 44710)
 -- Name: calificacion_personal fk_calpers_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6075,6 +6680,7 @@ ALTER TABLE ONLY hospitales_occidente.calificacion_personal
 
 
 --
+-- TOC entry 4540 (class 2606 OID 44481)
 -- Name: cirugia_documento_fase fk_cirdoc_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6083,6 +6689,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_documento_fase
 
 
 --
+-- TOC entry 4541 (class 2606 OID 44486)
 -- Name: cirugia_documento_fase fk_cirdoc_enfermero; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6091,6 +6698,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_documento_fase
 
 
 --
+-- TOC entry 4529 (class 2606 OID 44345)
 -- Name: cirugia_equipo_medico fk_cireq_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6099,6 +6707,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_equipo_medico
 
 
 --
+-- TOC entry 4530 (class 2606 OID 44350)
 -- Name: cirugia_equipo_medico fk_cireq_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6107,6 +6716,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_equipo_medico
 
 
 --
+-- TOC entry 4526 (class 2606 OID 44331)
 -- Name: cirugia fk_cirugia_ingreso; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6115,6 +6725,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4527 (class 2606 OID 44326)
 -- Name: cirugia fk_cirugia_quirofano; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6123,6 +6734,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4528 (class 2606 OID 44321)
 -- Name: cirugia fk_cirugia_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6131,6 +6743,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia
 
 
 --
+-- TOC entry 4537 (class 2606 OID 44451)
 -- Name: cirugia_verificacion fk_cirver_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6139,6 +6752,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_verificacion
 
 
 --
+-- TOC entry 4538 (class 2606 OID 44461)
 -- Name: cirugia_verificacion fk_cirver_enfermero; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6147,6 +6761,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_verificacion
 
 
 --
+-- TOC entry 4539 (class 2606 OID 44456)
 -- Name: cirugia_verificacion fk_cirver_item; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6155,6 +6770,7 @@ ALTER TABLE ONLY hospitales_occidente.cirugia_verificacion
 
 
 --
+-- TOC entry 4492 (class 2606 OID 43985)
 -- Name: cita fk_cita_anterior; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6163,6 +6779,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4493 (class 2606 OID 43975)
 -- Name: cita fk_cita_clinica; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6171,6 +6788,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4494 (class 2606 OID 43980)
 -- Name: cita fk_cita_hospital_referente; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6179,6 +6797,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4495 (class 2606 OID 43970)
 -- Name: cita fk_cita_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6187,6 +6806,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4496 (class 2606 OID 43965)
 -- Name: cita fk_cita_paciente; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6195,6 +6815,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4497 (class 2606 OID 43990)
 -- Name: cita fk_cita_recargo_origen; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6203,6 +6824,7 @@ ALTER TABLE ONLY hospitales_occidente.cita
 
 
 --
+-- TOC entry 4444 (class 2606 OID 43463)
 -- Name: clinica fk_clinica_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6211,6 +6833,7 @@ ALTER TABLE ONLY hospitales_occidente.clinica
 
 
 --
+-- TOC entry 4531 (class 2606 OID 44381)
 -- Name: consentimiento_informado fk_consent_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6219,6 +6842,7 @@ ALTER TABLE ONLY hospitales_occidente.consentimiento_informado
 
 
 --
+-- TOC entry 4532 (class 2606 OID 44391)
 -- Name: consentimiento_informado fk_consent_encargado; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6227,6 +6851,7 @@ ALTER TABLE ONLY hospitales_occidente.consentimiento_informado
 
 
 --
+-- TOC entry 4533 (class 2606 OID 44386)
 -- Name: consentimiento_informado fk_consent_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6235,6 +6860,7 @@ ALTER TABLE ONLY hospitales_occidente.consentimiento_informado
 
 
 --
+-- TOC entry 4498 (class 2606 OID 44011)
 -- Name: consulta fk_consulta_cita; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6243,6 +6869,7 @@ ALTER TABLE ONLY hospitales_occidente.consulta
 
 
 --
+-- TOC entry 4499 (class 2606 OID 44021)
 -- Name: consulta fk_consulta_diagnostico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6251,6 +6878,7 @@ ALTER TABLE ONLY hospitales_occidente.consulta
 
 
 --
+-- TOC entry 4500 (class 2606 OID 44016)
 -- Name: consulta fk_consulta_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6259,6 +6887,7 @@ ALTER TABLE ONLY hospitales_occidente.consulta
 
 
 --
+-- TOC entry 4489 (class 2606 OID 43927)
 -- Name: consumo_insumo fk_consumo_ingreso; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6267,6 +6896,7 @@ ALTER TABLE ONLY hospitales_occidente.consumo_insumo
 
 
 --
+-- TOC entry 4490 (class 2606 OID 43932)
 -- Name: consumo_insumo fk_consumo_insumo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6275,6 +6905,7 @@ ALTER TABLE ONLY hospitales_occidente.consumo_insumo
 
 
 --
+-- TOC entry 4491 (class 2606 OID 43937)
 -- Name: consumo_insumo fk_consumo_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6283,6 +6914,7 @@ ALTER TABLE ONLY hospitales_occidente.consumo_insumo
 
 
 --
+-- TOC entry 4436 (class 2606 OID 43160)
 -- Name: direccion fk_direccion_municipio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6291,6 +6923,7 @@ ALTER TABLE ONLY hospitales_occidente.direccion
 
 
 --
+-- TOC entry 4487 (class 2606 OID 43909)
 -- Name: egreso_diagnostico_secundario fk_egdiag_diagnostico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6299,6 +6932,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso_diagnostico_secundario
 
 
 --
+-- TOC entry 4488 (class 2606 OID 43904)
 -- Name: egreso_diagnostico_secundario fk_egdiag_egreso; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6307,6 +6941,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso_diagnostico_secundario
 
 
 --
+-- TOC entry 4482 (class 2606 OID 43877)
 -- Name: egreso fk_egreso_diagnostico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6315,6 +6950,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4483 (class 2606 OID 43892)
 -- Name: egreso fk_egreso_hospital_referido; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6323,6 +6959,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4484 (class 2606 OID 43872)
 -- Name: egreso fk_egreso_ingreso; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6331,6 +6968,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4485 (class 2606 OID 43882)
 -- Name: egreso fk_egreso_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6339,6 +6977,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4486 (class 2606 OID 43887)
 -- Name: egreso fk_egreso_traslado; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6347,6 +6986,7 @@ ALTER TABLE ONLY hospitales_occidente.egreso
 
 
 --
+-- TOC entry 4561 (class 2606 OID 44940)
 -- Name: enfermero fk_enfermero_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6355,6 +6995,7 @@ ALTER TABLE ONLY hospitales_occidente.enfermero
 
 
 --
+-- TOC entry 4461 (class 2606 OID 43685)
 -- Name: episodio fk_episodio_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6363,6 +7004,7 @@ ALTER TABLE ONLY hospitales_occidente.episodio
 
 
 --
+-- TOC entry 4462 (class 2606 OID 43680)
 -- Name: episodio fk_episodio_paciente; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6371,6 +7013,7 @@ ALTER TABLE ONLY hospitales_occidente.episodio
 
 
 --
+-- TOC entry 4443 (class 2606 OID 43444)
 -- Name: espacio_atencion fk_espacio_unidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6379,6 +7022,7 @@ ALTER TABLE ONLY hospitales_occidente.espacio_atencion
 
 
 --
+-- TOC entry 4534 (class 2606 OID 44428)
 -- Name: evaluacion_preanestesica fk_evalpre_anestesiologo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6387,6 +7031,7 @@ ALTER TABLE ONLY hospitales_occidente.evaluacion_preanestesica
 
 
 --
+-- TOC entry 4535 (class 2606 OID 44418)
 -- Name: evaluacion_preanestesica fk_evalpre_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6395,6 +7040,7 @@ ALTER TABLE ONLY hospitales_occidente.evaluacion_preanestesica
 
 
 --
+-- TOC entry 4536 (class 2606 OID 44423)
 -- Name: evaluacion_preanestesica fk_evalpre_clasifica; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6403,6 +7049,7 @@ ALTER TABLE ONLY hospitales_occidente.evaluacion_preanestesica
 
 
 --
+-- TOC entry 4550 (class 2606 OID 44623)
 -- Name: factura_detalle fk_facdet_cirugia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6411,6 +7058,7 @@ ALTER TABLE ONLY hospitales_occidente.factura_detalle
 
 
 --
+-- TOC entry 4551 (class 2606 OID 44613)
 -- Name: factura_detalle fk_facdet_consulta; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6419,6 +7067,7 @@ ALTER TABLE ONLY hospitales_occidente.factura_detalle
 
 
 --
+-- TOC entry 4552 (class 2606 OID 44608)
 -- Name: factura_detalle fk_facdet_factura; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6427,6 +7076,7 @@ ALTER TABLE ONLY hospitales_occidente.factura_detalle
 
 
 --
+-- TOC entry 4553 (class 2606 OID 44618)
 -- Name: factura_detalle fk_facdet_ingreso; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6435,6 +7085,7 @@ ALTER TABLE ONLY hospitales_occidente.factura_detalle
 
 
 --
+-- TOC entry 4548 (class 2606 OID 44578)
 -- Name: factura fk_factura_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6443,6 +7094,7 @@ ALTER TABLE ONLY hospitales_occidente.factura
 
 
 --
+-- TOC entry 4549 (class 2606 OID 44583)
 -- Name: factura fk_factura_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6451,6 +7103,7 @@ ALTER TABLE ONLY hospitales_occidente.factura
 
 
 --
+-- TOC entry 4508 (class 2606 OID 44131)
 -- Name: historia_clinica fk_historia_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6459,6 +7112,7 @@ ALTER TABLE ONLY hospitales_occidente.historia_clinica
 
 
 --
+-- TOC entry 4509 (class 2606 OID 44136)
 -- Name: historia_clinica fk_historia_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6467,6 +7121,7 @@ ALTER TABLE ONLY hospitales_occidente.historia_clinica
 
 
 --
+-- TOC entry 4510 (class 2606 OID 44141)
 -- Name: historia_clinica fk_historia_signos; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6475,6 +7130,7 @@ ALTER TABLE ONLY hospitales_occidente.historia_clinica
 
 
 --
+-- TOC entry 4459 (class 2606 OID 43663)
 -- Name: horario_medico fk_horario_clinica; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6483,6 +7139,7 @@ ALTER TABLE ONLY hospitales_occidente.horario_medico
 
 
 --
+-- TOC entry 4460 (class 2606 OID 43658)
 -- Name: horario_medico fk_horario_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6491,6 +7148,7 @@ ALTER TABLE ONLY hospitales_occidente.horario_medico
 
 
 --
+-- TOC entry 4440 (class 2606 OID 43402)
 -- Name: hospital fk_hospital_direccion; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6499,6 +7157,7 @@ ALTER TABLE ONLY hospitales_occidente.hospital
 
 
 --
+-- TOC entry 4465 (class 2606 OID 43755)
 -- Name: ingreso fk_ingreso_diagnostico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6507,6 +7166,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4466 (class 2606 OID 43770)
 -- Name: ingreso fk_ingreso_encargado; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6515,6 +7175,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4467 (class 2606 OID 43740)
 -- Name: ingreso fk_ingreso_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6523,6 +7184,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4468 (class 2606 OID 43765)
 -- Name: ingreso fk_ingreso_espacio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6531,6 +7193,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4469 (class 2606 OID 43760)
 -- Name: ingreso fk_ingreso_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6539,6 +7202,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4470 (class 2606 OID 43750)
 -- Name: ingreso fk_ingreso_servicio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6547,6 +7211,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4471 (class 2606 OID 43745)
 -- Name: ingreso fk_ingreso_unidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6555,6 +7220,7 @@ ALTER TABLE ONLY hospitales_occidente.ingreso
 
 
 --
+-- TOC entry 4439 (class 2606 OID 43376)
 -- Name: item_verificacion fk_item_momento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6563,6 +7229,7 @@ ALTER TABLE ONLY hospitales_occidente.item_verificacion
 
 
 --
+-- TOC entry 4454 (class 2606 OID 43607)
 -- Name: medico_especialidad fk_medesp_especialidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6571,6 +7238,7 @@ ALTER TABLE ONLY hospitales_occidente.medico_especialidad
 
 
 --
+-- TOC entry 4455 (class 2606 OID 43602)
 -- Name: medico_especialidad fk_medesp_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6579,6 +7247,7 @@ ALTER TABLE ONLY hospitales_occidente.medico_especialidad
 
 
 --
+-- TOC entry 4452 (class 2606 OID 43588)
 -- Name: medico fk_medico_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6587,6 +7256,7 @@ ALTER TABLE ONLY hospitales_occidente.medico
 
 
 --
+-- TOC entry 4453 (class 2606 OID 44920)
 -- Name: medico fk_medico_superior; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6595,6 +7265,7 @@ ALTER TABLE ONLY hospitales_occidente.medico
 
 
 --
+-- TOC entry 4435 (class 2606 OID 43143)
 -- Name: municipio fk_municipio_departamento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6603,6 +7274,7 @@ ALTER TABLE ONLY hospitales_occidente.municipio
 
 
 --
+-- TOC entry 4505 (class 2606 OID 44089)
 -- Name: orden_laboratorio fk_orden_consulta; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6611,6 +7283,7 @@ ALTER TABLE ONLY hospitales_occidente.orden_laboratorio
 
 
 --
+-- TOC entry 4506 (class 2606 OID 44106)
 -- Name: orden_laboratorio_detalle fk_ordendet_examen; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6619,6 +7292,7 @@ ALTER TABLE ONLY hospitales_occidente.orden_laboratorio_detalle
 
 
 --
+-- TOC entry 4507 (class 2606 OID 44101)
 -- Name: orden_laboratorio_detalle fk_ordendet_orden; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6627,6 +7301,7 @@ ALTER TABLE ONLY hospitales_occidente.orden_laboratorio_detalle
 
 
 --
+-- TOC entry 4448 (class 2606 OID 43538)
 -- Name: paciente_encargado fk_pacenc_paciente; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6635,6 +7310,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente_encargado
 
 
 --
+-- TOC entry 4449 (class 2606 OID 43548)
 -- Name: paciente_encargado fk_pacenc_parentesco; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6643,6 +7319,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente_encargado
 
 
 --
+-- TOC entry 4450 (class 2606 OID 43543)
 -- Name: paciente_encargado fk_pacenc_persona; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6651,6 +7328,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente_encargado
 
 
 --
+-- TOC entry 4446 (class 2606 OID 43519)
 -- Name: paciente fk_paciente_municipio_nac; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6659,6 +7337,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4447 (class 2606 OID 43514)
 -- Name: paciente fk_paciente_persona; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6667,6 +7346,7 @@ ALTER TABLE ONLY hospitales_occidente.paciente
 
 
 --
+-- TOC entry 4554 (class 2606 OID 44647)
 -- Name: pago fk_pago_factura; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6675,6 +7355,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4555 (class 2606 OID 44652)
 -- Name: pago fk_pago_metodo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6683,6 +7364,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4556 (class 2606 OID 44662)
 -- Name: pago fk_pago_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6691,6 +7373,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4557 (class 2606 OID 44657)
 -- Name: pago fk_pago_unidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6699,6 +7382,7 @@ ALTER TABLE ONLY hospitales_occidente.pago
 
 
 --
+-- TOC entry 4445 (class 2606 OID 43490)
 -- Name: persona fk_persona_direccion; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6707,6 +7391,7 @@ ALTER TABLE ONLY hospitales_occidente.persona
 
 
 --
+-- TOC entry 4451 (class 2606 OID 43567)
 -- Name: personal fk_personal_persona; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6715,6 +7400,7 @@ ALTER TABLE ONLY hospitales_occidente.personal
 
 
 --
+-- TOC entry 4438 (class 2606 OID 43299)
 -- Name: procedimiento_quirurgico fk_procedimiento_especialidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6723,6 +7409,7 @@ ALTER TABLE ONLY hospitales_occidente.procedimiento_quirurgico
 
 
 --
+-- TOC entry 4503 (class 2606 OID 44072)
 -- Name: receta_detalle fk_recdet_medicamento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6731,6 +7418,7 @@ ALTER TABLE ONLY hospitales_occidente.receta_detalle
 
 
 --
+-- TOC entry 4504 (class 2606 OID 44067)
 -- Name: receta_detalle fk_recdet_receta; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6739,6 +7427,7 @@ ALTER TABLE ONLY hospitales_occidente.receta_detalle
 
 
 --
+-- TOC entry 4501 (class 2606 OID 44047)
 -- Name: receta fk_receta_cita_proxima; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6747,6 +7436,7 @@ ALTER TABLE ONLY hospitales_occidente.receta
 
 
 --
+-- TOC entry 4502 (class 2606 OID 44042)
 -- Name: receta fk_receta_consulta; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6755,6 +7445,7 @@ ALTER TABLE ONLY hospitales_occidente.receta
 
 
 --
+-- TOC entry 4523 (class 2606 OID 44277)
 -- Name: revision_solicitud fk_revision_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6763,6 +7454,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_solicitud
 
 
 --
+-- TOC entry 4524 (class 2606 OID 44294)
 -- Name: revision_miembro_comite fk_revmiem_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6771,6 +7463,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_miembro_comite
 
 
 --
+-- TOC entry 4525 (class 2606 OID 44289)
 -- Name: revision_miembro_comite fk_revmiem_revision; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6779,6 +7472,7 @@ ALTER TABLE ONLY hospitales_occidente.revision_miembro_comite
 
 
 --
+-- TOC entry 4437 (class 2606 OID 43225)
 -- Name: servicio_medico fk_servicio_tipo_unidad; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6787,6 +7481,7 @@ ALTER TABLE ONLY hospitales_occidente.servicio_medico
 
 
 --
+-- TOC entry 4463 (class 2606 OID 43709)
 -- Name: registro_signos_vitales fk_signos_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6795,6 +7490,7 @@ ALTER TABLE ONLY hospitales_occidente.registro_signos_vitales
 
 
 --
+-- TOC entry 4464 (class 2606 OID 43714)
 -- Name: registro_signos_vitales fk_signos_personal; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6803,6 +7499,7 @@ ALTER TABLE ONLY hospitales_occidente.registro_signos_vitales
 
 
 --
+-- TOC entry 4521 (class 2606 OID 44255)
 -- Name: solicitud_equipo fk_soleq_equipo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6811,6 +7508,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_equipo
 
 
 --
+-- TOC entry 4522 (class 2606 OID 44250)
 -- Name: solicitud_equipo fk_soleq_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6819,6 +7517,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_equipo
 
 
 --
+-- TOC entry 4511 (class 2606 OID 44178)
 -- Name: solicitud_cirugia fk_solicitud_anestesia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6827,6 +7526,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_cirugia
 
 
 --
+-- TOC entry 4512 (class 2606 OID 44173)
 -- Name: solicitud_cirugia fk_solicitud_cirujano; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6835,6 +7535,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_cirugia
 
 
 --
+-- TOC entry 4513 (class 2606 OID 44163)
 -- Name: solicitud_cirugia fk_solicitud_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6843,6 +7544,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_cirugia
 
 
 --
+-- TOC entry 4514 (class 2606 OID 44168)
 -- Name: solicitud_cirugia fk_solicitud_historia; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6851,6 +7553,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_cirugia
 
 
 --
+-- TOC entry 4517 (class 2606 OID 44215)
 -- Name: solicitud_insumo fk_solins_insumo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6859,6 +7562,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_insumo
 
 
 --
+-- TOC entry 4518 (class 2606 OID 44210)
 -- Name: solicitud_insumo fk_solins_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6867,6 +7571,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_insumo
 
 
 --
+-- TOC entry 4519 (class 2606 OID 44235)
 -- Name: solicitud_instrumento fk_solinstr_instrumento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6875,6 +7580,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_instrumento
 
 
 --
+-- TOC entry 4520 (class 2606 OID 44230)
 -- Name: solicitud_instrumento fk_solinstr_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6883,6 +7589,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_instrumento
 
 
 --
+-- TOC entry 4515 (class 2606 OID 44195)
 -- Name: solicitud_procedimiento fk_solproc_procedimiento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6891,6 +7598,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_procedimiento
 
 
 --
+-- TOC entry 4516 (class 2606 OID 44190)
 -- Name: solicitud_procedimiento fk_solproc_solicitud; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6899,6 +7607,7 @@ ALTER TABLE ONLY hospitales_occidente.solicitud_procedimiento
 
 
 --
+-- TOC entry 4546 (class 2606 OID 44539)
 -- Name: tarifa_insumo fk_tarins_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6907,6 +7616,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_insumo
 
 
 --
+-- TOC entry 4547 (class 2606 OID 44544)
 -- Name: tarifa_insumo fk_tarins_insumo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6915,6 +7625,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_insumo
 
 
 --
+-- TOC entry 4544 (class 2606 OID 44520)
 -- Name: tarifa_procedimiento fk_tarproc_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6923,6 +7634,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_procedimiento
 
 
 --
+-- TOC entry 4545 (class 2606 OID 44525)
 -- Name: tarifa_procedimiento fk_tarproc_procedimiento; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6931,6 +7643,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_procedimiento
 
 
 --
+-- TOC entry 4542 (class 2606 OID 44501)
 -- Name: tarifa_servicio fk_tarserv_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6939,6 +7652,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_servicio
 
 
 --
+-- TOC entry 4543 (class 2606 OID 44506)
 -- Name: tarifa_servicio fk_tarserv_servicio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6947,6 +7661,7 @@ ALTER TABLE ONLY hospitales_occidente.tarifa_servicio
 
 
 --
+-- TOC entry 4472 (class 2606 OID 43842)
 -- Name: traslado fk_traslado_encargado; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6955,6 +7670,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4473 (class 2606 OID 43797)
 -- Name: traslado fk_traslado_episodio; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6963,6 +7679,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4474 (class 2606 OID 43822)
 -- Name: traslado fk_traslado_hosp_destino; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6971,6 +7688,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4475 (class 2606 OID 43807)
 -- Name: traslado fk_traslado_hosp_origen; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6979,6 +7697,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4476 (class 2606 OID 43837)
 -- Name: traslado fk_traslado_ingreso_destino; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6987,6 +7706,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4477 (class 2606 OID 43802)
 -- Name: traslado fk_traslado_medico; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -6995,6 +7715,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4478 (class 2606 OID 43832)
 -- Name: traslado fk_traslado_serv_destino; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7003,6 +7724,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4479 (class 2606 OID 43817)
 -- Name: traslado fk_traslado_serv_origen; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7011,6 +7733,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4480 (class 2606 OID 43827)
 -- Name: traslado fk_traslado_tipo_destino; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7019,6 +7742,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4481 (class 2606 OID 43812)
 -- Name: traslado fk_traslado_tipo_origen; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7027,6 +7751,7 @@ ALTER TABLE ONLY hospitales_occidente.traslado
 
 
 --
+-- TOC entry 4441 (class 2606 OID 43418)
 -- Name: unidad_hospital fk_unidad_hospital; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7035,6 +7760,7 @@ ALTER TABLE ONLY hospitales_occidente.unidad_hospital
 
 
 --
+-- TOC entry 4442 (class 2606 OID 43423)
 -- Name: unidad_hospital fk_unidad_tipo; Type: FK CONSTRAINT; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7043,6 +7769,8 @@ ALTER TABLE ONLY hospitales_occidente.unidad_hospital
 
 
 --
+-- TOC entry 4854 (class 0 OID 0)
+-- Dependencies: 7
 -- Name: SCHEMA hospitales_occidente; Type: ACL; Schema: -; Owner: user1
 --
 
@@ -7053,6 +7781,8 @@ GRANT USAGE ON SCHEMA hospitales_occidente TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4855 (class 0 OID 0)
+-- Dependencies: 523
 -- Name: FUNCTION fn_auditoria_personal_medico(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7060,6 +7790,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_auditoria_personal_medico() TO rol
 
 
 --
+-- TOC entry 4856 (class 0 OID 0)
+-- Dependencies: 408
 -- Name: FUNCTION fn_check_coherencia_paciente_consulta(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7067,6 +7799,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_coherencia_paciente_consulta
 
 
 --
+-- TOC entry 4857 (class 0 OID 0)
+-- Dependencies: 485
 -- Name: FUNCTION fn_check_cuota_pago(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7074,6 +7808,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_cuota_pago() TO rol_admin_ho
 
 
 --
+-- TOC entry 4858 (class 0 OID 0)
+-- Dependencies: 498
 -- Name: FUNCTION fn_check_cuotas_factura(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7081,6 +7817,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_cuotas_factura() TO rol_admi
 
 
 --
+-- TOC entry 4859 (class 0 OID 0)
+-- Dependencies: 588
 -- Name: FUNCTION fn_check_fecha_egreso(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7088,6 +7826,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_fecha_egreso() TO rol_admin_
 
 
 --
+-- TOC entry 4860 (class 0 OID 0)
+-- Dependencies: 557
 -- Name: FUNCTION fn_check_limite_quirofanos(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7095,6 +7835,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_limite_quirofanos() TO rol_a
 
 
 --
+-- TOC entry 4861 (class 0 OID 0)
+-- Dependencies: 474
 -- Name: FUNCTION fn_check_persona_fecha_nacimiento(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7102,6 +7844,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_persona_fecha_nacimiento() T
 
 
 --
+-- TOC entry 4862 (class 0 OID 0)
+-- Dependencies: 399
 -- Name: FUNCTION fn_check_rol_equipo_quirurgico(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7109,6 +7853,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_rol_equipo_quirurgico() TO r
 
 
 --
+-- TOC entry 4863 (class 0 OID 0)
+-- Dependencies: 437
 -- Name: FUNCTION fn_check_unidad_hospital_interno(); Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7116,6 +7862,8 @@ GRANT ALL ON FUNCTION hospitales_occidente.fn_check_unidad_hospital_interno() TO
 
 
 --
+-- TOC entry 4864 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: TABLE asignacion_personal; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7126,6 +7874,8 @@ GRANT SELECT ON TABLE hospitales_occidente.asignacion_personal TO rol_caja_factu
 
 
 --
+-- TOC entry 4865 (class 0 OID 0)
+-- Dependencies: 278
 -- Name: SEQUENCE asignacion_personal_id_asignacion_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7135,6 +7885,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.asignacion_personal_id_asignacion_s
 
 
 --
+-- TOC entry 4866 (class 0 OID 0)
+-- Dependencies: 348
 -- Name: TABLE bitacora_auditoria_personal; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7143,6 +7895,8 @@ GRANT SELECT ON TABLE hospitales_occidente.bitacora_auditoria_personal TO rol_au
 
 
 --
+-- TOC entry 4867 (class 0 OID 0)
+-- Dependencies: 347
 -- Name: SEQUENCE bitacora_auditoria_personal_id_auditoria_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7150,6 +7904,8 @@ GRANT ALL ON SEQUENCE hospitales_occidente.bitacora_auditoria_personal_id_audito
 
 
 --
+-- TOC entry 4868 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: TABLE calificacion_hospital; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7160,6 +7916,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.calificacion_hospital T
 
 
 --
+-- TOC entry 4869 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: SEQUENCE calificacion_hospital_id_calificacion_hospital_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7169,6 +7927,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.calificacion_hospital_id_calificaci
 
 
 --
+-- TOC entry 4870 (class 0 OID 0)
+-- Dependencies: 340
 -- Name: TABLE calificacion_personal; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7179,6 +7939,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.calificacion_personal T
 
 
 --
+-- TOC entry 4871 (class 0 OID 0)
+-- Dependencies: 339
 -- Name: SEQUENCE calificacion_personal_id_calificacion_personal_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7188,6 +7950,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.calificacion_personal_id_calificaci
 
 
 --
+-- TOC entry 4872 (class 0 OID 0)
+-- Dependencies: 318
 -- Name: TABLE cirugia; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7198,6 +7962,8 @@ GRANT SELECT ON TABLE hospitales_occidente.cirugia TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4873 (class 0 OID 0)
+-- Dependencies: 327
 -- Name: TABLE cirugia_documento_fase; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7208,6 +7974,8 @@ GRANT SELECT ON TABLE hospitales_occidente.cirugia_documento_fase TO rol_caja_fa
 
 
 --
+-- TOC entry 4874 (class 0 OID 0)
+-- Dependencies: 326
 -- Name: SEQUENCE cirugia_documento_fase_id_documento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7217,6 +7985,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.cirugia_documento_fase_id_documento
 
 
 --
+-- TOC entry 4875 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: TABLE cirugia_equipo_medico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7227,6 +7997,8 @@ GRANT SELECT ON TABLE hospitales_occidente.cirugia_equipo_medico TO rol_caja_fac
 
 
 --
+-- TOC entry 4876 (class 0 OID 0)
+-- Dependencies: 317
 -- Name: SEQUENCE cirugia_id_cirugia_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7236,6 +8008,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.cirugia_id_cirugia_seq TO rol_caja_
 
 
 --
+-- TOC entry 4877 (class 0 OID 0)
+-- Dependencies: 325
 -- Name: TABLE cirugia_verificacion; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7246,6 +8020,8 @@ GRANT SELECT ON TABLE hospitales_occidente.cirugia_verificacion TO rol_caja_fact
 
 
 --
+-- TOC entry 4878 (class 0 OID 0)
+-- Dependencies: 324
 -- Name: SEQUENCE cirugia_verificacion_id_verificacion_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7255,6 +8031,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.cirugia_verificacion_id_verificacio
 
 
 --
+-- TOC entry 4879 (class 0 OID 0)
+-- Dependencies: 296
 -- Name: TABLE cita; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7265,6 +8043,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.cita TO rol_caja_factur
 
 
 --
+-- TOC entry 4880 (class 0 OID 0)
+-- Dependencies: 295
 -- Name: SEQUENCE cita_id_cita_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7274,6 +8054,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.cita_id_cita_seq TO rol_caja_factur
 
 
 --
+-- TOC entry 4881 (class 0 OID 0)
+-- Dependencies: 267
 -- Name: TABLE clinica; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7284,6 +8066,8 @@ GRANT SELECT ON TABLE hospitales_occidente.clinica TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4882 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: SEQUENCE clinica_id_clinica_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7293,6 +8077,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.clinica_id_clinica_seq TO rol_caja_
 
 
 --
+-- TOC entry 4883 (class 0 OID 0)
+-- Dependencies: 321
 -- Name: TABLE consentimiento_informado; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7303,6 +8089,8 @@ GRANT SELECT ON TABLE hospitales_occidente.consentimiento_informado TO rol_caja_
 
 
 --
+-- TOC entry 4884 (class 0 OID 0)
+-- Dependencies: 320
 -- Name: SEQUENCE consentimiento_informado_id_consentimiento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7312,6 +8100,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.consentimiento_informado_id_consent
 
 
 --
+-- TOC entry 4885 (class 0 OID 0)
+-- Dependencies: 298
 -- Name: TABLE consulta; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7322,6 +8112,8 @@ GRANT SELECT ON TABLE hospitales_occidente.consulta TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4886 (class 0 OID 0)
+-- Dependencies: 297
 -- Name: SEQUENCE consulta_id_consulta_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7331,6 +8123,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.consulta_id_consulta_seq TO rol_caj
 
 
 --
+-- TOC entry 4887 (class 0 OID 0)
+-- Dependencies: 294
 -- Name: TABLE consumo_insumo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7341,6 +8135,8 @@ GRANT SELECT ON TABLE hospitales_occidente.consumo_insumo TO rol_caja_facturacio
 
 
 --
+-- TOC entry 4888 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: SEQUENCE consumo_insumo_id_consumo_insumo_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7350,6 +8146,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.consumo_insumo_id_consumo_insumo_se
 
 
 --
+-- TOC entry 4889 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: TABLE departamento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7360,6 +8158,8 @@ GRANT SELECT ON TABLE hospitales_occidente.departamento TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4890 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: SEQUENCE departamento_id_departamento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7369,6 +8169,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.departamento_id_departamento_seq TO
 
 
 --
+-- TOC entry 4891 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: TABLE diagnostico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7379,6 +8181,8 @@ GRANT SELECT ON TABLE hospitales_occidente.diagnostico TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4892 (class 0 OID 0)
+-- Dependencies: 232
 -- Name: SEQUENCE diagnostico_id_diagnostico_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7388,6 +8192,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.diagnostico_id_diagnostico_seq TO r
 
 
 --
+-- TOC entry 4893 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: TABLE direccion; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7398,6 +8204,8 @@ GRANT SELECT ON TABLE hospitales_occidente.direccion TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4894 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: SEQUENCE direccion_id_direccion_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7407,6 +8215,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.direccion_id_direccion_seq TO rol_c
 
 
 --
+-- TOC entry 4895 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: TABLE egreso; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7417,6 +8227,8 @@ GRANT SELECT ON TABLE hospitales_occidente.egreso TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4896 (class 0 OID 0)
+-- Dependencies: 292
 -- Name: TABLE egreso_diagnostico_secundario; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7427,6 +8239,8 @@ GRANT SELECT ON TABLE hospitales_occidente.egreso_diagnostico_secundario TO rol_
 
 
 --
+-- TOC entry 4897 (class 0 OID 0)
+-- Dependencies: 290
 -- Name: SEQUENCE egreso_id_egreso_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7436,6 +8250,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.egreso_id_egreso_seq TO rol_caja_fa
 
 
 --
+-- TOC entry 4903 (class 0 OID 0)
+-- Dependencies: 346
 -- Name: TABLE enfermero; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7446,6 +8262,8 @@ GRANT SELECT ON TABLE hospitales_occidente.enfermero TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4904 (class 0 OID 0)
+-- Dependencies: 283
 -- Name: TABLE episodio; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7456,6 +8274,8 @@ GRANT SELECT ON TABLE hospitales_occidente.episodio TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4905 (class 0 OID 0)
+-- Dependencies: 282
 -- Name: SEQUENCE episodio_id_episodio_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7465,6 +8285,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.episodio_id_episodio_seq TO rol_caj
 
 
 --
+-- TOC entry 4906 (class 0 OID 0)
+-- Dependencies: 255
 -- Name: TABLE equipo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7475,6 +8297,8 @@ GRANT SELECT ON TABLE hospitales_occidente.equipo TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4907 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: SEQUENCE equipo_id_equipo_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7484,6 +8308,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.equipo_id_equipo_seq TO rol_caja_fa
 
 
 --
+-- TOC entry 4908 (class 0 OID 0)
+-- Dependencies: 265
 -- Name: TABLE espacio_atencion; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7494,6 +8320,8 @@ GRANT SELECT ON TABLE hospitales_occidente.espacio_atencion TO rol_caja_facturac
 
 
 --
+-- TOC entry 4909 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: SEQUENCE espacio_atencion_id_espacio_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7503,6 +8331,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.espacio_atencion_id_espacio_seq TO 
 
 
 --
+-- TOC entry 4910 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: TABLE especialidad; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7513,6 +8343,8 @@ GRANT SELECT ON TABLE hospitales_occidente.especialidad TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4911 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: SEQUENCE especialidad_id_especialidad_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7522,6 +8354,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.especialidad_id_especialidad_seq TO
 
 
 --
+-- TOC entry 4912 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: TABLE evaluacion_preanestesica; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7532,6 +8366,8 @@ GRANT SELECT ON TABLE hospitales_occidente.evaluacion_preanestesica TO rol_caja_
 
 
 --
+-- TOC entry 4913 (class 0 OID 0)
+-- Dependencies: 322
 -- Name: SEQUENCE evaluacion_preanestesica_id_evaluacion_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7541,6 +8377,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.evaluacion_preanestesica_id_evaluac
 
 
 --
+-- TOC entry 4914 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: TABLE examen_laboratorio; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7551,6 +8389,8 @@ GRANT SELECT ON TABLE hospitales_occidente.examen_laboratorio TO rol_caja_factur
 
 
 --
+-- TOC entry 4915 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: SEQUENCE examen_laboratorio_id_examen_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7560,6 +8400,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.examen_laboratorio_id_examen_seq TO
 
 
 --
+-- TOC entry 4916 (class 0 OID 0)
+-- Dependencies: 332
 -- Name: TABLE factura; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7570,6 +8412,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.factura TO rol_caja_fac
 
 
 --
+-- TOC entry 4917 (class 0 OID 0)
+-- Dependencies: 334
 -- Name: TABLE factura_detalle; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7580,6 +8424,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.factura_detalle TO rol_
 
 
 --
+-- TOC entry 4918 (class 0 OID 0)
+-- Dependencies: 333
 -- Name: SEQUENCE factura_detalle_id_factura_detalle_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7589,6 +8435,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.factura_detalle_id_factura_detalle_
 
 
 --
+-- TOC entry 4919 (class 0 OID 0)
+-- Dependencies: 331
 -- Name: SEQUENCE factura_id_factura_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7598,6 +8446,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.factura_id_factura_seq TO rol_caja_
 
 
 --
+-- TOC entry 4920 (class 0 OID 0)
+-- Dependencies: 307
 -- Name: TABLE historia_clinica; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7608,6 +8458,8 @@ GRANT SELECT ON TABLE hospitales_occidente.historia_clinica TO rol_caja_facturac
 
 
 --
+-- TOC entry 4921 (class 0 OID 0)
+-- Dependencies: 306
 -- Name: SEQUENCE historia_clinica_id_historia_clinica_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7617,6 +8469,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.historia_clinica_id_historia_clinic
 
 
 --
+-- TOC entry 4922 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: TABLE horario_medico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7627,6 +8481,8 @@ GRANT SELECT ON TABLE hospitales_occidente.horario_medico TO rol_caja_facturacio
 
 
 --
+-- TOC entry 4923 (class 0 OID 0)
+-- Dependencies: 280
 -- Name: SEQUENCE horario_medico_id_horario_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7636,6 +8492,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.horario_medico_id_horario_seq TO ro
 
 
 --
+-- TOC entry 4924 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: TABLE hospital; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7646,6 +8504,8 @@ GRANT SELECT ON TABLE hospitales_occidente.hospital TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4925 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: SEQUENCE hospital_id_hospital_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7655,6 +8515,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.hospital_id_hospital_seq TO rol_caj
 
 
 --
+-- TOC entry 4926 (class 0 OID 0)
+-- Dependencies: 287
 -- Name: TABLE ingreso; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7665,6 +8527,8 @@ GRANT SELECT ON TABLE hospitales_occidente.ingreso TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4927 (class 0 OID 0)
+-- Dependencies: 286
 -- Name: SEQUENCE ingreso_id_ingreso_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7674,6 +8538,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.ingreso_id_ingreso_seq TO rol_caja_
 
 
 --
+-- TOC entry 4928 (class 0 OID 0)
+-- Dependencies: 253
 -- Name: TABLE instrumento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7684,6 +8550,8 @@ GRANT SELECT ON TABLE hospitales_occidente.instrumento TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4929 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: SEQUENCE instrumento_id_instrumento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7693,6 +8561,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.instrumento_id_instrumento_seq TO r
 
 
 --
+-- TOC entry 4930 (class 0 OID 0)
+-- Dependencies: 251
 -- Name: TABLE insumo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7703,6 +8573,8 @@ GRANT SELECT ON TABLE hospitales_occidente.insumo TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4931 (class 0 OID 0)
+-- Dependencies: 250
 -- Name: SEQUENCE insumo_id_insumo_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7712,6 +8584,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.insumo_id_insumo_seq TO rol_caja_fa
 
 
 --
+-- TOC entry 4932 (class 0 OID 0)
+-- Dependencies: 259
 -- Name: TABLE item_verificacion; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7722,6 +8596,8 @@ GRANT SELECT ON TABLE hospitales_occidente.item_verificacion TO rol_caja_factura
 
 
 --
+-- TOC entry 4933 (class 0 OID 0)
+-- Dependencies: 258
 -- Name: SEQUENCE item_verificacion_id_item_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7731,6 +8607,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.item_verificacion_id_item_seq TO ro
 
 
 --
+-- TOC entry 4934 (class 0 OID 0)
+-- Dependencies: 243
 -- Name: TABLE medicamento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7741,6 +8619,8 @@ GRANT SELECT ON TABLE hospitales_occidente.medicamento TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4935 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: SEQUENCE medicamento_id_medicamento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7750,6 +8630,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.medicamento_id_medicamento_seq TO r
 
 
 --
+-- TOC entry 4938 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: TABLE medico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7760,6 +8642,8 @@ GRANT SELECT ON TABLE hospitales_occidente.medico TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4939 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: TABLE medico_especialidad; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7770,6 +8654,8 @@ GRANT SELECT ON TABLE hospitales_occidente.medico_especialidad TO rol_caja_factu
 
 
 --
+-- TOC entry 4940 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: TABLE metodo_pago; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7780,6 +8666,8 @@ GRANT SELECT ON TABLE hospitales_occidente.metodo_pago TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4941 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: SEQUENCE metodo_pago_id_metodo_pago_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7789,6 +8677,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.metodo_pago_id_metodo_pago_seq TO r
 
 
 --
+-- TOC entry 4942 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: TABLE momento_quirurgico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7799,6 +8689,8 @@ GRANT SELECT ON TABLE hospitales_occidente.momento_quirurgico TO rol_caja_factur
 
 
 --
+-- TOC entry 4943 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: SEQUENCE momento_quirurgico_id_momento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7808,6 +8700,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.momento_quirurgico_id_momento_seq T
 
 
 --
+-- TOC entry 4944 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: TABLE municipio; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7818,6 +8712,8 @@ GRANT SELECT ON TABLE hospitales_occidente.municipio TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4945 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: SEQUENCE municipio_id_municipio_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7827,6 +8723,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.municipio_id_municipio_seq TO rol_c
 
 
 --
+-- TOC entry 4946 (class 0 OID 0)
+-- Dependencies: 304
 -- Name: TABLE orden_laboratorio; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7837,6 +8735,8 @@ GRANT SELECT ON TABLE hospitales_occidente.orden_laboratorio TO rol_caja_factura
 
 
 --
+-- TOC entry 4947 (class 0 OID 0)
+-- Dependencies: 305
 -- Name: TABLE orden_laboratorio_detalle; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7847,6 +8747,8 @@ GRANT SELECT ON TABLE hospitales_occidente.orden_laboratorio_detalle TO rol_caja
 
 
 --
+-- TOC entry 4948 (class 0 OID 0)
+-- Dependencies: 303
 -- Name: SEQUENCE orden_laboratorio_id_orden_laboratorio_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7856,6 +8758,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.orden_laboratorio_id_orden_laborato
 
 
 --
+-- TOC entry 4949 (class 0 OID 0)
+-- Dependencies: 271
 -- Name: TABLE paciente; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7866,6 +8770,8 @@ GRANT SELECT ON TABLE hospitales_occidente.paciente TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4950 (class 0 OID 0)
+-- Dependencies: 273
 -- Name: TABLE paciente_encargado; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7876,6 +8782,8 @@ GRANT SELECT ON TABLE hospitales_occidente.paciente_encargado TO rol_caja_factur
 
 
 --
+-- TOC entry 4951 (class 0 OID 0)
+-- Dependencies: 272
 -- Name: SEQUENCE paciente_encargado_id_paciente_encargado_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7885,6 +8793,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.paciente_encargado_id_paciente_enca
 
 
 --
+-- TOC entry 4952 (class 0 OID 0)
+-- Dependencies: 270
 -- Name: SEQUENCE paciente_id_paciente_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7894,6 +8804,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.paciente_id_paciente_seq TO rol_caj
 
 
 --
+-- TOC entry 4953 (class 0 OID 0)
+-- Dependencies: 336
 -- Name: TABLE pago; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7904,6 +8816,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE hospitales_occidente.pago TO rol_caja_factur
 
 
 --
+-- TOC entry 4954 (class 0 OID 0)
+-- Dependencies: 335
 -- Name: SEQUENCE pago_id_pago_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7913,6 +8827,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.pago_id_pago_seq TO rol_caja_factur
 
 
 --
+-- TOC entry 4955 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: TABLE parentesco; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7923,6 +8839,8 @@ GRANT SELECT ON TABLE hospitales_occidente.parentesco TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4956 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: SEQUENCE parentesco_id_parentesco_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7932,6 +8850,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.parentesco_id_parentesco_seq TO rol
 
 
 --
+-- TOC entry 4957 (class 0 OID 0)
+-- Dependencies: 269
 -- Name: TABLE persona; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7942,6 +8862,8 @@ GRANT SELECT ON TABLE hospitales_occidente.persona TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4958 (class 0 OID 0)
+-- Dependencies: 268
 -- Name: SEQUENCE persona_id_persona_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7951,6 +8873,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.persona_id_persona_seq TO rol_caja_
 
 
 --
+-- TOC entry 4961 (class 0 OID 0)
+-- Dependencies: 275
 -- Name: TABLE personal; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7961,6 +8885,8 @@ GRANT SELECT ON TABLE hospitales_occidente.personal TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4962 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: SEQUENCE personal_id_personal_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7970,6 +8896,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.personal_id_personal_seq TO rol_caj
 
 
 --
+-- TOC entry 4963 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: TABLE procedimiento_quirurgico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7980,6 +8908,8 @@ GRANT SELECT ON TABLE hospitales_occidente.procedimiento_quirurgico TO rol_caja_
 
 
 --
+-- TOC entry 4964 (class 0 OID 0)
+-- Dependencies: 248
 -- Name: SEQUENCE procedimiento_quirurgico_id_procedimiento_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7989,6 +8919,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.procedimiento_quirurgico_id_procedi
 
 
 --
+-- TOC entry 4965 (class 0 OID 0)
+-- Dependencies: 300
 -- Name: TABLE receta; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -7999,6 +8931,8 @@ GRANT SELECT ON TABLE hospitales_occidente.receta TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4966 (class 0 OID 0)
+-- Dependencies: 302
 -- Name: TABLE receta_detalle; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8009,6 +8943,8 @@ GRANT SELECT ON TABLE hospitales_occidente.receta_detalle TO rol_caja_facturacio
 
 
 --
+-- TOC entry 4967 (class 0 OID 0)
+-- Dependencies: 301
 -- Name: SEQUENCE receta_detalle_id_receta_detalle_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8018,6 +8954,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.receta_detalle_id_receta_detalle_se
 
 
 --
+-- TOC entry 4968 (class 0 OID 0)
+-- Dependencies: 299
 -- Name: SEQUENCE receta_id_receta_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8027,6 +8965,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.receta_id_receta_seq TO rol_caja_fa
 
 
 --
+-- TOC entry 4969 (class 0 OID 0)
+-- Dependencies: 285
 -- Name: TABLE registro_signos_vitales; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8037,6 +8977,8 @@ GRANT SELECT ON TABLE hospitales_occidente.registro_signos_vitales TO rol_caja_f
 
 
 --
+-- TOC entry 4970 (class 0 OID 0)
+-- Dependencies: 284
 -- Name: SEQUENCE registro_signos_vitales_id_signos_vitales_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8046,6 +8988,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.registro_signos_vitales_id_signos_v
 
 
 --
+-- TOC entry 4971 (class 0 OID 0)
+-- Dependencies: 316
 -- Name: TABLE revision_miembro_comite; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8056,6 +9000,8 @@ GRANT SELECT ON TABLE hospitales_occidente.revision_miembro_comite TO rol_caja_f
 
 
 --
+-- TOC entry 4972 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: TABLE revision_solicitud; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8066,6 +9012,8 @@ GRANT SELECT ON TABLE hospitales_occidente.revision_solicitud TO rol_caja_factur
 
 
 --
+-- TOC entry 4973 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: SEQUENCE revision_solicitud_id_revision_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8075,6 +9023,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.revision_solicitud_id_revision_seq 
 
 
 --
+-- TOC entry 4974 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: TABLE servicio_medico; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8085,6 +9035,8 @@ GRANT SELECT ON TABLE hospitales_occidente.servicio_medico TO rol_caja_facturaci
 
 
 --
+-- TOC entry 4975 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: SEQUENCE servicio_medico_id_servicio_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8094,6 +9046,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.servicio_medico_id_servicio_seq TO 
 
 
 --
+-- TOC entry 4976 (class 0 OID 0)
+-- Dependencies: 309
 -- Name: TABLE solicitud_cirugia; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8104,6 +9058,8 @@ GRANT SELECT ON TABLE hospitales_occidente.solicitud_cirugia TO rol_caja_factura
 
 
 --
+-- TOC entry 4977 (class 0 OID 0)
+-- Dependencies: 308
 -- Name: SEQUENCE solicitud_cirugia_id_solicitud_cirugia_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8113,6 +9069,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.solicitud_cirugia_id_solicitud_ciru
 
 
 --
+-- TOC entry 4978 (class 0 OID 0)
+-- Dependencies: 313
 -- Name: TABLE solicitud_equipo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8123,6 +9081,8 @@ GRANT SELECT ON TABLE hospitales_occidente.solicitud_equipo TO rol_caja_facturac
 
 
 --
+-- TOC entry 4979 (class 0 OID 0)
+-- Dependencies: 312
 -- Name: TABLE solicitud_instrumento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8133,6 +9093,8 @@ GRANT SELECT ON TABLE hospitales_occidente.solicitud_instrumento TO rol_caja_fac
 
 
 --
+-- TOC entry 4980 (class 0 OID 0)
+-- Dependencies: 311
 -- Name: TABLE solicitud_insumo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8143,6 +9105,8 @@ GRANT SELECT ON TABLE hospitales_occidente.solicitud_insumo TO rol_caja_facturac
 
 
 --
+-- TOC entry 4981 (class 0 OID 0)
+-- Dependencies: 310
 -- Name: TABLE solicitud_procedimiento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8153,6 +9117,8 @@ GRANT SELECT ON TABLE hospitales_occidente.solicitud_procedimiento TO rol_caja_f
 
 
 --
+-- TOC entry 4982 (class 0 OID 0)
+-- Dependencies: 330
 -- Name: TABLE tarifa_insumo; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8163,6 +9129,8 @@ GRANT SELECT ON TABLE hospitales_occidente.tarifa_insumo TO rol_caja_facturacion
 
 
 --
+-- TOC entry 4983 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: TABLE tarifa_procedimiento; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8173,6 +9141,8 @@ GRANT SELECT ON TABLE hospitales_occidente.tarifa_procedimiento TO rol_caja_fact
 
 
 --
+-- TOC entry 4984 (class 0 OID 0)
+-- Dependencies: 328
 -- Name: TABLE tarifa_servicio; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8183,6 +9153,8 @@ GRANT SELECT ON TABLE hospitales_occidente.tarifa_servicio TO rol_caja_facturaci
 
 
 --
+-- TOC entry 4985 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: TABLE tipo_anestesia; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8193,6 +9165,8 @@ GRANT SELECT ON TABLE hospitales_occidente.tipo_anestesia TO rol_caja_facturacio
 
 
 --
+-- TOC entry 4986 (class 0 OID 0)
+-- Dependencies: 246
 -- Name: SEQUENCE tipo_anestesia_id_tipo_anestesia_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8202,6 +9176,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.tipo_anestesia_id_tipo_anestesia_se
 
 
 --
+-- TOC entry 4987 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: TABLE tipo_unidad; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8212,6 +9188,8 @@ GRANT SELECT ON TABLE hospitales_occidente.tipo_unidad TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4988 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: SEQUENCE tipo_unidad_id_tipo_unidad_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8221,6 +9199,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.tipo_unidad_id_tipo_unidad_seq TO r
 
 
 --
+-- TOC entry 4989 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: TABLE traslado; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8231,6 +9211,8 @@ GRANT SELECT ON TABLE hospitales_occidente.traslado TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4990 (class 0 OID 0)
+-- Dependencies: 288
 -- Name: SEQUENCE traslado_id_traslado_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8240,6 +9222,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.traslado_id_traslado_seq TO rol_caj
 
 
 --
+-- TOC entry 4991 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: TABLE turno; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8250,6 +9234,8 @@ GRANT SELECT ON TABLE hospitales_occidente.turno TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 4992 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: SEQUENCE turno_id_turno_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8259,6 +9245,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.turno_id_turno_seq TO rol_caja_fact
 
 
 --
+-- TOC entry 4993 (class 0 OID 0)
+-- Dependencies: 263
 -- Name: TABLE unidad_hospital; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8269,6 +9257,8 @@ GRANT SELECT ON TABLE hospitales_occidente.unidad_hospital TO rol_caja_facturaci
 
 
 --
+-- TOC entry 4994 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: SEQUENCE unidad_hospital_id_unidad_hospital_seq; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8278,6 +9268,8 @@ GRANT USAGE ON SEQUENCE hospitales_occidente.unidad_hospital_id_unidad_hospital_
 
 
 --
+-- TOC entry 4995 (class 0 OID 0)
+-- Dependencies: 345
 -- Name: TABLE vw_calificacion_resumen_hospital; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8288,6 +9280,8 @@ GRANT SELECT ON TABLE hospitales_occidente.vw_calificacion_resumen_hospital TO r
 
 
 --
+-- TOC entry 4996 (class 0 OID 0)
+-- Dependencies: 344
 -- Name: TABLE vw_cirugias_rechazadas; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8298,6 +9292,8 @@ GRANT SELECT ON TABLE hospitales_occidente.vw_cirugias_rechazadas TO rol_caja_fa
 
 
 --
+-- TOC entry 4997 (class 0 OID 0)
+-- Dependencies: 342
 -- Name: TABLE vw_egreso_dias; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8308,6 +9304,8 @@ GRANT SELECT ON TABLE hospitales_occidente.vw_egreso_dias TO rol_caja_facturacio
 
 
 --
+-- TOC entry 4998 (class 0 OID 0)
+-- Dependencies: 343
 -- Name: TABLE vw_factura_resumen; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8318,6 +9316,8 @@ GRANT SELECT ON TABLE hospitales_occidente.vw_factura_resumen TO rol_caja_factur
 
 
 --
+-- TOC entry 4999 (class 0 OID 0)
+-- Dependencies: 341
 -- Name: TABLE vw_paciente; Type: ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8328,6 +9328,7 @@ GRANT SELECT ON TABLE hospitales_occidente.vw_paciente TO rol_caja_facturacion;
 
 
 --
+-- TOC entry 2719 (class 826 OID 44821)
 -- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8335,6 +9336,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE user1 IN SCHEMA hospitales_occidente GRANT ALL
 
 
 --
+-- TOC entry 2720 (class 826 OID 44822)
 -- Name: DEFAULT PRIVILEGES FOR FUNCTIONS; Type: DEFAULT ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8342,6 +9344,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE user1 IN SCHEMA hospitales_occidente GRANT ALL
 
 
 --
+-- TOC entry 2721 (class 826 OID 44820)
 -- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: hospitales_occidente; Owner: user1
 --
 
@@ -8349,9 +9352,11 @@ ALTER DEFAULT PRIVILEGES FOR ROLE user1 IN SCHEMA hospitales_occidente GRANT ALL
 ALTER DEFAULT PRIVILEGES FOR ROLE user1 IN SCHEMA hospitales_occidente GRANT SELECT ON TABLES TO rol_auditor_consulta;
 
 
+-- Completed on 2026-10-24 06:38:19 UTC
+
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict CbFmpxt1BLjiUOqcwwLhc5a8i1lazSpgQEscqoMIltAWtCV5DPb0F4QJzMus8Ub
+\unrestrict LtjAf8yJZcDdrlqqs15kFIdJzIAAbpjLP76d7g6Kl43LxRmaj46UMAQ8A8idcMI
 

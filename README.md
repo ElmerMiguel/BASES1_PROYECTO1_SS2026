@@ -129,15 +129,16 @@ La Fase 2 expande el sistema hospitalario mediante una migracion incremental 100
 ```text
 proyecto-2/
 ├── backup/
-│   └── hospital_occidente_fase2.sql      # Respaldo completo generado con pg_dump
+│   ├── hospital_occidente_fase2.dump     # Respaldo binario comprimido (pg_dump -F c)
+│   └── hospital_occidente_fase2.sql      # Respaldo plano SQL generado con pg_dump
 ├── documentacion/
 │   ├── documentacion_proyecto2.pdf       # Reporte maestro compilado (14 paginas)
 │   └── docuLatex/                        # Fuentes LaTeX reproducibles e imagenes
 │       ├── documentacion_fase2.tex
 │       └── imagenes/
 ├── modelo/
-│   ├── diagrama_barker_fase2.drawio      # Diagrama Draw.io extendido (Fase 2)
-│   ├── diagrama_barker_fase2.xml         # Fuente mxGraphModel en XML
+│   ├── barker_por_modulo.drawio          # Modelo multi-pagina por modulo (M1-M8) y General
+│   ├── diagrama_barker_HOSPITAL.drawio   # Diagrama general extendido oficial (Fase 2)
 │   └── imagenes/                         # Exportaciones PNG en alta resolucion
 │       ├── modelo_completo_fase2.png
 │       └── modulo3_personal_jerarquia_fase2.png
@@ -197,7 +198,12 @@ npm start
 ### Restauracion del Respaldo de Base de Datos de Fase 2
 
 ```bash
+# Opcion A: Restaurar desde archivo plano SQL (.sql)
 docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/backup/hospital_occidente_fase2.sql
+
+# Opcion B: Restaurar desde volcado binario custom (.dump) con pg_restore
+docker exec -i postgresql psql -U user1 -d hospital_occidente -c "CREATE EXTENSION IF NOT EXISTS btree_gist;"
+docker exec -i postgresql pg_restore -U user1 -d hospital_occidente -v < proyecto-2/backup/hospital_occidente_fase2.dump
 ```
 
 ### Compilacion de Documentacion LaTeX (Fase 2)

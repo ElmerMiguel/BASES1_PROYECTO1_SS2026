@@ -83,7 +83,9 @@ Para extender la entidad \texttt{personal} e incorporar a los enfermeros respeta
 Para soportar líneas de mando dinámicas sin límite arbitrario de niveles:
 \begin{itemize}
 	\item Se agregó en \texttt{medico} la columna \texttt{id\_superior INTEGER NULL}.
-	\item Se estableció la restricción \texttt{CHECK (id\_superior IS NULL OR id\_superior <> id\_personal)} para prohibir la auto-supervisión directa.
+	\item Se estableció la restricción de integridad:\\
+	\texttt{CHECK (id\_superior IS NULL OR id\_superior <> id\_personal)}\\
+	para prohibir la auto-supervisión directa.
 	\item \textbf{Acción Referencial:} Se definió \texttt{ON DELETE SET NULL ON UPDATE CASCADE}. Si un director médico o jefe de servicio es removido del sistema, sus subordinados quedan temporalmente sin superior directo (\texttt{NULL}) en lugar de eliminarse del hospital.
 \end{itemize}
 
@@ -249,7 +251,7 @@ Se contrastó la Variante A (funciones analíticas \texttt{RANK() OVER}) contra 
 \begin{table}[H]
 \centering
 \small
-\begin{tabular}{|l|c|c|}
+\begin{tabularx}{\linewidth}{|l|X|X|}
 \hline
 \textbf{Métrica de Ejecución} & \textbf{Variante A (Window Functions)} & \textbf{Variante B (Subconsultas Correlacionadas)} \\
 \hline
@@ -258,9 +260,9 @@ Se contrastó la Variante A (funciones analíticas \texttt{RANK() OVER}) contra 
 \textbf{Costo Total Estimado} & \textbf{87.90} & \textbf{701.70} (\textasciitilde{}8 veces mayor) \\
 \textbf{Tiempo Real de Ejecución} & \textbf{0.092 ms} & \textbf{0.142 ms} \\
 \textbf{Accesos a Buffers (Shared Hit)} & 8 bloques & 8 bloques + 16 llamadas a subplanes \\
-\textbf{Complejidad Computacional} & $O(N \log N)$ (Sort + Single Scan) & $O(N^2)$ (Subconsultas correlacionadas $N \times M$) \\
+\textbf{Complejidad Computacional} & $O(N \log N)$ (Sort + Single Scan) & $O(N^2)$ (Subconsultas $N \times M$) \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Justificación Técnica del Optimizador de PostgreSQL}
@@ -306,7 +308,7 @@ Ambas consultas arrojaron de forma matemáticamente idéntica a los siguientes 3
 \subsection{Diagnóstico de Violaciones a Formas Normales}
 \begin{itemize}
 	\item \textbf{1FN (No Atomicidad y Grupos Repetitivos):} Presencia de atributos numerados (\texttt{Nombre\_insumo\_1, Cantidad\_insumo\_1, Nombre\_insumo\_2, Cantidad\_insumo\_2}). Impone un límite artificial de 2 insumos y genera redundancia de nulos.
-	\item \textbf{2FN (Dependencias Parciales):} Atributos de catálogo como \texttt{Especialidad\_cirujano} y \texttt{Descripcion\_diagnostico} dependen únicamente de identificadores secundarios y no de la clave del acto quirúrgico.
+	\item \textbf{2FN (Dependencias Parciales):} Atributos de catálogo como \texttt{Especialidad\_cirujano} y \texttt{Descripcion\_diagnostico} dependen únicamente de identificadores secundarios y no de la clave primaria del acto quirúrgico.
 	\item \textbf{3FN (Dependencias Transitivas):} Existen dependencias funcionales entre atributos no primos:
 	\begin{itemize}
 		\item $Id\_cirugia \to Id\_cirujano \to (Nombre\_cirujano, Especialidad\_cirujano)$
