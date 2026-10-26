@@ -117,3 +117,100 @@ cd documentacion/docuLatex
 pdflatex -interaction=nonstopmode documentacion.tex
 pdflatex -interaction=nonstopmode documentacion.tex
 ```
+
+---
+
+## 6. FASE 2: EXTENSION NO DESTRUCTIVA, AUDITORIA, ANALISIS RELACIONAL Y TYPEORM
+
+La Fase 2 expande el sistema hospitalario mediante una migracion incremental 100% no destructiva (Zero-Downtime Migration), incorporando jerarquia medica recursiva, subtipo de enfermeros (TPT), auditoria granular con triggers PL/pgSQL, resolucion analitica de 20 objetivos de negocio y capa ORM en Node.js/TypeScript.
+
+### Estructura de la Carpeta `proyecto-2/`
+
+```text
+proyecto-2/
+├── backup/
+│   ├── hospital_occidente_fase2.dump     # Respaldo binario comprimido (pg_dump -F c)
+│   └── hospital_occidente_fase2.sql      # Respaldo plano SQL generado con pg_dump
+├── documentacion/
+│   ├── documentacion_proyecto2.pdf       # Reporte maestro compilado (14 paginas)
+│   └── docuLatex/                        # Fuentes LaTeX reproducibles e imagenes
+│       ├── documentacion_fase2.tex
+│       └── imagenes/
+├── modelo/
+│   ├── barker_por_modulo.drawio          # Modelo multi-pagina por modulo (M1-M8) y General
+│   ├── diagrama_barker_HOSPITAL.drawio   # Diagrama general extendido oficial (Fase 2)
+│   └── imagenes/                         # Exportaciones PNG en alta resolucion
+│       ├── modelo_completo_fase2.png
+│       └── modulo3_personal_jerarquia_fase2.png
+├── orm/                                  # Aplicacion TypeORM con TypeScript
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── comparacion.md                    # Tabla comparativa y logs oficiales TypeORM
+│   └── src/
+│       ├── config/data-source.ts
+│       ├── entities/
+│       ├── queries/
+│       └── index.ts
+└── sql/
+    ├── ddl/
+    │   └── 01_migracion_extension_fase2.sql
+    ├── auditoria/
+    │   ├── 01_bitacora_auditoria.sql
+    │   ├── 02_triggers_auditoria.sql
+    │   └── 03_demostracion_pruebas.sql
+    ├── dml/
+    │   └── 01_ampliacion_datos_fase2.sql
+    └── consultas/
+        ├── 01_inteligencia_negocio_1_al_14.sql
+        ├── 02_jerarquias_rendimiento_16_y_17.sql
+        ├── 03_division_relacional_18.sql
+        └── 04_analisis_normalizacion_19.sql
+```
+
+### Ejecucion de Scripts SQL de Fase 2 en Docker
+
+```bash
+# 1. Aplicar DDL de migracion (personal, enfermero, medico recursivo)
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/ddl/01_migracion_extension_fase2.sql
+
+# 2. Configurar auditoria PL/pgSQL (bitacora y triggers)
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/auditoria/01_bitacora_auditoria.sql
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/auditoria/02_triggers_auditoria.sql
+
+# 3. Cargar ampliacion de datos DML (4 niveles jerarquicos, enfermeros, episodios 4 unidades)
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/dml/01_ampliacion_datos_fase2.sql
+
+# 4. Ejecutar consultas analiticas (Objetivos 1 al 20)
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/consultas/01_inteligencia_negocio_1_al_14.sql
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/consultas/02_jerarquias_rendimiento_16_y_17.sql
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/consultas/03_division_relacional_18.sql
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/sql/consultas/04_analisis_normalizacion_19.sql
+```
+
+### Ejecucion de la Aplicacion TypeORM (Node.js)
+
+```bash
+cd proyecto-2/orm
+npm install
+npm start
+```
+
+### Restauracion del Respaldo de Base de Datos de Fase 2
+
+```bash
+# Opcion A: Restaurar desde archivo plano SQL (.sql)
+docker exec -i postgresql psql -U user1 -d hospital_occidente < proyecto-2/backup/hospital_occidente_fase2.sql
+
+# Opcion B: Restaurar desde volcado binario custom (.dump) con pg_restore
+docker exec -i postgresql psql -U user1 -d hospital_occidente -c "CREATE EXTENSION IF NOT EXISTS btree_gist;"
+docker exec -i postgresql pg_restore -U user1 -d hospital_occidente -v < proyecto-2/backup/hospital_occidente_fase2.dump
+```
+
+### Compilacion de Documentacion LaTeX (Fase 2)
+
+```bash
+cd proyecto-2/documentacion/docuLatex
+pdflatex -interaction=nonstopmode documentacion_fase2.tex
+pdflatex -interaction=nonstopmode documentacion_fase2.tex
+```
+
