@@ -160,13 +160,21 @@ ON CONFLICT (id_personal) DO NOTHING;
 
 
 -- ============================================================================
--- 5. ACTUALIZACIÓN DE CONTROL DE ACCESO (DCL)
---    Propósito: Asegurar que los roles de auditoría, médicos y caja puedan
---               consultar la nueva tabla enfermero.
+-- 5. ACTUALIZACIÓN DE CONTROL DE ACCESO (DCL) Y ENTORNO DE CONEXIÓN
+--    Propósito: Asegurar que los roles institucionales tengan permisos sobre
+--               la nueva entidad enfermero, soporte administrativo y search_path
+--               predeterminado para conexiones directas desde DBeaver/CLI.
 -- ============================================================================
 
 DO $$
+DECLARE
+    v_roles TEXT[] := ARRAY[
+        'rol_admin_hospital', 'rol_auditor_consulta', 'rol_medico_asistencial', 'rol_caja_facturacion',
+        'usr_admin_occidente', 'usr_auditor_occidente', 'usr_medico_occidente', 'usr_caja_occidente'
+    ];
+    v_role TEXT;
 BEGIN
+    -- 1. Permisos sobre la nueva tabla subtipo enfermero
     IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'rol_auditor_consulta') THEN
         GRANT SELECT ON TABLE enfermero TO rol_auditor_consulta;
     END IF;
@@ -176,6 +184,21 @@ BEGIN
     IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'rol_caja_facturacion') THEN
         GRANT SELECT ON TABLE enfermero TO rol_caja_facturacion;
     END IF;
+
+    -- 2. Privilegio CREATE en la base de datos para administracion (soporte esquemas analiticos)
+    IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'rol_admin_hospital') THEN
+        EXECUTE format('GRANT CREATE ON DATABASE %I TO rol_admin_hospital', current_database());
+    END IF;
+
+    -- 3. Asignacion automatica de search_path a roles y usuarios institucionales
+    FOREACH v_role IN ARRAY v_roles LOOP
+        IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = v_role) THEN
+            EXECUTE format('ALTER ROLE %I SET search_path TO hospitales_occidente, public', v_role);
+        END IF;
+    END LOOP;
+
+    -- 4. Asignacion predeterminada de search_path a la base de datos actual
+    EXECUTE format('ALTER DATABASE %I SET search_path TO hospitales_occidente, public', current_database());
 END $$;
 
 COMMIT;
