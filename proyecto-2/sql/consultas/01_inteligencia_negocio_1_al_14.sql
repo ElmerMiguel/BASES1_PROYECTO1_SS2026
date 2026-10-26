@@ -1,10 +1,10 @@
 SET search_path TO hospitales_occidente, public;
 SET timezone TO 'America/Guatemala';
 
--- ============================================================================
+
 -- OBJETIVO 01: Top 3 hospitales con mayor demanda en consulta externa
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 WITH demanda AS (
     SELECT 
         h.id_hospital,
@@ -32,9 +32,9 @@ ORDER BY demanda_total DESC
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 02: 5 medicos de consulta externa con menor nota (ranking 1 al 5)
--- ============================================================================
+
 SELECT 
     m.id_personal AS id_medico,
     p.nombres || ' ' || p.apellidos AS nombre_medico,
@@ -54,10 +54,10 @@ ORDER BY calificacion_promedio ASC, numero_consultas ASC
 LIMIT 5;
 
 
--- ============================================================================
+
 -- OBJETIVO 03: 5 mejores medicos de emergencias en un lapso de tiempo
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 WITH turnos_calc AS (
     SELECT 
         ap.id_personal AS id_medico,
@@ -108,10 +108,10 @@ ORDER BY egresos_vivos_consentimiento DESC, horas_laboradas DESC
 LIMIT 5;
 
 
--- ============================================================================
+
 -- OBJETIVO 04: 3 hospitales con mayor eficiencia en emergencias
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 WITH camas_emergencias AS (
     SELECT 
         uh.id_hospital,
@@ -150,10 +150,10 @@ ORDER BY camas_disponibles DESC, promedio_triage_espera ASC
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 05: 3 cirujanos mas eficientes (menor uso de recursos y mas cirugias aprobadas)
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 WITH agendamientos_aprobados AS (
     SELECT 
         sc.id_cirujano,
@@ -196,10 +196,10 @@ ORDER BY aa.solicitudes_aprobadas DESC, recursos_totales ASC
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 06: 3 tipos de cirugia con mayores ingresos monetarios (sin complicaciones y exito)
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 SELECT 
     pq.id_procedimiento,
     pq.nombre AS tipo_cirugia,
@@ -224,10 +224,10 @@ ORDER BY ingresos_monetarios DESC
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 07: 3 hospitales con mayores ingresos en hospitalizacion
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 SELECT 
     h.id_hospital,
     h.nombre AS hospital,
@@ -246,9 +246,9 @@ ORDER BY ingresos_hospitalizacion DESC, camillas_asignadas ASC, costo_promedio_s
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 08: Total de pagos por metodo (efectivo, credito, debito) por hospital y unidad
--- ============================================================================
+
 SELECT 
     h.id_hospital,
     h.nombre AS hospital,
@@ -267,10 +267,10 @@ GROUP BY h.id_hospital, h.nombre, tu.id_tipo_unidad, tu.nombre
 ORDER BY h.id_hospital, tu.id_tipo_unidad;
 
 
--- ============================================================================
+
 -- OBJETIVO 09: 3 hospitales con mayores ingresos monetarios por visita
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 WITH ingresos_hosp AS (
     SELECT 
         uh.id_hospital,
@@ -318,9 +318,9 @@ ORDER BY ingreso_promedio_por_visita DESC NULLS LAST
 LIMIT 3;
 
 
--- ============================================================================
+
 -- OBJETIVO 10: Fecha con mayor cantidad de decesos por hospital y unidad critica
--- ============================================================================
+
 WITH decesos_diarios AS (
     SELECT 
         uh.id_hospital,
@@ -350,10 +350,10 @@ WHERE dd.rank_hospital = 1
 ORDER BY dd.total_decesos DESC, h.id_hospital;
 
 
--- ============================================================================
+
 -- OBJETIVO 11: Ingresos monetarios totales de cada hospital en un lapso de tiempo
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 SELECT 
     h.id_hospital,
     h.nombre AS hospital,
@@ -367,9 +367,9 @@ GROUP BY h.id_hospital, h.nombre
 ORDER BY total_ingresos_monetarios DESC;
 
 
--- ============================================================================
+
 -- OBJETIVO 12: Promedio de edad y distribucion por sexo en emergencias por turno
--- ============================================================================
+
 SELECT 
     h.id_hospital,
     h.nombre AS hospital,
@@ -392,9 +392,9 @@ GROUP BY h.id_hospital, h.nombre, t.nombre
 ORDER BY h.id_hospital, turno;
 
 
--- ============================================================================
+
 -- OBJETIVO 13: Reporte de citas en consulta externa agrupado por sexo y especialidad
--- ============================================================================
+
 SELECT 
     ci.fecha_hora::DATE AS fecha_cita,
     h.nombre AS hospital,
@@ -416,10 +416,10 @@ GROUP BY ci.fecha_hora::DATE, h.nombre, per.sexo, esp.nombre
 ORDER BY fecha_cita ASC, hospital ASC, especialidad_medica ASC;
 
 
--- ============================================================================
+
 -- OBJETIVO 14: Promedio de cuotas de financiamiento por unidad medica en cada hospital
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
+
 SELECT 
     h.id_hospital,
     h.nombre AS hospital,

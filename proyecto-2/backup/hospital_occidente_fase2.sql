@@ -8856,9 +8856,9 @@ ALTER DEFAULT PRIVILEGES FOR ROLE user1 IN SCHEMA normalizacion_cirugia GRANT SE
 \unrestrict c0BWJ1Sj1M97iqjgCHrUiN6P5y6JpSPc2hcHCXKnqyrOfTduUyevmYIpVoaJtuY
 
 
--- ============================================================================
+
 -- AJUSTES DE AMBIENTE INSTITUCIONAL Y SEARCH_PATH POR DEFECTO
--- ============================================================================
+
 ALTER DATABASE hospital_occidente SET search_path TO hospitales_occidente, public;
 ALTER ROLE rol_admin_hospital SET search_path TO hospitales_occidente, public;
 ALTER ROLE rol_auditor_consulta SET search_path TO hospitales_occidente, public;

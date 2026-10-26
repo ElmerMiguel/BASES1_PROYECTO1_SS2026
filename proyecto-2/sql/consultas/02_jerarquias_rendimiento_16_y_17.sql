@@ -1,10 +1,10 @@
 SET search_path TO hospitales_occidente, public;
 SET timezone TO 'America/Guatemala';
 
--- ============================================================================
+
 -- OBJETIVO 16: Cadena de supervision medica recursiva
--- Parametros: id_medico (ejemplo: 7)
--- ============================================================================
+-- Parametros: id_medico
+
 WITH RECURSIVE cadena_supervision AS (
     SELECT 
         m.id_personal AS id_medico,
@@ -43,11 +43,11 @@ FROM cadena_supervision
 ORDER BY nivel_jerarquico ASC;
 
 
--- ============================================================================
--- OBJETIVO 17: Ranking dual de calificaciones (hospital y red general)
--- ============================================================================
 
--- Variante A: Funciones de ventana (Window Functions)
+-- OBJETIVO 17: Ranking dual de calificaciones (hospital y red general)
+
+
+-- a: Funciones de ventana
 SELECT 
     m.id_personal,
     p.nombres || ' ' || p.apellidos AS nombre_medico,
@@ -73,7 +73,7 @@ GROUP BY m.id_personal, p.nombres, p.apellidos, m.no_colegiado, h.id_hospital, h
 ORDER BY calificacion_promedio ASC;
 
 
--- Variante B: Subconsultas correlacionadas (sin funciones de ventana)
+-- b: Subconsultas correlacionadas
 WITH promedios AS (
     SELECT 
         m.id_personal,
@@ -114,9 +114,9 @@ FROM promedios p1
 ORDER BY p1.calificacion_promedio ASC;
 
 
--- ============================================================================
+
 -- OBJETIVO 17: Evaluacion de planes de ejecucion con EXPLAIN ANALYZE
--- ============================================================================
+
 
 -- Plan Variante A (Funciones de ventana)
 EXPLAIN (ANALYZE, BUFFERS, COSTS, VERBOSE, TIMING)

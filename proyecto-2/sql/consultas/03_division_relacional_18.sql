@@ -1,16 +1,16 @@
 SET search_path TO hospitales_occidente, public;
 SET timezone TO 'America/Guatemala';
 
--- ============================================================================
+
 -- OBJETIVO 18: Division relacional - Pacientes fieles
 -- Pacientes con atencion en todas las unidades medicas oficiales:
 -- 'Consulta externa', 'Emergencias', 'Cirugia', 'Hospitalizacion'
 -- Parametros: lapso de tiempo ('2026-01-01' a '2026-12-31')
--- ============================================================================
 
--- ----------------------------------------------------------------------------
+
+
 -- Enfoque 1: Agregacion relacional con conteo exacto
--- ----------------------------------------------------------------------------
+
 WITH atenciones AS (
     SELECT 
         ep.id_paciente,
@@ -63,10 +63,10 @@ HAVING COUNT(DISTINCT a.nombre_unidad) = (
 ORDER BY p.id_paciente ASC;
 
 
--- ----------------------------------------------------------------------------
+
 -- Enfoque 2: Doble negacion con algebra relacional (NOT EXISTS / EXCEPT)
 -- No existe unidad medica oficial requerida que no haya atendido al paciente
--- ----------------------------------------------------------------------------
+
 WITH atenciones AS (
     SELECT 
         ep.id_paciente,

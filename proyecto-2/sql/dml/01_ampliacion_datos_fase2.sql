@@ -3,9 +3,9 @@ SET timezone TO 'America/Guatemala';
 
 BEGIN;
 
--- ============================================================================
+
 -- 1. PERSONAS NUEVAS (ID 41 AL 75)
--- ============================================================================
+
 INSERT INTO persona (id_persona, nombres, apellidos, dpi, fecha_nacimiento, sexo, telefono, id_direccion) VALUES
     -- Medicos adicionales (IDs 41 al 50)
     (41, 'Gustavo Adolfo', 'Perez Monzon', '2154879650901', '1981-05-12', 'Masculino', '77612241', 8),
@@ -50,9 +50,9 @@ INSERT INTO persona (id_persona, nombres, apellidos, dpi, fecha_nacimiento, sexo
 ON CONFLICT (id_persona) DO NOTHING;
 
 
--- ============================================================================
+
 -- 2. PACIENTES NUEVOS (ID 9 AL 23)
--- ============================================================================
+
 INSERT INTO paciente (id_paciente, id_persona, no_expediente, estado_civil, no_seguro_social, religion, ocupacion, id_municipio_nacimiento) VALUES
     (9, 61, 'EXP-2026-009', 'Casado', 'IGSS-4012589', 'Catolica', 'Comerciante', 1),
     (10, 62, 'EXP-2026-010', 'Casado', 'IGSS-4123698', 'Evangelica', 'Maestra', 1),
@@ -72,9 +72,9 @@ INSERT INTO paciente (id_paciente, id_persona, no_expediente, estado_civil, no_s
 ON CONFLICT (id_paciente) DO NOTHING;
 
 
--- ============================================================================
+
 -- 3. PERSONAL ADICIONAL (MEDICOS Y ENFERMEROS, ID 41 AL 60)
--- ============================================================================
+
 INSERT INTO personal (id_personal, id_persona, tipo_personal, activo, fecha_contratacion, salario) VALUES
     -- Medicos
     (41, 41, 'Medico', True, '2024-02-01', 16000.00),
@@ -102,9 +102,9 @@ INSERT INTO personal (id_personal, id_persona, tipo_personal, activo, fecha_cont
 ON CONFLICT (id_personal) DO NOTHING;
 
 
--- ============================================================================
+
 -- 4. SUBTIPO ENFERMERO (REGISTROS ADICIONALES 51 AL 60)
--- ============================================================================
+
 INSERT INTO enfermero (id_personal, no_licencia, grado_academico, area_asignada) VALUES
     (51, 'LIC-ENF-0051', 'Licenciado', 'Consulta Externa'),
     (52, 'TEC-ENF-0052', 'Tecnico', 'Emergencias'),
@@ -119,9 +119,9 @@ INSERT INTO enfermero (id_personal, no_licencia, grado_academico, area_asignada)
 ON CONFLICT (id_personal) DO NOTHING;
 
 
--- ============================================================================
+
 -- 5. SUBTIPO MEDICO (REGISTROS ADICIONALES 41 AL 50)
--- ============================================================================
+
 INSERT INTO medico (id_personal, no_colegiado, condicion, institucion_origen, tarifa_consulta, id_superior, nivel_acceso) VALUES
     (41, 'COL-17100', 'Planta', NULL, 300.00, NULL, 'Jefe de Servicio'),
     (42, 'COL-18250', 'Planta', NULL, 275.00, NULL, 'Jefe de Guardia'),
@@ -136,9 +136,9 @@ INSERT INTO medico (id_personal, no_colegiado, condicion, institucion_origen, ta
 ON CONFLICT (id_personal) DO NOTHING;
 
 
--- ============================================================================
+
 -- 6. ASIGNACION DE ESPECIALIDADES PARA MEDICOS ADICIONALES
--- ============================================================================
+
 INSERT INTO medico_especialidad (id_medico, id_especialidad, es_principal) VALUES
     (41, 1, True),   -- Cardiologia
     (42, 7, True),   -- Medicina General
@@ -153,9 +153,9 @@ INSERT INTO medico_especialidad (id_medico, id_especialidad, es_principal) VALUE
 ON CONFLICT (id_medico, id_especialidad) DO NOTHING;
 
 
--- ============================================================================
+
 -- 7. CONFIGURACION DE LA CADENA JERARQUICA DE 4 NIVELES (OBJETIVO 16 Y 17)
--- ============================================================================
+
 -- HOSPITAL 1: Los Altos
 UPDATE medico SET nivel_acceso = 'Director Medico', id_superior = NULL WHERE id_personal = 1;
 UPDATE medico SET nivel_acceso = 'Jefe de Servicio', id_superior = 1 WHERE id_personal IN (2, 3);
@@ -185,9 +185,9 @@ UPDATE medico SET nivel_acceso = 'Jefe de Servicio', id_superior = 48 WHERE id_p
 UPDATE medico SET nivel_acceso = 'Medico Asistencial', id_superior = 49 WHERE id_personal = 50;
 
 
--- ============================================================================
+
 -- 8. ASIGNACION DE PERSONAL A UNIDADES HOSPITALARIAS Y TURNOS
--- ============================================================================
+
 INSERT INTO asignacion_personal (id_asignacion, id_personal, id_unidad_hospital, id_turno, fecha_inicio, fecha_fin) VALUES
     -- Hospital 1
     (20, 10, 2, 1, '2026-01-01', NULL),
@@ -225,9 +225,9 @@ INSERT INTO asignacion_personal (id_asignacion, id_personal, id_unidad_hospital,
 ON CONFLICT (id_asignacion) DO NOTHING;
 
 
--- ============================================================================
+
 -- 9. EPISODIOS ASISTENCIALES ADICIONALES (ID 9 AL 30)
--- ============================================================================
+
 INSERT INTO episodio (id_episodio, id_paciente, id_hospital, fecha_apertura, fecha_cierre) VALUES
     -- Paciente 1 (Fiel: 4 unidades en Hospital 1)
     (9, 1, 1, '2026-02-01 08:00:00-06', '2026-02-01 12:00:00-06'),   -- Consulta Externa
@@ -261,9 +261,9 @@ INSERT INTO episodio (id_episodio, id_paciente, id_hospital, fecha_apertura, fec
 ON CONFLICT (id_episodio) DO NOTHING;
 
 
--- ============================================================================
+
 -- 10. CITAS Y CONSULTAS EXTERNAS (PARA OBJETIVOS 1, 2, 13, 18)
--- ============================================================================
+
 INSERT INTO cita (id_cita, id_paciente, id_medico, id_clinica, fecha_hora, canal_asignacion, tipo_consulta, id_hospital_referente, estado, fecha_cancelacion, motivo_cancelacion, cancelacion_notificada, id_cita_anterior, id_cita_recargo_origen) VALUES
     -- Citas realizadas Hospital 1
     (10, 1, 7, 1, '2026-02-01 08:30:00-06', 'Recepcion general', 'Primera vez', NULL, 'Realizada', NULL, NULL, NULL, NULL, NULL),
@@ -305,9 +305,9 @@ INSERT INTO receta (id_receta, id_consulta, fecha_emision, id_cita_proxima, orie
 ON CONFLICT (id_receta) DO NOTHING;
 
 
--- ============================================================================
+
 -- 11. INGRESOS Y EGRESOS (EMERGENCIAS Y HOSPITALIZACION)
--- ============================================================================
+
 INSERT INTO ingreso (id_ingreso, id_episodio, id_unidad_hospital, id_servicio, fecha_hora_ingreso, motivo_ingreso, id_diagnostico_presuntivo, id_medico, id_espacio, id_paciente_encargado, estado_actual_paciente, prioridad_triage, dias_estimados_estancia) VALUES
     -- Emergencias Hospital 1
     (10, 10, 2, 2, '2026-03-10 14:30:00-06', 'Dolor precordial agudo de inicio subito', 1, 6, 5, 1, 'Paciente consciente orientado con dolor toracico', 2, 1),
@@ -356,9 +356,9 @@ INSERT INTO egreso (id_egreso, id_ingreso, fecha_hora_egreso, id_diagnostico_pri
 ON CONFLICT (id_egreso) DO NOTHING;
 
 
--- ============================================================================
+
 -- 12. HISTORIAS CLINICAS, SOLICITUDES Y CIRUGIAS (OBJETIVOS 5, 6, 18)
--- ============================================================================
+
 INSERT INTO historia_clinica (id_historia_clinica, id_episodio, id_medico, fecha_hora, tipo_interrogatorio, informante, padecimiento_actual) VALUES
     (10, 11, 2, '2026-04-05 07:30:00-06', 'Directo', NULL, 'Paciente evaluado para intervencion quirurgica programada'),
     (11, 15, 2, '2026-04-18 07:00:00-06', 'Directo', NULL, 'Cuadro clinico estable para resolucion quirurgica electiva'),
@@ -426,9 +426,9 @@ INSERT INTO cirugia_verificacion (id_verificacion, id_cirugia, id_item, resultad
 ON CONFLICT (id_verificacion) DO NOTHING;
 
 
--- ============================================================================
+
 -- 13. FACTURACION, PAGOS Y METODOS (OBJETIVOS 6, 7, 8, 9, 11, 14)
--- ============================================================================
+
 INSERT INTO factura (id_factura, serie, numero_factura, id_episodio, fecha_emision, nit_cliente, nombre_cliente, descripcion, numero_cuotas, id_personal_emite, estado) VALUES
     (10, 'A', 'FAC-2026-010', 9, '2026-02-01 11:30:00-06', 'CF', 'Josue Cifuentes', 'Atencion de consulta externa general', 1, 25, 'Emitida'),
     (11, 'A', 'FAC-2026-011', 10, '2026-03-10 19:30:00-06', 'CF', 'Josue Cifuentes', 'Atencion de urgencia y estabilizacion', 3, 25, 'Emitida'),
@@ -497,9 +497,9 @@ INSERT INTO pago (id_pago, id_factura, numero_cuota, monto, fecha_pago, id_metod
 ON CONFLICT (id_pago) DO NOTHING;
 
 
--- ============================================================================
+
 -- 14. CALIFICACIONES DE SERVICIO Y PERSONAL (PARA OBJETIVOS 2 Y 17)
--- ============================================================================
+
 INSERT INTO calificacion_personal (id_calificacion_personal, id_episodio, id_personal, puntuacion, comentario, fecha_hora) VALUES
     -- Calificaciones bajas para medicos con menor nota (Obj 2 y 17)
     (10, 9, 7, 2, 'Atencion acelerada y poca explicacion del diagnostico', '2026-02-01 12:00:00-06'),
@@ -520,9 +520,9 @@ INSERT INTO calificacion_personal (id_calificacion_personal, id_episodio, id_per
 ON CONFLICT (id_calificacion_personal) DO NOTHING;
 
 
--- ============================================================================
+
 -- 15. SINCRONIZACION FINAL DE SECUENCIAS
--- ============================================================================
+
 SELECT setval(pg_get_serial_sequence('persona', 'id_persona'), COALESCE((SELECT MAX(id_persona) FROM persona), 1));
 SELECT setval(pg_get_serial_sequence('personal', 'id_personal'), COALESCE((SELECT MAX(id_personal) FROM personal), 1));
 SELECT setval(pg_get_serial_sequence('paciente', 'id_paciente'), COALESCE((SELECT MAX(id_paciente) FROM paciente), 1));
@@ -545,4 +545,4 @@ SELECT setval(pg_get_serial_sequence('calificacion_personal', 'id_calificacion_p
 
 COMMIT;
 
--- FIN DML AMPLIACION FASE 2
+

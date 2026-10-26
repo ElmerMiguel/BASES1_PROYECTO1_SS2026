@@ -1,70 +1,27 @@
--- ============================================================================
--- OBJETIVO 19: Analisis de normalizacion y DDL para Reporte_Cirugia
--- ============================================================================
-
 /*
-1. DIAGNOSTICO DE FORMAS NORMALES
+OBJETIVO 19: Analisis de normalizacion para Reporte_Cirugia
 
-Tabla original monolytica:
-Reporte_Cirugia(
-    Id_cirugia, 
-    Nombre_cirujano, 
-    Especialidad_cirujano, 
-    Nombre_paciente, 
-    Codigo_diagnostico, 
-    Descripcion_diagnostico, 
-    Nombre_insumo_1, 
-    Cantidad_insumo_1, 
-    Nombre_insumo_2, 
-    Cantidad_insumo_2, 
-    Fecha
-)
+1. PROBLEMAS DE NORMALIZACION
+- 1FN: Las columnas fijas de insumo 1 e insumo 2 limitan los registros y llenan la tabla de nulos si no se usan.
+- 2FN y 3FN: Los datos del cirujano, paciente y diagnostico dependen del id de la cirugia en lugar de sus propias entidades, generando redundancia.
 
-A. Violacion de la Primera Forma Normal (1FN):
-- Grupos repetitivos: Columnas numeradas para insumos (insumo_1, insumo_2).
-- Falta de atomicidad: Restringe a un maximo arbitrario de 2 insumos por intervencion.
-- Nulos innecesarios: Si una cirugia usa un solo insumo o ninguno, deja campos NULL.
+2. ANOMALIAS
+- Insercion: No se pueden registrar nuevos insumos, cirujanos o pacientes sin asociarlos primero a una cirugia.
+- Modificacion: Cambiar el nombre de un diagnostico o especialidad obliga a actualizar cientos de filas historicas.
+- Eliminacion: Borrar una cirugia puede eliminar informacion de los catalogos si no esta en otro registro.
 
-B. Violacion de la Segunda Forma Normal (2FN):
-- Dependencias funcionales parciales respecto a la clave del evento quirurgico.
-- Datos de catalogo (diagnostico, insumo, cirujano) quedan atados a la tupla del reporte.
-
-C. Violacion de la Tercera Forma Normal (3FN):
-- Dependencias transitivas entre atributos no primos:
-  Id_cirugia -> Id_cirujano -> (Nombre_cirujano, Especialidad_cirujano)
-  Id_cirugia -> Codigo_diagnostico -> Descripcion_diagnostico
-  Id_cirugia -> Id_paciente -> Nombre_paciente
-
-
-2. ANOMALIAS OPERATIVAS IDENTIFICADAS
-
-- Anomalia de Insercion:
-  No se puede registrar un nuevo cirujano, paciente, diagnostico o insumo en el catalogo
-  sin tener una cirugia ficticia realizada.
-
-- Anomalia de Modificacion:
-  Si la descripcion de un diagnostico o la especialidad de un cirujano cambia, 
-  se debe actualizar en cientos de filas historicas. De lo contrario se genera inconsistencia.
-
-- Anomalia de Eliminacion:
-  Si se borra una cirugia cancelada por error, se pierde la informacion del diagnostico
-  o de los insumos si no existian en otra intervencion.
-
-
-3. PROPUESTA DE DESCOMPOSICION EN TERCERA FORMA NORMAL (3FN)
-
-Se divide el reporte en 6 tablas atomicas con integridad referencial:
-1. diagnostico (catalogo formal de patologias)
-2. paciente (sujeto de atencion)
-3. cirujano (personal facultativo)
-4. insumo (catalogo de materiales quirurgicos)
-5. cirugia (evento o acto quirurgico principal)
-6. cirugia_insumo (relacion N:M con cantidad consumida)
+3. SOLUCION EN 3FN (6 TABLAS)
+Se divide en tablas atomicas con integridad referencial:
+- diagnostico
+- paciente
+- cirujano
+- insumo
+- cirugia (tabla principal del evento)
+- cirugia_insumo (tabla intermedia N a M con la cantidad consumida)
 */
 
--- ============================================================================
--- DDL DE IMPLEMENTACION PROPUESTA (3FN)
--- ============================================================================
+-- DDL DE IMPLEMENTACION 3fn
+
 
 CREATE SCHEMA IF NOT EXISTS normalizacion_cirugia;
 SET search_path TO normalizacion_cirugia, public;
@@ -150,9 +107,9 @@ CREATE INDEX IF NOT EXISTS ix_norm_cirugia_fecha ON cirugia (fecha);
 CREATE INDEX IF NOT EXISTS ix_norm_det_insumo ON cirugia_insumo (id_insumo);
 
 
--- ============================================================================
+
 -- VISTA DE RECONSTRUCCION DEL REPORTE ORIGINAL (LOSSLESS RECONSTRUCTION)
--- ============================================================================
+
 CREATE OR REPLACE VIEW vista_reporte_cirugia AS
 SELECT 
     c.id_cirugia,
@@ -178,9 +135,9 @@ GROUP BY
     c.fecha;
 
 
--- ============================================================================
+
 -- VERIFICACION DE INTEGRIDAD Y RECONSTRUCCION DEL REPORTE
--- ============================================================================
+
 INSERT INTO diagnostico (codigo_diagnostico, descripcion) 
 VALUES ('K35.8', 'Apendicitis aguda no especificada') 
 ON CONFLICT (codigo_diagnostico) DO NOTHING;
